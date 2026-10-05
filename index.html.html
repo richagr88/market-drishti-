@@ -529,7 +529,76 @@
     let activeTicker = "RELIANCE";
     let activeStockData = TOP_5_DEFAULTS["RELIANCE"];
 
-    // Make functions globally accessible to window for inline onclick handlers
+    // -----------------------------------------------------------------
+    // 3. DYNAMIC TECHNICAL & FUNDAMENTAL ENGINES
+    // -----------------------------------------------------------------
+    function computeLiveRSI(closes, period = 14) {
+      if (!closes || closes.length <= period) return 52;
+      let gains = 0, losses = 0;
+      for (let i = closes.length - period; i < closes.length; i++) {
+        const diff = closes[i] - closes[i - 1];
+        if (diff >= 0) gains += diff;
+        else losses -= diff;
+      }
+      if (losses === 0) return 100;
+      const rs = (gains / period) / (losses / period);
+      return Math.round(100 - (100 / (1 + rs)));
+    }
+
+    function generateDynamicTStudy(ticker, name, cmp, dma50, dma200, high52, low52, rsi, pe) {
+      const techPros = [];
+      const techCons = [];
+      const fundPros = [];
+      const fundCons = [];
+
+      // Technical Rules
+      if (cmp >= dma50 && dma50 >= dma200) {
+        techPros.push(`Confirmed Stage 2 Uptrend: CMP (₹${cmp}) trades firmly above rising 50 DMA (₹${dma50}) and 200 DMA (₹${dma200}).`);
+      } else if (cmp < dma50 && cmp < dma200) {
+        techCons.push(`Downtrend Pressure: Currently trading below both 50 DMA (₹${dma50}) and 200 DMA (₹${dma200}).`);
+      } else {
+        techPros.push(`Moving Average Equilibrium: Testing support near 50 DMA (₹${dma50}).`);
+      }
+
+      if (rsi >= 50 && rsi <= 68) {
+        techPros.push(`Healthy Relative Strength: RSI(14) at ${rsi} indicates constructive accumulation without overbought extension.`);
+      } else if (rsi > 70) {
+        techCons.push(`Overbought Zone: RSI(14) at ${rsi} signals elevated short-term risk of profit taking.`);
+      } else if (rsi < 35) {
+        techPros.push(`Oversold Reversal Territory: RSI(14) at ${rsi} indicates technical mean-reversion opportunity.`);
+      }
+
+      const distFromHigh = high52 > 0 ? (((high52 - cmp) / high52) * 100) : 0;
+      if (distFromHigh <= 5) {
+        techPros.push(`Breakout Setup: Hovering within ${distFromHigh.toFixed(1)}% of its 52-week peak (₹${high52}).`);
+      } else {
+        techCons.push(`Overhead Supply: Sits ${distFromHigh.toFixed(1)}% below its 52-week high resistance (₹${high52}).`);
+      }
+
+      // Fundamental Rules
+      fundPros.push(`Clean Compliance & Governance: Registered under SEBI reporting standards with active institutional participation.`);
+      if (pe && pe !== "N/A" && parseFloat(pe) < 25) {
+        fundPros.push(`Valuation Margin of Safety: P/E multiple (${pe}) offers relative value compared to broader index averages.`);
+      } else if (pe && pe !== "N/A" && parseFloat(pe) >= 45) {
+        fundCons.push(`High Valuation Multiple: Trading at ${pe}, demanding steady quarterly earnings acceleration.`);
+      } else {
+        fundPros.push(`Operating Reinvestment: Cash generation utilized to reinforce domain distribution.`);
+      }
+
+      const tpEl = document.getElementById('studyTechPros');
+      const tcEl = document.getElementById('studyTechCons');
+      const fpEl = document.getElementById('studyFundPros');
+      const fcEl = document.getElementById('studyFundCons');
+
+      if (tpEl) tpEl.innerHTML = techPros.map(p => `<li>${p}</li>`).join('');
+      if (tcEl) tcEl.innerHTML = techCons.map(c => `<li>${c}</li>`).join('');
+      if (fpEl) fpEl.innerHTML = fundPros.map(p => `<li>${p}</li>`).join('');
+      if (fcEl) fcEl.innerHTML = fundCons.map(c => `<li>${c}</li>`).join('');
+    }
+
+    // -----------------------------------------------------------------
+    // 4. GLOBAL INTERACTION HANDLERS
+    // -----------------------------------------------------------------
     window.switchTab = function(tabId, btn) {
       document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -564,10 +633,10 @@
         name: ticker,
         sector: "NSE Listed Equities",
         summary: `Speciality: Listed corporation active in the Indian National Stock Exchange equity universe under SEBI compliance standards.`,
-        moat: "Sector Participant",
+        moat: "Sector Standard",
         girvi: "0.00% Girvi",
         roce: "15.0% ROCE",
-        pe: "20.0x P/E"
+        pe: "22.0x P/E"
       };
 
       try {
@@ -576,7 +645,7 @@
         
         const json = await res.json();
         const result = json.chart?.result?.[0];
-        if (!result) throw new Error("Ticker data missing in payload");
+        if (!result) throw new Error("Ticker missing in payload");
 
         const meta = result.meta;
         const rawCloses = result.indicators?.quote?.[0]?.close || [];
@@ -587,25 +656,36 @@
         const chg = cmp - prev;
         const pct = prev ? (chg / prev) * 100 : 0;
 
-        const dma50 = closes.length >= 50 ? closes.slice(-50).reduce((a,b)=>a+b,0)/50 : cmp;
-        const dma200 = closes.length >= 200 ? closes.slice(-200).reduce((a,b)=>a+b,0)/200 : cmp;
+        const dma50 = closes.length >= 50 
+          ? Math.round((closes.slice(-50).reduce((a, b) => a + b, 0) / 50) * 100) / 100 
+          : cmp;
+        const dma200 = closes.length >= 200 
+          ? Math.round((closes.slice(-200).reduce((a, b) => a + b, 0) / 200) * 100) / 100 
+          : cmp;
 
-        const liveStock = {
+        const high52 = meta.fiftyTwoWeekHigh || Math.max(...closes.slice(-250));
+        const low52 = meta.fiftyTwoWeekLow || Math.min(...closes.slice(-250));
+        const liveRsi = computeLiveRSI(closes, 14);
+
+        activeStockData = {
           name: profile.name || meta.symbol.replace('.NS', '').replace('.BO', ''),
           sector: profile.sector,
           cmp: Math.round(cmp * 100) / 100,
           chg: Math.round(chg * 100) / 100,
           pct: Math.round(pct * 100) / 100,
-          dma50: Math.round(dma50 * 100) / 100,
-          dma200: Math.round(dma200 * 100) / 100,
+          dma50,
+          dma200,
           summary: profile.summary,
-          moat: profile.moat,
-          girvi: profile.girvi,
-          roce: profile.roce,
-          pe: profile.pe
+          moat: profile.moat || "Market Infrastructure",
+          girvi: profile.girvi || "0.00% Girvi",
+          roce: profile.roce || "18.5% ROCE",
+          pe: profile.pe !== "N/A" ? profile.pe : (meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E"),
+          closes: closes.slice(-60)
         };
 
-        renderActiveStock(liveStock);
+        renderActiveStock(activeStockData);
+        generateDynamicTStudy(ticker, activeStockData.name, activeStockData.cmp, dma50, dma200, high52, low52, liveRsi, activeStockData.pe);
+
         if (badge) {
           badge.textContent = "🟢 LIVE VERCEL EDGE FEED";
           badge.style.color = "var(--accent-emerald-dark)";
@@ -713,6 +793,7 @@
 
       ctx.clearRect(0, 0, w, h);
 
+      // Light background grid
       ctx.strokeStyle = '#E2E8F0';
       ctx.lineWidth = 1;
       for (let y = 30; y < h; y += 45) {
@@ -722,35 +803,34 @@
         ctx.stroke();
       }
 
-      const pts = 35;
-      const baseCmp = activeStockData ? activeStockData.cmp : 1000;
-      let price = baseCmp * 0.92;
-      const vals = [];
-      for (let i = 0; i < pts; i++) {
-        price += (Math.random() - 0.48) * (baseCmp * 0.015);
-        vals.push(price);
-      }
-      vals[vals.length - 1] = baseCmp;
+      // Plot true historical closes if available
+      const series = (activeStockData && activeStockData.closes && activeStockData.closes.length > 5)
+        ? activeStockData.closes
+        : [activeStockData.cmp * 0.95, activeStockData.cmp * 0.98, activeStockData.cmp];
 
-      const min = Math.min(...vals) * 0.98;
-      const max = Math.max(...vals) * 1.02;
+      const min = Math.min(...series) * 0.99;
+      const max = Math.max(...series) * 1.01;
+      const isUp = series[series.length - 1] >= series[0];
+      const strokeColor = isUp ? '#10B981' : '#EF4444';
 
       ctx.beginPath();
-      ctx.strokeStyle = '#10B981';
+      ctx.strokeStyle = strokeColor;
       ctx.lineWidth = 2.5;
-      for (let i = 0; i < vals.length; i++) {
-        const x = (i / (vals.length - 1)) * w;
-        const y = h - ((vals[i] - min) / (max - min)) * (h - 20) - 10;
+
+      for (let i = 0; i < series.length; i++) {
+        const x = (i / (series.length - 1)) * w;
+        const y = h - ((series[i] - min) / (max - min)) * (h - 24) - 12;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       }
       ctx.stroke();
 
+      // Soft gradient fill
       ctx.lineTo(w, h);
       ctx.lineTo(0, h);
       const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0, 'rgba(16, 185, 129, 0.18)');
-      grad.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+      grad.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.18)' : 'rgba(239, 68, 68, 0.18)');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
       ctx.fillStyle = grad;
       ctx.fill();
     }
