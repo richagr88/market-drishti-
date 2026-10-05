@@ -640,12 +640,12 @@
     }
 
     // Dynamic Live Fetch (Queries Vercel edge /api/quote with profile binding)
-    async function selectStock(ticker) {
+   async function selectStock(ticker) {
       ticker = ticker.toUpperCase().trim();
       if (!ticker) return;
       activeTicker = ticker;
 
-      // Close dropdown
+      // Close dropdown & update input
       const dd = document.getElementById('suggestDropdown');
       dd.style.display = 'none';
       document.getElementById('omniSearch').value = ticker;
@@ -654,14 +654,69 @@
       badge.textContent = "⏳ QUERYING EXCHANGE...";
       badge.style.color = "var(--accent-amber-dark)";
 
-      // Step A: Check Top 5 Defaults
-      if (TOP_5_DEFAULTS[ticker]) {
-        renderActiveStock(TOP_5_DEFAULTS[ticker]);
-        badge.textContent = "🟢 VERIFIED ACTIVE DATA";
-        badge.style.color = "var(--accent-emerald-dark)";
-        return;
-      }
+      // Retrieve company profile description or default
+      const profile = TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker] || {
+        name: ticker,
+        sector: "NSE Listed Equities",
+        summary: `Speciality: Listed corporation active in the Indian National Stock Exchange equity universe under SEBI compliance standards.`,
+        moat: "Sector Participant",
+        girvi: "0.00% Girvi",
+        roce: "15.0% ROCE",
+        pe: "20.0x P/E"
+      };
 
+      try {
+        // Direct call to your live Vercel serverless endpoint
+        const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        
+        const json = await res.json();
+        const result = json.chart?.result?.[0];
+        if (!result) throw new Error("Ticker data missing in payload");
+
+        const meta = result.meta;
+        const rawCloses = result.indicators?.quote?.[0]?.close || [];
+        const closes = rawCloses.filter(c => c !== null && !isNaN(c));
+        
+        const cmp = meta.regularMarketPrice || closes[closes.length - 1] || 0;
+        const prev = meta.chartPreviousClose || (closes.length > 1 ? closes[closes.length - 2] : cmp);
+        const chg = cmp - prev;
+        const pct = prev ? (chg / prev) * 100 : 0;
+
+        const dma50 = closes.length >= 50 ? closes.slice(-50).reduce((a,b)=>a+b,0)/50 : cmp;
+        const dma200 = closes.length >= 200 ? closes.slice(-200).reduce((a,b)=>a+b,0)/200 : cmp;
+
+        const liveStock = {
+          name: profile.name || meta.symbol.replace('.NS', '').replace('.BO', ''),
+          sector: profile.sector,
+          cmp: Math.round(cmp * 100) / 100,
+          chg: Math.round(chg * 100) / 100,
+          pct: Math.round(pct * 100) / 100,
+          dma50: Math.round(dma50 * 100) / 100,
+          dma200: Math.round(dma200 * 100) / 100,
+          summary: profile.summary,
+          moat: profile.moat,
+          girvi: profile.girvi,
+          roce: profile.roce,
+          pe: profile.pe
+        };
+
+        renderActiveStock(liveStock);
+        badge.textContent = "🟢 LIVE VERCEL EDGE FEED";
+        badge.style.color = "var(--accent-emerald-dark)";
+
+      } catch (err) {
+        console.error("Live fetch failed:", err);
+        badge.textContent = "🔴 EDGE FETCH FAILED";
+        badge.style.color = "var(--accent-rose-dark)";
+        
+        // Only fallback if the fetch actually failed
+        if (TOP_5_DEFAULTS[ticker]) {
+          renderActiveStock(TOP_5_DEFAULTS[ticker]);
+        }
+      }
+    }
+    
       // Step B: Check Extended Knowledge Base or General Stock
       const knownProfile = EXTENDED_PROFILES[ticker] || {
         name: ticker,
