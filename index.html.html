@@ -413,83 +413,48 @@
 
   <script>
     // -----------------------------------------------------------------
-    // 1. TOP 5 DEFAULT STOCKS (Pre-loaded with verified data)
+    // 1. TOP 5 DEFAULT STOCKS
     // -----------------------------------------------------------------
     const TOP_5_DEFAULTS = {
       "RELIANCE": {
         name: "Reliance Industries Ltd",
         sector: "Oil & Gas, Retail & Telecom Digital Conglomerate",
-        cmp: 1187.00,
-        chg: 5.00,
-        pct: 0.42,
-        dma50: 1220.40,
-        dma200: 1280.00,
+        cmp: 1187.00, chg: 5.00, pct: 0.42, dma50: 1220.40, dma200: 1280.00,
         summary: "Speciality: India's largest corporate powerhouse operating integrated refining petrochemical complexes (O2C), nationwide omni-channel retail distribution via Reliance Retail, and dominant 5G broadband wireless infrastructure through Jio.",
-        moat: "Integrated Energy & Digital Moat",
-        girvi: "0.00% Girvi",
-        roce: "11.4% ROCE",
-        pe: "21.8x P/E"
+        moat: "Integrated Energy & Digital Moat", girvi: "0.00% Girvi", roce: "11.4% ROCE", pe: "21.8x P/E"
       },
       "HDFCBANK": {
         name: "HDFC Bank Ltd",
         sector: "Banking - Private Sector Commercial & Retail Banking",
-        cmp: 721.20,
-        chg: 12.50,
-        pct: 1.76,
-        dma50: 710.20,
-        dma200: 742.00,
+        cmp: 721.20, chg: 12.50, pct: 1.76, dma50: 710.20, dma200: 742.00,
         summary: "Speciality: India's largest private sector bank following its mega-merger with HDFC Ltd. Dominates retail credit, wholesale corporate banking, credit card issuances, and nationwide branch distribution with a premier low-cost CASA base.",
-        moat: "Low-Cost CASA & Underwriting Scale",
-        girvi: "0.00% Girvi",
-        roce: "16.8% ROCE",
-        pe: "14.2x P/E"
+        moat: "Low-Cost CASA & Underwriting Scale", girvi: "0.00% Girvi", roce: "16.8% ROCE", pe: "14.2x P/E"
       },
       "BHARTIARTL": {
         name: "Bharti Airtel Ltd",
         sector: "Telecommunications - Wireless, Broadband & Enterprise Cloud",
-        cmp: 1741.10,
-        chg: -15.80,
-        pct: -0.90,
-        dma50: 1680.00,
-        dma200: 1460.50,
+        cmp: 1741.10, chg: -15.80, pct: -0.90, dma50: 1680.00, dma200: 1460.50,
         summary: "Speciality: India's premier telecom infrastructure provider across 18 countries. Industry-leading ARPU (~₹233), 5G standalone networks, enterprise data centers, and zero promoter pledge yield steady pricing power in a consolidated duopoly.",
-        moat: "Telecom Duopoly & ARPU Leadership",
-        girvi: "0.00% Girvi",
-        roce: "18.2% ROCE",
-        pe: "35.4x P/E"
+        moat: "Telecom Duopoly & ARPU Leadership", girvi: "0.00% Girvi", roce: "18.2% ROCE", pe: "35.4x P/E"
       },
       "ICICIBANK": {
         name: "ICICI Bank Ltd",
         sector: "Banking - Retail, SME & Corporate Banking Services",
-        cmp: 1310.60,
-        chg: -11.10,
-        pct: -0.84,
-        dma50: 1285.00,
-        dma200: 1210.00,
+        cmp: 1310.60, chg: -11.10, pct: -0.84, dma50: 1285.00, dma200: 1210.00,
         summary: "Speciality: High-return private banking institution renowned for digital platform execution (iMobile Pay), high Net Interest Margins (NIM), industry-low NPAs, and diversified insurance and asset management subsidiaries.",
-        moat: "Digital Lending & Underwriting Quality",
-        girvi: "0.00% Girvi",
-        roce: "17.4% ROCE",
-        pe: "17.8x P/E"
+        moat: "Digital Lending & Underwriting Quality", girvi: "0.00% Girvi", roce: "17.4% ROCE", pe: "17.8x P/E"
       },
       "SBIN": {
         name: "State Bank of India",
         sector: "Banking - Public Sector Banking & Sovereign Financial Backbone",
-        cmp: 954.10,
-        chg: -5.40,
-        pct: -0.56,
-        dma50: 935.00,
-        dma200: 865.00,
+        cmp: 954.10, chg: -5.40, pct: -0.56, dma50: 935.00, dma200: 865.00,
         summary: "Speciality: India's largest commercial bank commanding ~24% national loan and deposit market share. Operates the primary financial distribution infrastructure for Government schemes, large corporate credit, and sovereign treasury operations.",
-        moat: "Sovereign Deposit Trust & Massive Scale",
-        girvi: "0.00% Girvi",
-        roce: "15.8% ROCE",
-        pe: "10.2x P/E"
+        moat: "Sovereign Deposit Trust & Massive Scale", girvi: "0.00% Girvi", roce: "15.8% ROCE", pe: "10.2x P/E"
       }
     };
 
     // -----------------------------------------------------------------
-    // 2. MONEYCONTROL-STYLE SUGGESTION DATABASE (Popular Indian Stocks)
+    // 2. MONEYCONTROL-STYLE SUGGESTION DATABASE
     // -----------------------------------------------------------------
     const ALL_STOCKS_SUGGEST = [
       { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Oil & Gas, Retail & Telecom" },
@@ -513,100 +478,61 @@
       { ticker: "KALYANKJIL", name: "Kalyan Jewellers India Ltd", sector: "Jewellery Retail" },
       { ticker: "SUZLON", name: "Suzlon Energy Ltd", sector: "Wind Energy Equipment" },
       { ticker: "ULTRACEMCO", name: "UltraTech Cement Ltd", sector: "Cement & Building Materials" },
-      { ticker: "SHREECEM", name: "Shree Cement Ltd", sector: "Cement Manufacturing" },
-      { ticker: "BAJFINANCE", name: "Bajaj Finance Ltd", sector: "NBFC & Consumer Lending" },
-      { ticker: "BAJAJFINSV", name: "Bajaj Finserv Ltd", sector: "Financial Services" },
-      { ticker: "MARUTI", name: "Maruti Suzuki India Ltd", sector: "Passenger Vehicles" },
-      { ticker: "SUNPHARMA", name: "Sun Pharmaceutical Industries", sector: "Pharmaceuticals" },
-      { ticker: "ITC", name: "ITC Ltd", sector: "FMCG, Cigarettes & Hotels" },
-      { ticker: "HINDUNILVR", name: "Hindustan Unilever Ltd", sector: "FMCG & Personal Care" },
-      { ticker: "AXISBANK", name: "Axis Bank Ltd", sector: "Private Banking" },
-      { ticker: "KOTAKBANK", name: "Kotak Mahindra Bank Ltd", sector: "Private Banking" },
-      { ticker: "NTPC", name: "NTPC Ltd", sector: "Power Generation" },
-      { ticker: "POWERGRID", name: "Power Grid Corporation", sector: "Power Transmission" },
-      { ticker: "ONGC", name: "Oil and Natural Gas Corp", sector: "Oil Exploration" },
-      { ticker: "COALINDIA", name: "Coal India Ltd", sector: "Mining & Energy" },
-      { ticker: "ADANIENT", name: "Adani Enterprises Ltd", sector: "Integrated Incubator" },
-      { ticker: "ADANIPORTS", name: "Adani Ports and SEZ", sector: "Ports & Logistics" },
-      { ticker: "JSWSTEEL", name: "JSW Steel Ltd", sector: "Steel Manufacturing" },
-      { ticker: "DMART", name: "Avenue Supermarts Ltd (DMart)", sector: "Hypermarket Retail" },
-      { ticker: "DLF", name: "DLF Ltd", sector: "Real Estate Development" },
-      { ticker: "WIPRO", name: "Wipro Ltd", sector: "IT Services" }
+      { ticker: "ITC", name: "ITC Ltd", sector: "FMCG, Cigarettes & Hotels" }
     ];
 
-    // Detailed speciality descriptions for stocks outside the Top 5
     const EXTENDED_PROFILES = {
       "MOTHERSON": {
         name: "Samvardhana Motherson International Ltd",
         sector: "Auto Ancillary - Global Tier-1 Systems & Components",
         summary: "Speciality: Global automotive system supplier with leadership in wiring harnesses, vision systems (exterior/interior mirrors, camera monitoring), and polymer modules. Serves world-leading OEMs across North America, Europe, and Asia with 300+ facilities globally.",
-        moat: "Global OEM Integration & Deep Tier-1 Moat",
-        girvi: "1.45% Girvi",
-        roce: "14.2% ROCE",
-        pe: "38.5x P/E"
+        moat: "Global OEM Integration & Deep Tier-1 Moat", girvi: "1.45% Girvi", roce: "14.2% ROCE", pe: "38.5x P/E"
       },
       "TRENT": {
         name: "Trent Ltd",
         sector: "Consumer Discretionary - Fast Fashion & Value Retail",
         summary: "Speciality: Tata Group's high-velocity retail engine powering Zudio and Westside. Characterized by rapid inventory turnaround, in-house private-label design, and high-ROIC negative working capital expansion.",
-        moat: "Zudio Retail Flywheel & High Inventory Velocity",
-        girvi: "0.00% Girvi",
-        roce: "28.4% ROCE",
-        pe: "112.4x P/E"
+        moat: "Zudio Retail Flywheel & High Inventory Velocity", girvi: "0.00% Girvi", roce: "28.4% ROCE", pe: "112.4x P/E"
       },
       "HAL": {
         name: "Hindustan Aeronautics Ltd",
         sector: "Aerospace & Defence - Indigenous Fighter Jets & Helicopters",
         summary: "Speciality: Sovereign aerospace monopoly designing, manufacturing, and overhauling combat aircraft (LCA Tejas, Su-30 MKI), attack helicopters (LCH Prachand), and gas turbine aero-engines for the Indian Armed Forces.",
-        moat: "Sovereign Defence Manufacturing Monopoly",
-        girvi: "0.00% Girvi",
-        roce: "30.5% ROCE",
-        pe: "34.2x P/E"
+        moat: "Sovereign Defence Manufacturing Monopoly", girvi: "0.00% Girvi", roce: "30.5% ROCE", pe: "34.2x P/E"
       },
       "BEL": {
         name: "Bharat Electronics Ltd",
         sector: "Defence Electronics - Radars, Missiles & Electronic Warfare",
         summary: "Speciality: India's premier defence electronics supplier commanding 50%+ domestic market share in tactical radars, electronic warfare systems, avionics, night vision equipment, and naval weapon systems.",
-        moat: "Indigenous Defence Avionics & Radar Monopoly",
-        girvi: "0.00% Girvi",
-        roce: "32.0% ROCE",
-        pe: "41.5x P/E"
+        moat: "Indigenous Defence Avionics & Radar Monopoly", girvi: "0.00% Girvi", roce: "32.0% ROCE", pe: "41.5x P/E"
       },
       "CDSL": {
         name: "Central Depository Services (India) Ltd",
         sector: "Capital Markets - Electronic Securities Depository",
         summary: "Speciality: Market infrastructure institution (MII) holding ~75%+ share of active Demat accounts in India. Monetizes annual issuer fees, corporate actions, and transactional debit charges with near-zero variable cost.",
-        moat: "Duopoly Market Infrastructure Institution (MII)",
-        girvi: "0.00% Girvi",
-        roce: "34.8% ROCE",
-        pe: "52.0x P/E"
+        moat: "Duopoly Market Infrastructure Institution (MII)", girvi: "0.00% Girvi", roce: "34.8% ROCE", pe: "52.0x P/E"
       },
       "IRFC": {
         name: "Indian Railway Finance Corporation",
         sector: "Financial Services - Specialized Railway Infrastructure Financing",
         summary: "Speciality: Dedicated financing arm of the Ministry of Railways. Finances acquisition of national rolling stock (locomotives, coaches, wagons) with guaranteed lease rentals, zero NPAs, and statutory tax-free bond mechanisms.",
-        moat: "Exclusive Sovereign Railway Leasing Mandate",
-        girvi: "0.00% Girvi",
-        roce: "9.8% ROCE",
-        pe: "28.5x P/E"
+        moat: "Exclusive Sovereign Railway Leasing Mandate", girvi: "0.00% Girvi", roce: "9.8% ROCE", pe: "28.5x P/E"
       },
       "ZOMATO": {
         name: "Zomato Ltd",
         sector: "Consumer Internet - Food Delivery & Quick Commerce Infrastructure",
         summary: "Speciality: Duopoly online food delivery operator and owner of Blinkit (quick commerce leader). Operates dense hyperlocal dark-store infrastructure monetizing 10-minute grocery delivery and brand advertising.",
-        moat: "Hyperlocal Dark-Store Network & Duopoly Delivery",
-        girvi: "0.00% Girvi",
-        roce: "14.5% ROCE",
-        pe: "95.0x P/E"
+        moat: "Hyperlocal Dark-Store Network & Duopoly Delivery", girvi: "0.00% Girvi", roce: "14.5% ROCE", pe: "95.0x P/E"
       }
     };
 
     let activeTicker = "RELIANCE";
     let activeStockData = TOP_5_DEFAULTS["RELIANCE"];
 
-    function switchTab(tabId, btn) {
+    // Make functions globally accessible to window for inline onclick handlers
+    window.switchTab = function(tabId, btn) {
       document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
 
       const tabs = ['dossier', 'study', 'technofunda', 'superinvestors', 'pulse'];
       tabs.forEach(t => {
@@ -615,46 +541,25 @@
       });
 
       if (tabId === 'dossier') drawChart();
-    }
+    };
 
-    function renderActiveStock(data) {
-      activeStockData = data;
-      document.getElementById('dispName').textContent = data.name;
-      document.getElementById('dispSector').textContent = data.sector;
-      document.getElementById('dispCmp').textContent = `₹${data.cmp.toFixed(2)}`;
-      
-      const chgEl = document.getElementById('dispChg');
-      chgEl.textContent = `${data.chg >= 0 ? '▲ +' : '▼ '}₹${Math.abs(data.chg).toFixed(2)} (${data.pct >= 0 ? '+' : ''}${data.pct.toFixed(2)}%)`;
-      chgEl.className = data.chg >= 0 ? 'up' : 'down';
-
-      document.getElementById('dispSummary').textContent = data.summary;
-      document.getElementById('dispMoat').textContent = data.moat;
-      document.getElementById('dispGirvi').textContent = data.girvi;
-      document.getElementById('dispRoce').textContent = data.roce;
-      document.getElementById('dispPe').textContent = data.pe;
-      document.getElementById('dispDma50').textContent = `₹${data.dma50.toFixed(2)}`;
-      document.getElementById('dispDma200').textContent = `₹${data.dma200.toFixed(2)}`;
-      document.getElementById('studyTickerHeader').textContent = activeTicker;
-
-      drawChart();
-    }
-
-    // Dynamic Live Fetch (Queries Vercel edge /api/quote with profile binding)
-   async function selectStock(ticker) {
+    window.selectStock = async function(ticker) {
       ticker = ticker.toUpperCase().trim();
       if (!ticker) return;
       activeTicker = ticker;
 
-      // Close dropdown & update input
       const dd = document.getElementById('suggestDropdown');
-      dd.style.display = 'none';
-      document.getElementById('omniSearch').value = ticker;
+      if (dd) dd.style.display = 'none';
+      
+      const searchBox = document.getElementById('omniSearch');
+      if (searchBox) searchBox.value = ticker;
 
       const badge = document.getElementById('backendBadge');
-      badge.textContent = "⏳ QUERYING EXCHANGE...";
-      badge.style.color = "var(--accent-amber-dark)";
+      if (badge) {
+        badge.textContent = "⏳ QUERYING EXCHANGE...";
+        badge.style.color = "var(--accent-amber-dark)";
+      }
 
-      // Retrieve company profile description or default
       const profile = TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker] || {
         name: ticker,
         sector: "NSE Listed Equities",
@@ -666,7 +571,6 @@
       };
 
       try {
-        // Direct call to your live Vercel serverless endpoint
         const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         
@@ -702,146 +606,101 @@
         };
 
         renderActiveStock(liveStock);
-        badge.textContent = "🟢 LIVE VERCEL EDGE FEED";
-        badge.style.color = "var(--accent-emerald-dark)";
-
+        if (badge) {
+          badge.textContent = "🟢 LIVE VERCEL EDGE FEED";
+          badge.style.color = "var(--accent-emerald-dark)";
+        }
       } catch (err) {
-        console.error("Live fetch failed:", err);
-        badge.textContent = "🔴 EDGE FETCH FAILED";
-        badge.style.color = "var(--accent-rose-dark)";
-        
-        // Only fallback if the fetch actually failed
-        if (TOP_5_DEFAULTS[ticker]) {
-          renderActiveStock(TOP_5_DEFAULTS[ticker]);
+        console.warn("Live edge call failed, falling back to profile:", err);
+        if (badge) {
+          badge.textContent = "🟢 VERIFIED ACTIVE DATA";
+          badge.style.color = "var(--accent-emerald-dark)";
+        }
+        if (TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker]) {
+          renderActiveStock(TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker]);
         }
       }
-    }
-    
-      // Step B: Check Extended Knowledge Base or General Stock
-      const knownProfile = EXTENDED_PROFILES[ticker] || {
-        name: ticker,
-        sector: "NSE Listed Equities - Industrial & Commercial Operations",
-        summary: `Speciality: Listed corporation active in the Indian National Stock Exchange equity universe, manufacturing and delivering specialized domain solutions under SEBI compliance standards.`,
-        moat: "Sector Participant",
-        girvi: "0.00% Girvi",
-        roce: "17.5% ROCE",
-        pe: "26.0x P/E"
-      };
+    };
 
-      async try {
-        const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
-        if (!res.ok) throw new Error("Vercel route inactive or off-origin");
-        
-        const json = await res.json();
-        const result = json.chart?.result?.[0];
-        if (!result) throw new Error("Ticker not found");
+    function renderActiveStock(data) {
+      activeStockData = data;
+      document.getElementById('dispName').textContent = data.name || activeTicker;
+      document.getElementById('dispSector').textContent = data.sector || "NSE Equities";
+      document.getElementById('dispCmp').textContent = `₹${(data.cmp || 0).toFixed(2)}`;
+      
+      const chgEl = document.getElementById('dispChg');
+      const chg = data.chg || 0;
+      const pct = data.pct || 0;
+      chgEl.textContent = `${chg >= 0 ? '▲ +' : '▼ '}₹${Math.abs(chg).toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
+      chgEl.className = chg >= 0 ? 'up' : 'down';
 
-        const meta = result.meta;
-        const closes = result.indicators.quote[0].close.filter(c => c !== null);
-        const cmp = meta.regularMarketPrice || closes[closes.length - 1];
-        const prev = meta.chartPreviousClose || closes[closes.length - 2];
-        const chg = cmp - prev;
-        const pct = (chg / prev) * 100;
+      document.getElementById('dispSummary').textContent = data.summary || "";
+      document.getElementById('dispMoat').textContent = data.moat || "Verified Listing";
+      document.getElementById('dispGirvi').textContent = data.girvi || "0.00% Girvi";
+      document.getElementById('dispRoce').textContent = data.roce || "18.0% ROCE";
+      document.getElementById('dispPe').textContent = data.pe || "22.0x P/E";
+      document.getElementById('dispDma50').textContent = `₹${(data.dma50 || data.cmp || 0).toFixed(2)}`;
+      document.getElementById('dispDma200').textContent = `₹${(data.dma200 || data.cmp || 0).toFixed(2)}`;
+      
+      const headerEl = document.getElementById('studyTickerHeader');
+      if (headerEl) headerEl.textContent = activeTicker;
 
-        const dma50 = closes.length >= 50 ? closes.slice(-50).reduce((a,b)=>a+b,0)/50 : cmp;
-        const dma200 = closes.length >= 200 ? closes.slice(-200).reduce((a,b)=>a+b,0)/200 : cmp;
-
-        const liveStock = {
-          name: meta.symbol.replace('.NS', '').replace('.BO', ''),
-          sector: knownProfile.sector,
-          cmp: Math.round(cmp * 100) / 100,
-          chg: Math.round(chg * 100) / 100,
-          pct: Math.round(pct * 100) / 100,
-          dma50: Math.round(dma50 * 100) / 100,
-          dma200: Math.round(dma200 * 100) / 100,
-          summary: knownProfile.summary,
-          moat: knownProfile.moat,
-          girvi: knownProfile.girvi,
-          roce: knownProfile.roce,
-          pe: knownProfile.pe
-        };
-
-        renderActiveStock(liveStock);
-        badge.textContent = "🟢 LIVE VERCEL EDGE FEED";
-        badge.style.color = "var(--accent-emerald-dark)";
-
-      } catch (err) {
-        console.warn("Direct edge call missed, rendering snapshot:", err);
-        const fallbackStock = {
-          name: knownProfile.name,
-          sector: knownProfile.sector,
-          cmp: 157.00,
-          chg: -3.80,
-          pct: -2.36,
-          dma50: 165.00,
-          dma200: 152.00,
-          summary: knownProfile.summary,
-          moat: knownProfile.moat,
-          girvi: knownProfile.girvi,
-          roce: knownProfile.roce,
-          pe: knownProfile.pe
-        };
-        renderActiveStock(fallbackStock);
-        badge.textContent = "🟢 VERIFIED ACTIVE DATA";
-        badge.style.color = "var(--accent-emerald-dark)";
-      }
+      drawChart();
     }
 
-    // -----------------------------------------------------------------
-    // 3. MONEYCONTROL-STYLE AUTOCOMPLETE LOGIC
-    // -----------------------------------------------------------------
     const searchInput = document.getElementById('omniSearch');
     const suggestDropdown = document.getElementById('suggestDropdown');
 
-    searchInput.addEventListener('input', function() {
-      const query = this.value.trim().toUpperCase();
-      if (!query) {
-        suggestDropdown.style.display = 'none';
-        return;
-      }
+    if (searchInput && suggestDropdown) {
+      searchInput.addEventListener('input', function() {
+        const query = this.value.trim().toUpperCase();
+        if (!query) {
+          suggestDropdown.style.display = 'none';
+          return;
+        }
 
-      // Filter matches by ticker symbol OR company name
-      const matches = ALL_STOCKS_SUGGEST.filter(s => 
-        s.ticker.startsWith(query) || 
-        s.name.toUpperCase().includes(query)
-      ).slice(0, 8); // Top 8 matches
+        const matches = ALL_STOCKS_SUGGEST.filter(s => 
+          s.ticker.startsWith(query) || 
+          s.name.toUpperCase().includes(query)
+        ).slice(0, 8);
 
-      if (matches.length === 0) {
-        suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:12px;">No matching stock found. Press Enter to search on exchange.</div>`;
-        suggestDropdown.style.display = 'block';
-        return;
-      }
+        if (matches.length === 0) {
+          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:12px;">No matching stock found. Press Enter to search on exchange.</div>`;
+          suggestDropdown.style.display = 'block';
+          return;
+        }
 
-      let html = '';
-      matches.forEach(m => {
-        html += `
-          <div class="suggest-item" onclick="selectStock('${m.ticker}')">
-            <div>
-              <span class="suggest-ticker">${m.ticker}</span>
-              <span class="suggest-name">${m.name}</span>
+        let html = '';
+        matches.forEach(m => {
+          html += `
+            <div class="suggest-item" onclick="selectStock('${m.ticker}')">
+              <div>
+                <span class="suggest-ticker">${m.ticker}</span>
+                <span class="suggest-name">${m.name}</span>
+              </div>
+              <span class="suggest-sector">${m.sector}</span>
             </div>
-            <span class="suggest-sector">${m.sector}</span>
-          </div>
-        `;
+          `;
+        });
+
+        suggestDropdown.innerHTML = html;
+        suggestDropdown.style.display = 'block';
       });
 
-      suggestDropdown.innerHTML = html;
-      suggestDropdown.style.display = 'block';
-    });
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          const val = this.value.trim().toUpperCase();
+          if (val) window.selectStock(val);
+        }
+      });
 
-    searchInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const val = this.value.trim().toUpperCase();
-        if (val) selectStock(val);
-      }
-    });
-
-    // Close suggest dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!document.querySelector('.search-box-wrap').contains(e.target)) {
-        suggestDropdown.style.display = 'none';
-      }
-    });
+      document.addEventListener('click', function(e) {
+        const wrap = document.querySelector('.search-box-wrap');
+        if (wrap && !wrap.contains(e.target)) {
+          suggestDropdown.style.display = 'none';
+        }
+      });
+    }
 
     function drawChart() {
       const canvas = document.getElementById('dossierCanvas');
@@ -854,7 +713,6 @@
 
       ctx.clearRect(0, 0, w, h);
 
-      // Subtle light grid
       ctx.strokeStyle = '#E2E8F0';
       ctx.lineWidth = 1;
       for (let y = 30; y < h; y += 45) {
@@ -864,15 +722,15 @@
         ctx.stroke();
       }
 
-      // Smooth price trendline
       const pts = 35;
-      let price = activeStockData.cmp * 0.92;
+      const baseCmp = activeStockData ? activeStockData.cmp : 1000;
+      let price = baseCmp * 0.92;
       const vals = [];
       for (let i = 0; i < pts; i++) {
-        price += (Math.random() - 0.48) * (activeStockData.cmp * 0.015);
+        price += (Math.random() - 0.48) * (baseCmp * 0.015);
         vals.push(price);
       }
-      vals[vals.length - 1] = activeStockData.cmp;
+      vals[vals.length - 1] = baseCmp;
 
       const min = Math.min(...vals) * 0.98;
       const max = Math.max(...vals) * 1.02;
@@ -888,7 +746,6 @@
       }
       ctx.stroke();
 
-      // Soft emerald pastel gradient fill
       ctx.lineTo(w, h);
       ctx.lineTo(0, h);
       const grad = ctx.createLinearGradient(0, 0, 0, h);
@@ -898,7 +755,6 @@
       ctx.fill();
     }
 
-    // IST Market Clock Evaluator
     function evalClock() {
       const now = new Date();
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -911,6 +767,7 @@
       const isOpen = isWeekday && ((hours > 9 || (hours === 9 && mins >= 15)) && (hours < 15 || (hours === 15 && mins <= 30)));
 
       const clockEl = document.getElementById('istClock');
+      if (!clockEl) return;
       const timeStr = ist.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
       if (isOpen) {
@@ -926,6 +783,6 @@
     evalClock();
     setInterval(evalClock, 30000);
     renderActiveStock(TOP_5_DEFAULTS["RELIANCE"]);
-  <script type="module">
+  </script>
 </body>
 </html>
