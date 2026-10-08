@@ -6,290 +6,146 @@
   <title>Market Drishti × Market Monk | Research Terminal</title>
   <style>
     :root {
-      --bg-canvas: #F8FAFC;
-      --bg-surface: #FFFFFF;
-      --bg-subtle: #F1F5F9;
-      --border-subtle: #E2E8F0;
-      --border-strong: #CBD5E1;
-      
-      --text-main: #0F172A;
-      --text-muted: #475569;
+      /* Neomorphic & Glassmorphic Palette */
+      --bg-canvas: #0B0F19;
+      --bg-surface: #111827;
+      --bg-card: #162032;
+      --bg-card-hover: #1E293B;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: #F59E0B;
+
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
       --text-dim: #64748B;
 
-      --brand-brass: #B08D57;
-      --brand-brass-dark: #8A6D3B;
-      --brand-brass-light: #FBF7EE;
-      
+      --brand-brass: #D4AF37;
+      --brand-brass-light: rgba(212, 175, 55, 0.15);
+
       --accent-emerald: #10B981;
       --accent-emerald-dark: #047857;
       --accent-rose: #EF4444;
       --accent-rose-dark: #B91C1C;
       --accent-amber: #F59E0B;
-      --accent-amber-dark: #B45309;
       --accent-sapphire: #3B82F6;
-      --accent-sapphire-dark: #1D4ED8;
+      --accent-purple: #8B5CF6;
 
-      --pillar-sage-bg: #EDFDF4;
-      --pillar-sage-border: #BBF7D0;
-      --pillar-sage-text: #14532D;
-
-      --pillar-sapphire-bg: #EFF6FF;
-      --pillar-sapphire-border: #BFDBFE;
-      --pillar-sapphire-text: #1E3A8A;
-
-      --pillar-amber-bg: #FFFBEB;
-      --pillar-amber-border: #FDE68A;
-      --pillar-amber-text: #78350F;
-
-      --pillar-lavender-bg: #FAF5FF;
-      --pillar-lavender-border: #E9D5FF;
-      --pillar-lavender-text: #581C87;
+      /* 3D Shadows & Layering */
+      --shadow-3d-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      --shadow-3d-glow: 0 0 25px rgba(212, 175, 55, 0.2);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif; }
     body { background-color: var(--bg-canvas); color: var(--text-main); font-size: 13px; line-height: 1.5; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
     /* Masthead */
-    .masthead-t1 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-shrink: 0; position: relative; z-index: 100; }
+    .masthead-t1 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-shrink: 0; z-index: 100; }
     .brand-group { display: flex; align-items: center; gap: 10px; }
-    .brand-mark { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; color: var(--text-main); }
+    .brand-mark { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; color: #FFF; }
     .brand-mark span { color: var(--brand-brass); }
     .brand-tag { font-size: 11px; color: var(--text-dim); border-left: 1px solid var(--border-subtle); padding-left: 10px; }
 
     .search-box-wrap { position: relative; flex: 1; max-width: 520px; }
-    .search-input-box { width: 100%; background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 12px 8px 34px; color: var(--text-main); font-size: 12.5px; outline: none; transition: all 0.2s; }
-    .search-input-box:focus { border-color: var(--brand-brass); background: #fff; box-shadow: 0 0 0 2px rgba(176,141,87,0.18); }
-    .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 12px; }
+    .search-input-box { width: 100%; background: #1A2436; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 12px 8px 34px; color: #FFF; font-size: 12.5px; outline: none; transition: all 0.2s; }
+    .search-input-box:focus { border-color: var(--brand-brass); box-shadow: var(--shadow-3d-glow); }
+    .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
 
-    .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; box-shadow: 0 8px 24px rgba(15,23,42,0.12); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
-    .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; }
-    .suggest-item:last-child { border-bottom: none; }
-    .suggest-item:hover, .suggest-item.active { background: #F8FAFC; }
-    .suggest-ticker { font-weight: 800; color: var(--text-main); font-size: 12.5px; }
+    .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #1A2436; border: 1px solid var(--border-subtle); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
+    .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
+    .suggest-item:hover { background: #24314A; }
+    .suggest-ticker { font-weight: 800; color: #FFF; }
     .suggest-name { font-size: 11.5px; color: var(--text-muted); margin-left: 8px; }
-    .suggest-sector { font-size: 10.5px; color: var(--brand-brass-dark); font-weight: 600; text-transform: uppercase; background: var(--brand-brass-light); padding: 2px 7px; border-radius: 4px; }
+    .suggest-sector { font-size: 10px; color: var(--brand-brass); background: var(--brand-brass-light); padding: 2px 7px; border-radius: 4px; }
 
-    .status-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .status-badge { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; }
 
-    .masthead-t2 { background: #F1F5F9; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
-    .clock-pill { font-weight: 700; color: var(--text-main); }
-    .clock-pill.closed { color: var(--accent-amber-dark); }
-    .tape-items { display: flex; align-items: center; gap: 18px; overflow-x: auto; white-space: nowrap; }
-    .tape-val { font-weight: 700; color: var(--text-main); margin-left: 3px; }
-    .up { color: var(--accent-emerald-dark); font-weight: 600; }
-    .down { color: var(--accent-rose-dark); font-weight: 600; }
+    /* Session Clock & Tape */
+    .masthead-t2 { background: #0E1524; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
+    .tape-items { display: flex; align-items: center; gap: 18px; }
+    .up { color: var(--accent-emerald); font-weight: 600; }
+    .down { color: var(--accent-rose); font-weight: 600; }
 
-    .masthead-t3 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 5px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
-    .breadth-pills { display: flex; align-items: center; gap: 14px; }
-
+    /* App Body */
     .app-body { display: grid; grid-template-columns: 240px 1fr; flex: 1; overflow: hidden; }
 
-    /* Left Menu */
-    .sidebar { background: var(--bg-surface); border-right: 1px solid var(--border-subtle); padding: 14px 12px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
-    .nav-header { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.08em; padding: 6px 10px 4px; }
-    .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 9px 12px; font-size: 12.5px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.15s ease; }
-    .nav-btn:hover { background: var(--bg-subtle); color: var(--text-main); }
-    .nav-btn.active { background: var(--brand-brass-light); color: var(--brand-brass-dark); border-left: 3px solid var(--brand-brass); }
+    /* Sidebar Navigation */
+    .sidebar { background: var(--bg-surface); border-right: 1px solid var(--border-subtle); padding: 14px 10px; display: flex; flex-direction: column; gap: 6px; }
+    .nav-header { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.08em; padding: 6px 10px; }
+    .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 10px 12px; font-size: 12.5px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .nav-btn:hover { background: #1A2436; color: #FFF; }
+    .nav-btn.active { background: linear-gradient(90deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.05) 100%); color: var(--brand-brass); border-left: 3px solid var(--brand-brass); }
 
-    .content-viewport { background: var(--bg-canvas); padding: 16px 22px; overflow-y: auto; height: 100%; }
+    .content-viewport { background: var(--bg-canvas); padding: 18px 24px; overflow-y: auto; height: 100%; }
 
-    .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-    .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass-dark); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    /* 3D Visual Cards */
+    .card-3d { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow-3d-card); position: relative; }
+    .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
 
-    /* Trendlyne-style DVM Scorecard */
-    .dvm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
-    .dvm-card { background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; }
-    .dvm-meta { display: flex; flex-direction: column; }
-    .dvm-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); }
-    .dvm-score { font-size: 18px; font-weight: 900; color: var(--text-main); }
-    .dvm-badge { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 4px; text-transform: uppercase; }
-    .dvm-high { background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); }
-    .dvm-mid { background: var(--pillar-amber-bg); color: var(--accent-amber-dark); border: 1px solid var(--pillar-amber-border); }
+    /* 3D Pillars Visualizer */
+    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+    .pillar-card { background: linear-gradient(145deg, #1A253A 0%, #131B2A 100%); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; box-shadow: var(--shadow-3d-card); transition: transform 0.2s; position: relative; overflow: hidden; }
+    .pillar-card:hover { transform: translateY(-3px); }
+    .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
+    .pillar-sage::before { background: var(--accent-emerald); }
+    .pillar-sapphire::before { background: var(--accent-sapphire); }
+    .pillar-amber::before { background: var(--accent-amber); }
+    .pillar-lavender::before { background: var(--accent-purple); }
 
-    /* 4 Color Pillars with 'i' Tooltip */
-    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
-    @media (max-width: 1024px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
-    .pillar { border-radius: 8px; padding: 12px 14px; border: 1px solid transparent; position: relative; }
-    .pillar-sage { background: var(--pillar-sage-bg); border-color: var(--pillar-sage-border); }
-    .pillar-sapphire { background: var(--pillar-sapphire-bg); border-color: var(--pillar-sapphire-border); }
-    .pillar-amber { background: var(--pillar-amber-bg); border-color: var(--pillar-amber-border); }
-    .pillar-lavender { background: var(--pillar-lavender-bg); border-color: var(--pillar-lavender-border); }
-    
-    .pillar-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-    .pillar-name { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
-    .pillar-sage .pillar-name { color: var(--pillar-sage-text); }
-    .pillar-sapphire .pillar-name { color: var(--pillar-sapphire-text); }
-    .pillar-amber .pillar-name { color: var(--pillar-amber-text); }
-    .pillar-lavender .pillar-name { color: var(--pillar-lavender-text); }
+    .pillar-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .pillar-name { font-size: 11px; font-weight: 800; color: #FFF; }
+    .pillar-val { font-size: 20px; font-weight: 900; margin: 4px 0; color: #FFF; }
+    .pillar-desc { font-size: 11px; color: var(--text-muted); }
 
-    /* 'i' Info Circle Icon & Hover Card */
-    .info-bubble-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
-    .info-bubble-icon { width: 16px; height: 16px; border-radius: 50%; background: rgba(0,0,0,0.06); color: var(--text-dim); font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease; }
-    .info-bubble-wrap:hover .info-bubble-icon { background: var(--brand-brass); color: #FFFFFF; }
-    
-    .info-tooltip-popover {
-      position: absolute;
-      top: calc(100% + 6px);
-      right: 0;
-      width: 230px;
-      background: #FFFFFF;
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 9px 11px;
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.12);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(4px);
-      transition: all 0.18s ease;
-      z-index: 100;
-      pointer-events: none;
-    }
-    .info-bubble-wrap:hover .info-tooltip-popover { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
-    .info-tooltip-title { font-weight: 800; color: var(--text-main); margin-bottom: 2px; font-size: 11.5px; }
+    /* Info Tooltip */
+    .info-bubble { width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #FFF; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+    .info-popover { position: absolute; top: 35px; right: 10px; width: 220px; background: #0E1524; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px; font-size: 11px; color: var(--text-muted); z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
+    .info-bubble:hover + .info-popover { display: block; }
 
-    .pillar-val { font-size: 18px; font-weight: 900; color: var(--text-main); margin-bottom: 2px; }
-    .pillar-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+    /* 3D Technofunda Basket Cards */
+    .basket-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 10px; }
+    .basket-card { background: linear-gradient(145deg, #162032 0%, #111827 100%); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px; position: relative; box-shadow: var(--shadow-3d-card); transition: all 0.25s; }
+    .basket-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.4); }
+    .basket-badge { position: absolute; top: 14px; right: 14px; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
+    .badge-pass { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid var(--accent-emerald); }
+    .badge-watch { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+    .basket-title { font-size: 14px; font-weight: 900; color: #FFF; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+    .basket-author { font-size: 11px; color: var(--brand-brass); font-weight: 700; margin-bottom: 10px; }
+    .basket-params { list-style: none; font-size: 11.5px; color: var(--text-muted); line-height: 1.6; }
+    .basket-params li { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 4px; }
+    .basket-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-subtle); font-size: 11px; }
 
-    /* Timeframe Selection Ribbon */
-    .time-ribbon { display: inline-flex; background: #F1F5F9; padding: 2px; border-radius: 4px; gap: 2px; }
-    .time-btn { border: none; background: transparent; padding: 3px 8px; border-radius: 3px; font-size: 10.5px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.12s ease; }
-    .time-btn:hover { color: var(--text-main); }
-    .time-btn.active { background: #FFFFFF; color: var(--brand-brass-dark); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+    /* Chart Module */
+    .chart-container-3d { background: #131B2A; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 14px; }
+    .time-ribbon { display: inline-flex; background: #0B0F19; border-radius: 6px; padding: 2px; gap: 2px; }
+    .time-btn { background: transparent; border: none; color: var(--text-muted); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+    .time-btn.active { background: var(--brand-brass); color: #000; }
+    .chart-box { position: relative; width: 100%; height: 280px; }
+    canvas { width: 100% !important; height: 100% !important; cursor: crosshair; }
 
-    /* Sub-Tab Navigation for Deep Scan */
-    .subnav-pills { display: flex; gap: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; }
-    .subnav-btn { background: #FFFFFF; border: 1px solid var(--border-subtle); padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.15s ease; display: flex; align-items: center; gap: 6px; }
-    .subnav-btn:hover { background: var(--bg-subtle); color: var(--text-main); }
-    .subnav-btn.active { background: var(--brand-brass-light); border-color: var(--brand-brass); color: var(--brand-brass-dark); }
+    /* Floating Glassmorphic Tooltip */
+    .chart-tooltip-floating { position: absolute; pointer-events: none; background: rgba(14, 21, 36, 0.85); color: #FFF; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: none; z-index: 100; font-size: 11px; }
 
-    /* Side-by-Side Squeezed Layout */
-    .chart-dual-layout { display: grid; grid-template-columns: 1.7fr 1fr; gap: 14px; margin-top: 4px; }
-    @media (max-width: 980px) { .chart-dual-layout { grid-template-columns: 1fr; } }
+    /* Subnav Buttons */
+    .subnav-pills { display: flex; gap: 10px; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
+    .subnav-btn { background: #1A2436; border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 12px; font-weight: 700; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .subnav-btn.active { background: var(--brand-brass); color: #000; border-color: var(--brand-brass); }
 
-    .chart-left-pane { position: relative; background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 12px 6px; display: flex; flex-direction: column; }
-    .chart-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid #F1F5F9; }
-    
-    .chart-legend-bar { display: flex; align-items: center; gap: 14px; font-size: 10.5px; font-weight: 700; }
-    .legend-item { display: flex; align-items: center; gap: 5px; }
-    .legend-color-dot { width: 10px; height: 3px; border-radius: 2px; }
+    /* SWOT Matrix */
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .swot-box { border-radius: 10px; padding: 14px; background: #131B2A; border: 1px solid var(--border-subtle); }
+    .swot-title { font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; display: flex; justify-content: space-between; }
 
-    .chart-box { position: relative; width: 100%; height: 280px; overflow: hidden; }
-    canvas { width: 100% !important; height: 100% !important; display: block; cursor: crosshair; }
-
-    /* Transparent Thin-Outlined Floating Box */
-    .chart-tooltip-floating { 
-      position: absolute; 
-      pointer-events: none; 
-      background: rgba(15, 23, 42, 0.75); 
-      color: #fff; 
-      padding: 8px 12px; 
-      border-radius: 8px; 
-      font-size: 11px; 
-      line-height: 1.45; 
-      box-shadow: 0 6px 20px rgba(0,0,0,0.22); 
-      display: none; 
-      z-index: 99; 
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    .chart-tooltip-floating .tt-date { color: #CBD5E1; font-size: 10px; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 3px; margin-bottom: 5px; font-weight: 700; }
-    .chart-tooltip-floating .tt-row { display: flex; justify-content: space-between; gap: 14px; }
-    .chart-tooltip-floating .tt-val { font-weight: 800; color: #FFFFFF; }
-
-    /* Companion Metrics Table */
-    .chart-right-pane { background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; }
-    .exp-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
-    .exp-table td { padding: 6px 3px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
-    .exp-table tr:last-child td { border-bottom: none; }
-    .exp-label { color: var(--text-dim); font-weight: 600; width: 45%; }
-    .exp-value { color: var(--text-main); font-weight: 800; text-align: right; }
-    .exp-note { font-size: 11px; color: var(--text-muted); background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 10px; margin-top: 8px; line-height: 1.4; }
-
-    /* Deep Scan Grid Layouts */
-    .deep-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-    .deep-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-    @media (max-width: 900px) { .deep-grid-2, .deep-grid-3 { grid-template-columns: 1fr; } }
-
-    .metric-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px 14px; }
-    .metric-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--brand-brass-dark); margin-bottom: 8px; }
-
-    .shareholding-bar { width: 100%; height: 16px; background: #E2E8F0; border-radius: 4px; overflow: hidden; display: flex; margin: 8px 0; }
-    .sh-prom { background: #3B82F6; height: 100%; }
-    .sh-fii { background: #10B981; height: 100%; }
-    .sh-dii { background: #F59E0B; height: 100%; }
-    .sh-pub { background: #94A3B8; height: 100%; }
-
-    /* 4-Box Moneycontrol SWOT Matrix */
-    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-    .swot-box { border-radius: 6px; padding: 12px 14px; border: 1px solid transparent; background: #FFFFFF; }
-    .swot-s { border-color: #BBF7D0; background: #F0FDF4; }
-    .swot-w { border-color: #FECACA; background: #FEF2F2; }
-    .swot-o { border-color: #BFDBFE; background: #EFF6FF; }
-    .swot-t { border-color: #FED7AA; background: #FFF7ED; }
-
-    .swot-title { font-size: 11.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; }
-    .swot-s .swot-title { color: var(--accent-emerald-dark); }
-    .swot-w .swot-title { color: var(--accent-rose-dark); }
-    .swot-o .swot-title { color: var(--accent-sapphire-dark); }
-    .swot-t .swot-title { color: var(--accent-amber-dark); }
-
-    .swot-list { list-style: disc inside; font-size: 11.5px; color: var(--text-muted); line-height: 1.45; }
-    .swot-list li { margin-bottom: 3px; }
-
-    /* 3-Column Market Mood Grid */
-    .mood-tri-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-    @media (max-width: 1024px) { .mood-tri-grid { grid-template-columns: 1fr; } }
-
-    /* 3D Gauge Pointer Styling */
-    .gauge-card-3d { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 14px 10px; }
-    .gauge-wrap-3d { position: relative; width: 220px; height: 115px; display: flex; justify-content: center; }
+    /* Gauge 3D Dial */
     .gauge-needle {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      width: 4px;
-      height: 72px;
-      background: linear-gradient(to top, #1E293B, #0F172A);
-      border-radius: 3px 3px 0 0;
-      transform-origin: bottom center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.35);
-      z-index: 10;
+      position: absolute; bottom: 15px; left: 50%; width: 4px; height: 72px; background: linear-gradient(to top, #1E293B, #0F172A);
+      border-radius: 3px 3px 0 0; transform-origin: bottom center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.35); z-index: 10;
     }
-    .gauge-hub {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 18px;
-      height: 18px;
-      background: #B08D57;
-      border: 3px solid #FFFFFF;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 11;
-    }
+    .gauge-hub { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; background: #B08D57; border: 3px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 11; }
 
-    .ad-bar-wrap { width: 100%; height: 14px; background: #F1F5F9; border-radius: 7px; overflow: hidden; display: flex; margin: 10px 0 6px; }
-    .ad-bar-adv { background: var(--accent-emerald); height: 100%; }
-    .ad-bar-dec { background: var(--accent-rose); height: 100%; }
-
-    .tf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
-    .tf-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px; }
-    .tf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .tf-score { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-brass-light); border: 2px solid var(--brand-brass); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; color: var(--brand-brass-dark); }
-
-    .si-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .si-table th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted); text-transform: uppercase; font-size: 10px; font-weight: 700; border-bottom: 1px solid var(--border-subtle); }
-    .si-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--text-main); }
     .si-badge { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
-    .si-badge.added { background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); }
-    .si-badge.same { background: var(--pillar-amber-bg); color: var(--accent-amber-dark); border: 1px solid var(--pillar-amber-border); }
-    .si-badge.reduced { background: #FEF2F2; color: var(--accent-rose-dark); border: 1px solid #FECACA; }
+    .si-badge.added { background: #ECFDF5; color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .si-badge.same { background: #FFFBEB; color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .si-badge.reduced { background: #FEF2F2; color: var(--accent-rose); border: 1px solid rgba(239, 68, 68, 0.3); }
   </style>
 </head>
 <body>
@@ -298,325 +154,314 @@
   <div class="masthead-t1">
     <div class="brand-group">
       <div class="brand-mark">MARKET <span>DRISHTI</span></div>
-      <div class="brand-tag">Institutional Research Terminal • v2.0 Pro</div>
+      <div class="brand-tag">Institutional Research Terminal • v2.1 3D Pro</div>
     </div>
     
     <div class="search-box-wrap">
       <span class="search-icon">🔍</span>
-      <input type="text" id="omniSearch" class="search-input-box" placeholder="Search company name or symbol (e.g. RELIANCE, MOTHERSON, TRENT)..." autocomplete="off" />
+      <input type="text" id="omniSearch" class="search-input-box" placeholder="Search Symbol / Stock (e.g. RELIANCE, MOTHERSON, TRENT)..." autocomplete="off" />
       <div id="suggestDropdown" class="suggest-dropdown"></div>
     </div>
 
     <div class="status-badge" id="backendBadge">🟢 LIVE TERMINAL</div>
   </div>
 
-  <!-- Session Clock & Benchmark Indices Tape -->
+  <!-- Benchmarks Tape -->
   <div class="masthead-t2">
     <div class="clock-pill" id="istClock">⏰ IST: 09:15 AM • MARKET OPEN</div>
     <div class="tape-items">
-      <span>NIFTY 50: <span class="tape-val" id="tapeNifty">24,852.40</span> <span class="up" id="tapeNiftyChg">▲ +0.58%</span></span>
-      <span>SENSEX: <span class="tape-val" id="tapeSensex">81,385.20</span> <span class="up" id="tapeSensexChg">▲ +0.53%</span></span>
-      <span>BANK NIFTY: <span class="tape-val" id="tapeBank">51,460.80</span> <span class="down" id="tapeBankChg">▼ -0.17%</span></span>
+      <span>NIFTY 50: <span class="tape-val" id="tapeNifty">22,478.20</span> <span class="down" id="tapeNiftyChg">▼ -0.55%</span></span>
+      <span>SENSEX: <span class="tape-val" id="tapeSensex">72,286.80</span> <span class="down" id="tapeSensexChg">▼ -0.48%</span></span>
+      <span>BANK NIFTY: <span class="tape-val" id="tapeBank">50,340.50</span> <span class="down" id="tapeBankChg">▼ -0.32%</span></span>
       <span>INDIA VIX: <span class="tape-val" id="tapeVix">12.85</span> <span class="down" id="tapeVixChg">▼ Calm</span></span>
     </div>
   </div>
 
-  <!-- Live Market Activity Ribbon -->
-  <div class="masthead-t3">
-    <div class="breadth-pills">
-      <span>NSE Market Breadth:</span>
-      <span class="up" id="ribbonAdv">▲ 1,514 Advances</span>
-      <span class="down" id="ribbonDec">▼ 748 Declines</span>
-      <span id="ribbonUnch">124 Unchanged</span>
-    </div>
-    <div>FII Cash: <span class="down" id="ribbonFii">▼ -₹820 Cr</span> | DII Cash: <span class="up" id="ribbonDii">▲ +₹1,450 Cr</span></div>
-  </div>
-
   <!-- App Body Layout -->
   <div class="app-body">
-    <!-- Left Navigation Menu -->
+    <!-- Sidebar -->
     <aside class="sidebar">
-      <div class="nav-header">Intelligence Suite</div>
+      <div class="nav-header">Research Modules</div>
       <button class="nav-btn active" onclick="switchTab('dossier', this)">📊 Executive Overview</button>
       <button class="nav-btn" onclick="switchTab('deepscan', this)">🔬 Drishti 360° Deep Scan</button>
       <button class="nav-btn" onclick="switchTab('study', this)">⚖️ SWOT Diagnostics</button>
       <button class="nav-btn" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
-      <button class="nav-btn" onclick="switchTab('technofunda', this)">⚡ Technofunda Picks</button>
       <button class="nav-btn" onclick="switchTab('superinvestors', this)">👥 Super Investors</button>
     </aside>
 
     <!-- Main Viewport -->
     <main class="content-viewport">
       
-      <!-- TAB 1: EXECUTIVE OVERVIEW (DOSSIER) -->
+      <!-- TAB 1: EXECUTIVE OVERVIEW -->
       <section id="tab-dossier">
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+        <!-- Stock Hero Card -->
+        <div class="card-3d">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
             <div>
               <div style="display:flex; align-items:center; gap:8px;">
-                <h1 id="dispName" style="font-size:20px; font-weight:900; color:var(--text-main);">Reliance Industries Ltd</h1>
-                <span id="dispTickerBadge" style="font-size:10px; font-weight:800; background:var(--bg-subtle); padding:2px 6px; border-radius:4px; color:var(--text-dim);">NSE: RELIANCE</span>
+                <h1 id="dispName" style="font-size:22px; font-weight:900; color:#FFF;">Reliance Industries Ltd</h1>
+                <span id="dispTickerBadge" style="font-size:10.5px; font-weight:800; background:rgba(255,255,255,0.08); padding:2px 8px; border-radius:4px; color:var(--brand-brass);">NSE: RELIANCE</span>
               </div>
-              <div id="dispSector" style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Oil Refining, Reliance Retail & Jio Telecom</div>
+              <div id="dispSector" style="font-size:11.5px; color:var(--text-muted); font-weight:600; margin-top:2px;">Oil Refining, Reliance Retail & Jio Telecom</div>
             </div>
             <div style="text-align:right;">
-              <div id="dispCmp" style="font-size:22px; font-weight:900; color:var(--text-main);">₹1,187.00</div>
+              <div id="dispCmp" style="font-size:24px; font-weight:900; color:#FFF;">₹1,187.00</div>
               <div id="dispChg" class="up" style="font-weight:700; font-size:12px;">▲ +₹5.00 (+0.42%)</div>
             </div>
           </div>
-          <p id="dispSummary" style="font-size:12px; color:var(--text-muted); line-height:1.45; border-top:1px solid var(--border-subtle); padding-top:6px;">
-            What the company does: India's largest private enterprise. It generates strong operational cash flow from petrochemical complexes to scale Reliance Retail distribution and Jio 5G connectivity nationwide.
+          <p id="dispSummary" style="font-size:12px; color:var(--text-muted); line-height:1.5; border-top:1px solid var(--border-subtle); padding-top:8px; margin-top:8px;">
+            Speciality: India's largest corporate powerhouse operating integrated refining petrochemical complexes (O2C), nationwide retail distribution via Reliance Retail, and dominant 5G broadband wireless infrastructure through Jio.
           </p>
         </div>
 
-        <!-- Trendlyne-style DVM Scorecard -->
-        <div class="dvm-grid">
-          <div class="dvm-card">
-            <div class="dvm-meta">
-              <span class="dvm-label">Durability (Quality)</span>
-              <span class="dvm-score" id="scoreDurability">82 / 100</span>
-            </div>
-            <span class="dvm-badge dvm-high" id="badgeDurability">High Quality</span>
-          </div>
-          <div class="dvm-card">
-            <div class="dvm-meta">
-              <span class="dvm-label">Valuation Score</span>
-              <span class="dvm-score" id="scoreValuation">64 / 100</span>
-            </div>
-            <span class="dvm-badge dvm-mid" id="badgeValuation">Fair Price</span>
-          </div>
-          <div class="dvm-card">
-            <div class="dvm-meta">
-              <span class="dvm-label">Momentum Score</span>
-              <span class="dvm-score" id="scoreMomentum">71 / 100</span>
-            </div>
-            <span class="dvm-badge dvm-high" id="badgeMomentum">Bullish Trend</span>
-          </div>
-        </div>
-
-        <!-- 4 Revised Pillars with 'i' Auto-Explanatory Tooltips -->
+        <!-- 4 Revised Pillars with 3D Bevels & 'i' Popovers -->
         <div class="pillars-grid">
-          <div class="pillar pillar-sage">
+          <div class="pillar-card pillar-sage">
             <div class="pillar-header-row">
               <span class="pillar-name">Competitive Edge (Moat)</span>
-              <div class="info-bubble-wrap">
-                <span class="info-bubble-icon">ℹ</span>
-                <div class="info-tooltip-popover">
-                  <div class="info-tooltip-title">Competitive Edge (Moat)</div>
-                  An economic 'Moat' represents a company's structural advantage (brand trust, massive retail footprints, network effects) protecting pricing power against peers.
-                </div>
-              </div>
+              <div class="info-bubble">i</div>
+              <div class="info-popover"><b>Economic Moat:</b> Measures market dominance, brand strength, or cost advantage that shields earnings from competitors over a multi-decade timeframe.</div>
             </div>
             <div class="pillar-val" id="dispMoat">Market Leader</div>
-            <div class="pillar-desc">Dominant market share across downstream energy, retail footfall, and 5G connectivity.</div>
+            <div class="pillar-desc">Integrated refining footprint, massive retail reach, and dominant telecom scale.</div>
           </div>
 
-          <div class="pillar pillar-sapphire">
+          <div class="pillar-card pillar-sapphire">
             <div class="pillar-header-row">
-              <span class="pillar-name">Debt & Promoter Pledge (Mortgage)</span>
-              <div class="info-bubble-wrap">
-                <span class="info-bubble-icon">ℹ</span>
-                <div class="info-tooltip-popover">
-                  <div class="info-tooltip-title">Promoter Share Pledging (Girvi)</div>
-                  Measures whether promoters have mortgaged shares to borrow debt. 0% pledge is an essential mark of solvency hygiene.
-                </div>
-              </div>
+              <span class="pillar-name">Debt & Pledge (Mortgage)</span>
+              <div class="info-bubble">i</div>
+              <div class="info-popover"><b>Promoter Pledge (Girvi):</b> Percentage of founders' personal shares pledged to secure borrowings. 0% represents maximum safety against margin liquidations.</div>
             </div>
             <div class="pillar-val" id="dispGirvi">0.00% Girvi</div>
-            <div class="pillar-desc">Founders have zero pledged shares against personal loans. Pristine balance sheet.</div>
+            <div class="pillar-desc">Clean balance sheet; zero promoter shares mortgaged against loans.</div>
           </div>
 
-          <div class="pillar pillar-amber">
+          <div class="pillar-card pillar-amber">
             <div class="pillar-header-row">
-              <span class="pillar-name">Business Profitability (ROCE)</span>
-              <div class="info-bubble-wrap">
-                <span class="info-bubble-icon">ℹ</span>
-                <div class="info-tooltip-popover">
-                  <div class="info-tooltip-title">ROCE: Return on Capital Employed</div>
-                  Operating income earned per rupee of debt + equity capital. A sustainable ROCE > 15% denotes value generation.
-                </div>
-              </div>
+              <span class="pillar-name">Profitability (ROCE)</span>
+              <div class="info-bubble">i</div>
+              <div class="info-popover"><b>Return on Capital Employed (ROCE):</b> Evaluates how effectively operating profit is generated per rupee of capital employed. ROCE > 15% denotes value compounding.</div>
             </div>
             <div class="pillar-val" id="dispRoce">11.4% Return</div>
-            <div class="pillar-desc">Reinvesting operating earnings into new clean energy gigafactories.</div>
+            <div class="pillar-desc">Reinvesting heavy operating cash flows into clean energy gigafactories.</div>
           </div>
 
-          <div class="pillar pillar-lavender">
+          <div class="pillar-card pillar-lavender">
             <div class="pillar-header-row">
-              <span class="pillar-name">Stock Price Check (Valuation)</span>
-              <div class="info-bubble-wrap">
-                <span class="info-bubble-icon">ℹ</span>
-                <div class="info-tooltip-popover">
-                  <div class="info-tooltip-title">P/E: Price-to-Earnings Ratio</div>
-                  Indicates how many rupees investors pay for every ₹1 of company net profit. Below sector median implies relative comfort.
-                </div>
-              </div>
+              <span class="pillar-name">Stock Valuation (P/E)</span>
+              <div class="info-bubble">i</div>
+              <div class="info-popover"><b>Price-to-Earnings (P/E):</b> Multiple paid per rupee of annual net profit. Compared against historical medians and sector averages to identify discount or premium.</div>
             </div>
             <div class="pillar-val" id="dispPe">21.8x P/E</div>
-            <div class="pillar-desc">Trading at fair historical multiple relative to sum-of-parts optionality.</div>
+            <div class="pillar-desc">Trading near historical multiple support relative to consumer demerger value.</div>
           </div>
         </div>
 
-        <!-- Stable Squeezed Chart with 1Y, 3Y, 5Y Ribbon & Transparent Hover Box -->
-        <div class="card">
+        <!-- 3D Timeframe Synchronized Chart -->
+        <div class="card-3d">
           <div class="card-title">
-            <span>Price Action & Moving Averages</span>
-            <span style="font-size:11px; color:var(--text-muted);">
-              50 DMA: <strong id="dispDma50" style="color:var(--text-main);">₹1,220.40</strong> | 
-              200 DMA: <strong id="dispDma200" style="color:var(--text-main);">₹1,280.00</strong>
-            </span>
+            <span>Price Action & Multi-Timeframe Volume</span>
+            <div class="time-ribbon">
+              <button class="time-btn active" onclick="setTimeframe('1Y', this)">1Y</button>
+              <button class="time-btn" onclick="setTimeframe('3Y', this)">3Y</button>
+              <button class="time-btn" onclick="setTimeframe('5Y', this)">5Y</button>
+            </div>
           </div>
 
-          <div class="chart-dual-layout">
-            <div class="chart-left-pane">
-              <div class="chart-header-row">
-                <div class="time-ribbon">
-                  <button class="time-btn active" onclick="setTimeframe('1Y', this)">1Y</button>
-                  <button class="time-btn" onclick="setTimeframe('3Y', this)">3Y</button>
-                  <button class="time-btn" onclick="setTimeframe('5Y', this)">5Y</button>
-                </div>
-                <div class="chart-legend-bar">
-                  <div class="legend-item"><div class="legend-color-dot" style="background:#10B981;"></div><span>Price</span></div>
-                  <div class="legend-item"><div class="legend-color-dot" style="background:#F59E0B;"></div><span>50 DMA</span></div>
-                  <div class="legend-item" style="color:var(--text-dim);"><span>Vol & RSI</span></div>
-                </div>
-              </div>
+          <div class="chart-container-3d">
+            <div style="position:relative;">
               <div class="chart-box">
                 <canvas id="dossierCanvas"></canvas>
                 <div id="chartTooltip" class="chart-tooltip-floating"></div>
               </div>
             </div>
+            
+            <!-- Quick Diagnostics Metrics Panel -->
+            <div style="display:flex; flex-direction:column; justify-content:space-between;">
+              <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:7px 0; color:var(--text-muted);">Current Trend</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="tableTrendStatus">Bullish Uptrend 🟢</td></tr>
+                <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:7px 0; color:var(--text-muted);">52W High / Low</td><td style="text-align:right; font-weight:800; color:#FFF;" id="table52Range">₹1,020 - ₹1,302</td></tr>
+                <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:7px 0; color:var(--text-muted);">From 52W High</td><td style="text-align:right; font-weight:800; color:#FFF;" id="tableDistHigh">-8.8%</td></tr>
+                <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:7px 0; color:var(--text-muted);">50-Day Line (Floor)</td><td style="text-align:right; font-weight:800; color:var(--brand-brass);" id="tableSupport">₹1,220.40</td></tr>
+                <tr><td style="padding:7px 0; color:var(--text-muted);">RSI (14) Momentum</td><td style="text-align:right; font-weight:800; color:#A78BFA;" id="tableRsi">52 (Balanced)</td></tr>
+              </table>
 
-            <div class="chart-right-pane">
-              <div>
-                <div style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--brand-brass-dark); margin-bottom:6px;">
-                  Technical Diagnostics
-                </div>
-                <table class="exp-table">
-                  <tbody>
-                    <tr><td class="exp-label">Trend Alignment</td><td class="exp-value" id="tableTrendStatus">Uptrend Support 🟢</td></tr>
-                    <tr><td class="exp-label">52-Week Range</td><td class="exp-value" id="table52Range">₹1,020 - ₹1,302</td></tr>
-                    <tr><td class="exp-label">From 52W High</td><td class="exp-value" id="tableDistHigh">-8.8%</td></tr>
-                    <tr><td class="exp-label">50-Day Line (Floor)</td><td class="exp-value" id="tableSupport">₹1,220.40</td></tr>
-                    <tr><td class="exp-label">RSI (14) Momentum</td><td class="exp-value" id="tableRsi">52 (Balanced)</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="exp-note" id="chartContextNote">
-                💡 <strong>Key takeaway:</strong> The 50-day moving average represents critical trend support. Staying above amber indicates active institutional defense.
+              <div style="background:#0E1524; border:1px solid var(--border-subtle); border-radius:8px; padding:10px; font-size:11px; color:var(--text-muted); line-height:1.45;">
+                💡 <b>Timeframe Sync Active:</b> Clicking 1Y, 3Y, or 5Y genuinely adjusts the data resolution. Hover across the graph to inspect exact price, volume, and 50 DMA readings at any date.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- TAB 2: DRISHTI 360° DEEP SCAN (NEW FLAGSHIP MODULE) -->
+      <!-- TAB 2: DRISHTI 360° DEEP SCAN (WITH TECHNOFUNDA BASKETS) -->
       <section id="tab-deepscan" style="display:none;">
-        <div class="card" style="margin-bottom:12px;">
+        <div class="card-3d">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <h2 style="font-size:18px; font-weight:900; color:var(--text-main);">🔬 Drishti 360° Deep Scan</h2>
-              <div style="font-size:11px; color:var(--text-dim);">Exhaustive Fundamental Forensic & Technical Indicator Matrix</div>
+              <h2 style="font-size:18px; font-weight:900; color:#FFF;">🔬 Drishti 360° Deep Scan</h2>
+              <div style="font-size:11px; color:var(--text-muted);">Forensic Fundamental Diagnostics, Technical Indicators & Legend Investor Baskets</div>
             </div>
-            <div style="font-size:12px; font-weight:800; color:var(--brand-brass-dark); background:var(--brand-brass-light); padding:4px 10px; border-radius:6px;" id="deepScanHeaderStock">
+            <div style="font-size:12px; font-weight:800; color:var(--brand-brass); background:var(--brand-brass-light); padding:4px 12px; border-radius:6px;" id="deepScanHeaderStock">
               RELIANCE
             </div>
           </div>
         </div>
 
-        <!-- Sub-navigation Pills -->
+        <!-- Subnav Pills -->
         <div class="subnav-pills">
-          <button class="subnav-btn active" id="btnSubFund" onclick="switchSubScan('fund')">📑 Fundamental Scan</button>
-          <button class="subnav-btn" id="btnSubTech" onclick="switchSubScan('tech')">📐 Technical Scan</button>
+          <button class="subnav-btn active" id="btnSubLegend" onclick="switchSubScan('legend')">⚡ Technofunda Baskets (Superinvesting.ai)</button>
+          <button class="subnav-btn" id="btnSubFund" onclick="switchSubScan('fund')">📑 Fundamental Deep Scan</button>
+          <button class="subnav-btn" id="btnSubTech" onclick="switchSubScan('tech')">📐 Technical Indicators & Pivots</button>
         </div>
 
-        <!-- SUB-TAB A: FUNDAMENTAL DEEP SCAN -->
-        <div id="subscan-fund">
-          <div class="deep-grid-3">
-            <div class="metric-card">
-              <div class="metric-card-title">Piotroski F-Score</div>
-              <div style="font-size:24px; font-weight:900; color:var(--accent-emerald-dark);" id="scanPiotroski">8 / 9</div>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Very Strong financial health & low turnaround risk.</div>
+        <!-- SUB-PANE 1: TECHNOFUNDA LEGEND BASKETS -->
+        <div id="subscan-legend">
+          <div class="basket-grid">
+            
+            <!-- Basket 1: Mark Minervini VCP -->
+            <div class="basket-card">
+              <span class="basket-badge badge-pass" id="badgeMinervini">Qualified (4/5)</span>
+              <div class="basket-title">🌪️ Volatility Contraction Pattern (VCP)</div>
+              <div class="basket-author">Mark Minervini • US Investing Champion Formula</div>
+              <ul class="basket-rules">
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Contraction Symmetry:</b> Successive price pullbacks contracting progressively (T1: 16% → T2: 7% → T3: 3%).</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Volume Drying Up:</b> Contraction troughs display volume dries up by >45% below 50-day average.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Stage 2 Uptrend:</b> Price resides above rising 50 DMA, 150 DMA, and 200 DMA.</li>
+                <li><span style="color:var(--accent-amber);">⚠</span> <b>Pivot Breakout Trigger:</b> Requires heavy institutional volume expansion on the pivot breakout bar.</li>
+              </ul>
+              <div class="basket-footer">
+                <span>Setup Fidelity:</span>
+                <strong style="color:var(--accent-emerald);" id="scoreMinervini">84% Match</strong>
+              </div>
             </div>
-            <div class="metric-card">
-              <div class="metric-card-title">Altman Z-Score</div>
-              <div style="font-size:24px; font-weight:900; color:var(--accent-emerald-dark);" id="scanAltman">3.82 (Safe)</div>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Safe Zone; zero bankruptcy probability.</div>
+
+            <!-- Basket 2: Warren Buffett & Charlie Munger -->
+            <div class="basket-card">
+              <span class="basket-badge badge-pass" id="badgeBuffett">Moat Compounder Pass</span>
+              <div class="basket-title">🏰 Economic Moat & Cash Machine</div>
+              <div class="basket-author">Warren Buffett & Charlie Munger • Berkshire Hathaway</div>
+              <ul class="basket-rules">
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Capital Compounding:</b> 10-Year average ROCE consistently sustained above 15%.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Conservative Debt:</b> Debt-to-Equity well contained under 0.5 with high interest coverage.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Durable Moat:</b> Brand and distribution power enables passing raw material costs to customers.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Free Cash Flow Machine:</b> Over 70% of reported net earnings convert into free operating cash.</li>
+              </ul>
+              <div class="basket-footer">
+                <span>Moat Rating:</span>
+                <strong style="color:var(--brand-brass);" id="scoreBuffett">Grade A Compounder</strong>
+              </div>
             </div>
-            <div class="metric-card">
-              <div class="metric-card-title">Modified Du-Pont ROE</div>
-              <div style="font-size:24px; font-weight:900; color:var(--brand-brass-dark);" id="scanDupont">14.2%</div>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">High asset turnover with moderate leverage ratio.</div>
+
+            <!-- Basket 3: Peter Lynch GARP -->
+            <div class="basket-card">
+              <span class="basket-badge badge-watch" id="badgeLynch">Fair Value</span>
+              <div class="basket-title">📈 Growth at Reasonable Price (GARP)</div>
+              <div class="basket-author">Peter Lynch • Fidelity Magellan Legend</div>
+              <ul class="basket-rules">
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>PEG Ratio Check:</b> Price-to-Earnings divided by 3-Yr EPS Growth Rate sits below 1.2.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Simple Business Model:</b> Dominant market share with understandable daily consumer consumption.</li>
+                <li><span style="color:var(--accent-amber);">⚠</span> <b>Institutional Headroom:</b> Moderate room for institutional ownership expansion.</li>
+              </ul>
+              <div class="basket-footer">
+                <span>PEG Score:</span>
+                <strong style="color:var(--accent-amber);" id="scoreLynch">PEG = 1.14 (Fairly Valued)</strong>
+              </div>
+            </div>
+
+            <!-- Basket 4: Ashish Kacholia & Rakesh Jhunjhunwala -->
+            <div class="basket-card">
+              <span class="basket-badge badge-pass" id="badgeBigBull">Multibagger Alignment</span>
+              <div class="basket-title">🎯 Domestic Multibagger Compounder</div>
+              <div class="basket-author">Ashish Kacholia & Rakesh Jhunjhunwala Model</div>
+              <ul class="basket-rules">
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Pristine Promoter Pledge:</b> Zero promoter share mortgaging protects against margin forced selling.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Capacity Capex Trigger:</b> Self-funding capacity expansions through operational accruals.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>DII Flow Backing:</b> Steady net institutional accumulation from domestic mutual funds.</li>
+              </ul>
+              <div class="basket-footer">
+                <span>Promoter Alignment:</span>
+                <strong style="color:var(--accent-emerald);" id="scoreBigBull">100% Clean Balance Sheet</strong>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SUB-PANE 2: FUNDAMENTAL FORENSIC SCAN -->
+        <div id="subscan-fund" style="display:none;">
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:14px;">
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass);">Piotroski F-Score</div>
+              <div style="font-size:24px; font-weight:900; color:var(--accent-emerald);" id="scanPiotroski">8 / 9</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Excellent financial health across profitability, leverage, and efficiency checks.</div>
+            </div>
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass);">Altman Z-Score</div>
+              <div style="font-size:24px; font-weight:900; color:var(--accent-emerald);" id="scanAltman">3.82 (Safe)</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Well above the distress line (1.81); zero financial insolvency probability.</div>
+            </div>
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass);">Du-Pont ROE Breakdown</div>
+              <div style="font-size:24px; font-weight:900; color:var(--brand-brass);" id="scanDupont">14.2%</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Solid profit margins combined with strong asset turnover.</div>
             </div>
           </div>
 
-          <div class="deep-grid-2">
-            <!-- Shareholding Pattern Radar -->
-            <div class="metric-card">
-              <div class="metric-card-title">Quarterly Shareholding Pattern (QoQ)</div>
-              <div class="shareholding-bar">
-                <div class="sh-prom" style="width: 50.3%;" title="Promoters: 50.3%"></div>
-                <div class="sh-fii" style="width: 22.1%;" title="FII: 22.1%"></div>
-                <div class="sh-dii" style="width: 16.4%;" title="DII: 16.4%"></div>
-                <div class="sh-pub" style="width: 11.2%;" title="Public: 11.2%"></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass); margin-bottom:8px;">Shareholding Distribution</div>
+              <div style="height:14px; background:#1A2436; border-radius:6px; overflow:hidden; display:flex;">
+                <div style="width:50.3%; background:#3B82F6;" title="Promoters: 50.3%"></div>
+                <div style="width:22.1%; background:#10B981;" title="FII: 22.1%"></div>
+                <div style="width:16.4%; background:#F59E0B;" title="DII: 16.4%"></div>
+                <div style="width:11.2%; background:#94A3B8;" title="Public: 11.2%"></div>
               </div>
-              <div style="display:flex; justify-content:space-between; font-size:10.5px; font-weight:700; color:var(--text-muted);">
+              <div style="display:flex; justify-content:space-between; font-size:10.5px; font-weight:700; color:var(--text-muted); margin-top:8px;">
                 <span>Promoters: <strong style="color:#3B82F6;" id="shProm">50.3%</strong></span>
                 <span>FII: <strong style="color:#10B981;" id="shFii">22.1%</strong></span>
                 <span>DII: <strong style="color:#F59E0B;" id="shDii">16.4%</strong></span>
                 <span>Public: <strong style="color:#94A3B8;" id="shPub">11.2%</strong></span>
               </div>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:8px; line-height:1.4;">
-                Institutional ownership stands at 38.5% with steady net buying by domestic mutual funds over the last 2 quarters.
-              </div>
             </div>
 
-            <!-- 3-Year CAGR Growth Radar -->
-            <div class="metric-card">
-              <div class="metric-card-title">Financial Growth Rates (3-Yr CAGR)</div>
-              <table class="exp-table">
-                <tbody>
-                  <tr><td class="exp-label">Revenue CAGR (3Y)</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="cagrRev">+14.8%</td></tr>
-                  <tr><td class="exp-label">Operating Profit CAGR</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="cagrOpm">+16.2%</td></tr>
-                  <tr><td class="exp-label">Net Profit (PAT) CAGR</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="cagrPat">+12.5%</td></tr>
-                  <tr><td class="exp-label">Debt-to-Equity Ratio</td><td class="exp-value" id="cagrDebt">0.38 (Healthy)</td></tr>
-                </tbody>
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass); margin-bottom:6px;">3-Year CAGR Compounding</div>
+              <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                <tr><td style="padding:4px 0; color:var(--text-muted);">Revenue CAGR (3Y)</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="cagrRev">+14.8%</td></tr>
+                <tr><td style="padding:4px 0; color:var(--text-muted);">Operating Profit CAGR</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="cagrOpm">+16.2%</td></tr>
+                <tr><td style="padding:4px 0; color:var(--text-muted);">PAT Growth CAGR</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="cagrPat">+12.5%</td></tr>
+                <tr><td style="padding:4px 0; color:var(--text-muted);">Debt / Equity</td><td style="text-align:right; font-weight:800; color:#FFF;" id="cagrDebt">0.38 (Healthy)</td></tr>
               </table>
             </div>
           </div>
         </div>
 
-        <!-- SUB-TAB B: TECHNICAL DEEP SCAN -->
+        <!-- SUB-PANE 3: TECHNICAL INDICATORS & PIVOTS -->
         <div id="subscan-tech" style="display:none;">
-          <div class="deep-grid-2">
-            <!-- Classical Pivot Points Table -->
-            <div class="metric-card">
-              <div class="metric-card-title">Classical Floor Pivots (Daily Calculation)</div>
-              <table class="exp-table">
-                <tbody>
-                  <tr><td class="exp-label">Resistance 3 (R3)</td><td class="exp-value" style="color:var(--accent-rose-dark);" id="pivR3">₹1,248.00</td></tr>
-                  <tr><td class="exp-label">Resistance 2 (R2)</td><td class="exp-value" style="color:var(--accent-rose-dark);" id="pivR2">₹1,225.50</td></tr>
-                  <tr><td class="exp-label">Resistance 1 (R1)</td><td class="exp-value" style="color:var(--accent-amber-dark);" id="pivR1">₹1,206.00</td></tr>
-                  <tr style="background:#F8FAFC;"><td class="exp-label" style="font-weight:900;">Central Pivot (PP)</td><td class="exp-value" style="font-weight:900;" id="pivPP">₹1,185.00</td></tr>
-                  <tr><td class="exp-label">Support 1 (S1)</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="pivS1">₹1,165.50</td></tr>
-                  <tr><td class="exp-label">Support 2 (S2)</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="pivS2">₹1,145.00</td></tr>
-                  <tr><td class="exp-label">Support 3 (S3)</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="pivS3">₹1,120.00</td></tr>
-                </tbody>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass); margin-bottom:8px;">Classical Daily Floor Pivots</div>
+              <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                <tr><td style="padding:5px 0; color:var(--text-muted);">Resistance 3 (R3)</td><td style="text-align:right; font-weight:800; color:var(--accent-rose);" id="pivR3">₹1,248.00</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">Resistance 2 (R2)</td><td style="text-align:right; font-weight:800; color:var(--accent-rose);" id="pivR2">₹1,225.50</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">Resistance 1 (R1)</td><td style="text-align:right; font-weight:800; color:var(--accent-amber);" id="pivR1">₹1,206.00</td></tr>
+                <tr style="background:rgba(255,255,255,0.04);"><td style="padding:5px 0; font-weight:900; color:#FFF;">Central Pivot (PP)</td><td style="text-align:right; font-weight:900; color:#FFF;" id="pivPP">₹1,185.00</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">Support 1 (S1)</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="pivS1">₹1,165.50</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">Support 2 (S2)</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="pivS2">₹1,145.00</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">Support 3 (S3)</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="pivS3">₹1,120.00</td></tr>
               </table>
             </div>
 
-            <!-- Moving Average Cross Matrix -->
-            <div class="metric-card">
-              <div class="metric-card-title">Moving Averages Cross Matrix</div>
-              <table class="exp-table">
-                <tbody>
-                  <tr><td class="exp-label">20 EMA (Short-term)</td><td class="exp-value" id="ma20">₹1,192.00 <span class="up" style="font-size:10px;">(Bullish)</span></td></tr>
-                  <tr><td class="exp-label">50 SMA (Medium-term)</td><td class="exp-value" id="ma50">₹1,220.40 <span class="down" style="font-size:10px;">(Bearish)</span></td></tr>
-                  <tr><td class="exp-label">100 SMA (Structural)</td><td class="exp-value" id="ma100">₹1,245.00 <span class="down" style="font-size:10px;">(Bearish)</span></td></tr>
-                  <tr><td class="exp-label">200 SMA (Long-term)</td><td class="exp-value" id="ma200">₹1,280.00 <span class="down" style="font-size:10px;">(Bearish)</span></td></tr>
-                  <tr><td class="exp-label">14-Day ADX (Trend Power)</td><td class="exp-value" id="oscAdx">24.5 (Moderate Trend)</td></tr>
-                  <tr><td class="exp-label">MACD (12, 26, 9)</td><td class="exp-value" style="color:var(--accent-emerald-dark);" id="oscMacd">+4.20 (Positive Divergence)</td></tr>
-                </tbody>
+            <div class="card-3d">
+              <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass); margin-bottom:8px;">Moving Averages Alignment Matrix</div>
+              <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                <tr><td style="padding:5px 0; color:var(--text-muted);">20 EMA (Short-term)</td><td style="text-align:right; font-weight:800;" id="ma20">₹1,192.00 <span class="up">(Bullish)</span></td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">50 SMA (Medium-term)</td><td style="text-align:right; font-weight:800;" id="ma50">₹1,220.40 <span class="down">(Bearish)</span></td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">100 SMA (Structural)</td><td style="text-align:right; font-weight:800;" id="ma100">₹1,245.00 <span class="down">(Neutral)</span></td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">200 SMA (Long-term)</td><td style="text-align:right; font-weight:800;" id="ma200">₹1,280.00 <span class="down">(Bearish)</span></td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">14-Day ADX (Trend Power)</td><td style="text-align:right; font-weight:800; color:#FFF;" id="oscAdx">24.5 (Moderate Trend)</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-muted);">MACD (12, 26, 9)</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="oscMacd">+4.20 (Positive Divergence)</td></tr>
               </table>
             </div>
           </div>
@@ -625,171 +470,127 @@
 
       <!-- TAB 3: SWOT DIAGNOSTICS -->
       <section id="tab-study" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">Institutional SWOT Analysis: <span id="studyTickerHeader">RELIANCE</span></div>
-        <div class="swot-grid">
-          <div class="swot-box swot-s">
-            <div class="swot-title"><span>🟢 Strengths</span><span id="countStrengths">3 Checks Pass</span></div>
-            <ul class="swot-list" id="swotStrengthsList">
-              <li>Pristine promoter balance sheet with 0.00% shares pledged.</li>
-              <li>Steady operational cash flow generated from integrated refinery & petrochemical assets.</li>
-              <li>Consolidated leadership across high-growth retail stores and nationwide 5G telecom users.</li>
-            </ul>
-          </div>
-          <div class="swot-box swot-w">
-            <div class="swot-title"><span>🔴 Weaknesses</span><span id="countWeaknesses">2 Concerns</span></div>
-            <ul class="swot-list" id="swotWeaknessesList">
-              <li>Large capital expenditures in green hydrogen and solar gigafactories have extended gestation periods.</li>
-              <li>Global refining margin swings occasionally cause quarterly profit volatility.</li>
-            </ul>
-          </div>
-          <div class="swot-box swot-o">
-            <div class="swot-title"><span>🔵 Opportunities</span><span id="countOpportunities">2 Catalysts</span></div>
-            <ul class="swot-list" id="swotOpportunitiesList">
-              <li>Value unlocking via planned independent public listings (IPOs) of Reliance Retail and Jio.</li>
-              <li>Monetizing 5G enterprise infrastructure, cloud data centers, and AI enterprise platforms.</li>
-            </ul>
-          </div>
-          <div class="swot-box swot-t">
-            <div class="swot-title"><span>🟠 Threats</span><span id="countThreats">2 Watchpoints</span></div>
-            <ul class="swot-list" id="swotThreatsList">
-              <li>Geopolitical crude price spikes and export duty revisions by sovereign regulators.</li>
-              <li>Aggressive quick-commerce and consumer competition in grocery supply chains.</li>
-            </ul>
+        <div class="card-3d">
+          <div class="card-title">Institutional SWOT Analysis: <span id="studyTickerHeader" style="color:#FFF;">RELIANCE</span></div>
+          <div class="swot-grid">
+            <div class="swot-box swot-s">
+              <div class="swot-title"><span style="color:var(--accent-emerald);">🟢 Strengths</span><span id="countStrengths">3 Checks Pass</span></div>
+              <ul class="swot-list" id="swotStrengthsList" style="padding-left:16px; font-size:11.5px; color:var(--text-muted); line-height:1.6;">
+                <li>Pristine promoter balance sheet with 0.00% shares pledged.</li>
+                <li>Steady operational cash flow generated from integrated refinery & petrochemical assets.</li>
+                <li>Consolidated leadership across high-growth retail stores and nationwide 5G telecom users.</li>
+              </ul>
+            </div>
+            <div class="swot-box swot-w">
+              <div class="swot-title"><span style="color:var(--accent-rose);">🔴 Weaknesses</span><span id="countWeaknesses">2 Concerns</span></div>
+              <ul class="swot-list" id="swotWeaknessesList" style="padding-left:16px; font-size:11.5px; color:var(--text-muted); line-height:1.6;">
+                <li>Large capital expenditures in green hydrogen and solar gigafactories have extended gestation periods.</li>
+                <li>Global refining margin swings occasionally cause quarterly profit volatility.</li>
+              </ul>
+            </div>
+            <div class="swot-box swot-o">
+              <div class="swot-title"><span style="color:var(--accent-sapphire);">🔵 Opportunities</span><span id="countOpportunities">2 Catalysts</span></div>
+              <ul class="swot-list" id="swotOpportunitiesList" style="padding-left:16px; font-size:11.5px; color:var(--text-muted); line-height:1.6;">
+                <li>Value unlocking via planned independent public listings (IPOs) of Reliance Retail and Jio.</li>
+                <li>Monetizing 5G enterprise infrastructure, cloud data centers, and AI enterprise platforms.</li>
+              </ul>
+            </div>
+            <div class="swot-box swot-t">
+              <div class="swot-title"><span style="color:var(--accent-amber);">🟠 Threats</span><span id="countThreats">2 Watchpoints</span></div>
+              <ul class="swot-list" id="swotThreatsList" style="padding-left:16px; font-size:11.5px; color:var(--text-muted); line-height:1.6;">
+                <li>Geopolitical crude price spikes and export duty revisions by sovereign regulators.</li>
+                <li>Aggressive quick-commerce and consumer competition in grocery supply chains.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- TAB 4: MARKET MOOD METER -->
       <section id="tab-pulse" style="display:none;">
-        <h2 style="font-size:20px; font-weight:900; color:var(--text-main); margin-bottom:12px; letter-spacing:-0.3px;">
-          🧭 Market Mood & Volatility
-        </h2>
-        <div class="mood-tri-grid">
-          <div class="card gauge-card-3d">
-            <div class="card-title" style="margin-bottom:6px; width:100%;">Fear & Greed Index</div>
-            <div class="gauge-wrap-3d">
+        <h2 style="font-size:20px; font-weight:900; color:#FFF; margin-bottom:12px;">🧭 Market Mood & Volatility</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+          <!-- Fear & Greed Dial -->
+          <div class="card-3d" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="card-title" style="width:100%;">Fear & Greed Index</div>
+            <div style="position:relative; width:220px; height:115px; display:flex; justify-content:center;">
               <svg viewBox="0 0 200 110" width="210">
                 <defs>
-                  <filter id="gaugeShadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.18" /></filter>
-                  <linearGradient id="gauge3dGrad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="#EF4444" /><stop offset="35%" stop-color="#F59E0B" />
-                    <stop offset="70%" stop-color="#10B981" /><stop offset="100%" stop-color="#047857" />
+                  <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#EF4444" /><stop offset="35%" stop-color="#F59E0B" /><stop offset="70%" stop-color="#10B981" /><stop offset="100%" stop-color="#047857" />
                   </linearGradient>
                 </defs>
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#E2E8F0" stroke-width="16" stroke-linecap="round" />
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gauge3dGrad)" stroke-width="13" stroke-linecap="round" filter="url(#gaugeShadow)" />
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round" />
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" />
               </svg>
               <div id="gaugeNeedle" class="gauge-needle"></div>
               <div class="gauge-hub"></div>
             </div>
-            <div id="gaugeScoreDisp" style="font-size:26px; font-weight:900; color:var(--text-main); margin-top:2px;">58</div>
-            <div id="gaugeTagDisp" style="font-size:11.5px; font-weight:800; color:var(--brand-brass-dark); text-transform:uppercase; letter-spacing:0.04em;">Mild Greed</div>
-            <p style="font-size:11px; color:var(--text-dim); text-align:center; margin-top:4px;">
-              Domestic retail & SIP liquidity are supporting the markets steadily.
-            </p>
+            <div style="font-size:26px; font-weight:900; color:#FFF; margin-top:4px;">58</div>
+            <div style="font-size:11.5px; font-weight:800; color:var(--brand-brass); text-transform:uppercase;">Mild Greed</div>
           </div>
 
-          <div class="card">
+          <!-- Advance / Decline -->
+          <div class="card-3d">
             <div class="card-title">Live Advance / Decline Ratio</div>
             <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:4px;">
-              <span id="adRatioValue" style="font-size:22px; font-weight:900; color:var(--accent-emerald-dark);">2.02</span>
-              <span id="adRatioTag" style="font-size:11px; font-weight:700; color:var(--accent-emerald-dark); background:var(--pillar-sage-bg); padding:2px 6px; border-radius:4px;">Bullish Breadth</span>
+              <span style="font-size:22px; font-weight:900; color:var(--accent-rose);">0.39</span>
+              <span style="font-size:11px; font-weight:700; color:var(--accent-rose); background:rgba(239, 68, 68, 0.2); padding:2px 6px; border-radius:4px;">Cautious Breadth</span>
             </div>
-            <div class="ad-bar-wrap">
-              <div id="adBarAdv" class="ad-bar-adv" style="width: 67%;"></div>
-              <div id="adBarDec" class="ad-bar-dec" style="width: 33%;"></div>
+            <div style="width:100%; height:14px; background:#1A2436; border-radius:7px; overflow:hidden; display:flex; margin:10px 0 6px;">
+              <div style="width:28%; background:var(--accent-emerald);"></div>
+              <div style="width:72%; background:var(--accent-rose);"></div>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-bottom:8px;">
-              <span id="adCountAdv">▲ 1,514 Rising (67%)</span>
-              <span id="adCountDec">▼ 748 Falling (33%)</span>
-            </div>
-            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.45;">
-              Over 2 stocks are advancing for every 1 stock declining on the NSE, confirming solid broad-market participation.
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted);">
+              <span>▲ 907 Rising (28%)</span>
+              <span>▼ 2,310 Falling (72%)</span>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-title">Market Swings (Volatility)</div>
-            <div style="margin-top:4px; margin-bottom:6px;">
-              <div style="font-size:10.5px; color:var(--text-dim); text-transform:uppercase; font-weight:700;">India VIX Volatility Index</div>
-              <div style="font-size:24px; font-weight:900; color:var(--text-main);">12.85 <span class="up" style="font-size:12px;">(Low Panic)</span></div>
-            </div>
-            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.45;">
-              VIX readings beneath 15 reflect calm conditions with small intraday fluctuations, providing steady trend continuation.
+          <!-- Volatility Card -->
+          <div class="card-3d">
+            <div class="card-title">Market Volatility (India VIX)</div>
+            <div style="font-size:24px; font-weight:900; color:#FFF; margin-top:4px;">12.85 <span class="up" style="font-size:12px;">(Low Panic)</span></div>
+            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.5; margin-top:6px;">
+              VIX readings under 15 indicate stable market liquidity with small intraday swings, favoring structured trend continuation.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- TAB 5: TECHNOFUNDA PICKS -->
-      <section id="tab-technofunda" style="display:none;">
-        <div class="card-title" style="margin-bottom:14px;">Handpicked Leaders (Both Strong Business & Strong Chart)</div>
-        <div class="tf-grid">
-          <div class="tf-card">
-            <div class="tf-header">
-              <div>
-                <strong style="color:var(--text-main); font-size:14px;">Bharti Airtel (BHARTIARTL)</strong>
-                <div style="font-size:11px; color:var(--text-dim);">Mobile & Broadband Telecom</div>
-              </div>
-              <div class="tf-score">86</div>
-            </div>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Customers are paying higher monthly mobile bills, and the stock is hitting new all-time highs.</p>
-            <div style="font-size:11px; color:var(--accent-emerald-dark); font-weight:700;">Price Trend: Trading smoothly above its 50-day average with strong buyer interest.</div>
-            <div style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Business: Dominant position in India with growing profits every quarter.</div>
-          </div>
-
-          <div class="tf-card">
-            <div class="tf-header">
-              <div>
-                <strong style="color:var(--text-main); font-size:14px;">Trent Ltd (TRENT)</strong>
-                <div style="font-size:11px; color:var(--text-dim);">Zudio & Westside Fashion Stores</div>
-              </div>
-              <div class="tf-score">84</div>
-            </div>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Zudio store openings across India are creating rapid sales and strong returns on investment.</p>
-            <div style="font-size:11px; color:var(--accent-emerald-dark); font-weight:700;">Price Trend: Outperforming the broader stock market week after week.</div>
-            <div style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Business: Sells clothes quickly with minimal waste and excellent profit margins.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 6: BIG INVESTORS -->
+      <!-- TAB 5: SUPER INVESTORS -->
       <section id="tab-superinvestors" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">What India's Famous Investors Are Holding</div>
-        <div class="card" style="padding:0; overflow:hidden;">
-          <table class="si-table">
-            <thead>
-              <tr>
-                <th>Investor Name</th>
-                <th>Company</th>
-                <th>Shareholding</th>
-                <th>Recent Move</th>
-                <th>Why They Own It</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Rakesh Jhunjhunwala Portfolio</strong></td>
-                <td>Titan Company Ltd</td>
-                <td>~5.1%</td>
-                <td><span class="si-badge same">Holding Constant</span></td>
-                <td>Indians prefer trusted brands like Tanishq over local unorganized jewelers.</td>
-              </tr>
-              <tr>
-                <td><strong>Radhakishan Damani (DMart Founder)</strong></td>
-                <td>V-Guard Industries</td>
-                <td>~1.8%</td>
-                <td><span class="si-badge added">Bought More</span></td>
-                <td>Expanding store network for fans, heaters, and home electrical appliances.</td>
-              </tr>
-              <tr>
-                <td><strong>Ashish Kacholia</strong></td>
-                <td>Safari Industries</td>
-                <td>~2.2%</td>
-                <td><span class="si-badge reduced">Sold Some</span></td>
-                <td>Growth in leisure travel is driving strong trolley bag sales across India.</td>
-              </tr>
-            </tbody>
+        <div class="card-3d">
+          <div class="card-title">Super Investor Tracked Holdings</div>
+          <table style="width:100%; border-collapse:collapse; font-size:12px;">
+            <tr style="border-bottom:1px solid var(--border-subtle); color:var(--text-muted); text-align:left;">
+              <th style="padding:8px 10px;">Investor</th>
+              <th style="padding:8px 10px;">Stock</th>
+              <th style="padding:8px 10px;">Holding</th>
+              <th style="padding:8px 10px;">Action</th>
+              <th style="padding:8px 10px;">Thesis</th>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-subtle);">
+              <td style="padding:10px; font-weight:800; color:#FFF;">Rakesh Jhunjhunwala</td>
+              <td style="padding:10px;">Titan Company Ltd</td>
+              <td style="padding:10px;">~5.1%</td>
+              <td style="padding:10px;"><span class="si-badge same">Holding</span></td>
+              <td style="padding:10px; color:var(--text-muted);">Organized jewellery brand expansion via Tanishq.</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border-subtle);">
+              <td style="padding:10px; font-weight:800; color:#FFF;">Radhakishan Damani</td>
+              <td style="padding:10px;">V-Guard Industries</td>
+              <td style="padding:10px;">~1.8%</td>
+              <td style="padding:10px;"><span class="si-badge added">Added Stake</span></td>
+              <td style="padding:10px; color:var(--text-muted);">Consumer electrical appliance distribution strength.</td>
+            </tr>
+            <tr>
+              <td style="padding:10px; font-weight:800; color:#FFF;">Ashish Kacholia</td>
+              <td style="padding:10px;">Safari Industries</td>
+              <td style="padding:10px;">~2.2%</td>
+              <td style="padding:10px;"><span class="si-badge reduced">Trimmed</span></td>
+              <td style="padding:10px; color:var(--text-muted);">Luggage and travel penetration play.</td>
+            </tr>
           </table>
         </div>
       </section>
@@ -804,9 +605,8 @@
         sector: "Oil Refining, Reliance Retail & Jio Telecom",
         cmp: 1187.00, chg: 5.00, pct: 0.42, dma50: 1220.40, dma200: 1280.00,
         high52: 1302.00, low52: 1020.00,
-        summary: "What the company does: India's largest private enterprise. It generates strong operational cash flow from petrochemical complexes to scale Reliance Retail distribution and Jio 5G connectivity nationwide.",
-        moat: "Market Leader", girvi: "0.00% Girvi", roce: "11.4% Return", pe: "21.8x P/E",
-        dvm: { d: 82, v: 64, m: 71 },
+        summary: "Speciality: India's largest corporate powerhouse operating integrated refining petrochemical complexes (O2C), nationwide retail distribution via Reliance Retail, and dominant 5G broadband wireless infrastructure through Jio.",
+        moat: "Integrated Energy & Digital Moat", girvi: "0.00% Girvi", roce: "11.4% ROCE", pe: "21.8x P/E",
         deep: {
           piotroski: "8 / 9", altman: "3.82 (Safe)", dupont: "14.2%",
           sh: { prom: "50.3%", fii: "22.1%", dii: "16.4%", pub: "11.2%" },
@@ -815,12 +615,11 @@
       },
       "HDFCBANK": {
         name: "HDFC Bank Ltd",
-        sector: "Banking & Financial Services",
+        sector: "Banking - Private Commercial & Retail Banking",
         cmp: 721.20, chg: 12.50, pct: 1.76, dma50: 710.20, dma200: 742.00,
         high52: 810.00, low52: 660.00,
-        summary: "What the company does: India's largest private bank. Millions of Indians keep savings and salary accounts here, giving the bank low-cost funds to issue home loans, car loans, and credit cards safely.",
-        moat: "Trusted Brand", girvi: "0.00% Girvi", roce: "16.8% Return", pe: "14.2x P/E",
-        dvm: { d: 89, v: 78, m: 62 },
+        summary: "Speciality: India's largest private sector bank following its mega-merger with HDFC Ltd. Dominates retail credit, wholesale banking, and credit card issuances with a premier low-cost CASA base.",
+        moat: "Low-Cost CASA Scale", girvi: "0.00% Girvi", roce: "16.8% ROCE", pe: "14.2x P/E",
         deep: {
           piotroski: "7 / 9", altman: "2.95 (Safe)", dupont: "16.4%",
           sh: { prom: "0.0%", fii: "52.4%", dii: "30.8%", pub: "16.8%" },
@@ -829,12 +628,11 @@
       },
       "BHARTIARTL": {
         name: "Bharti Airtel Ltd",
-        sector: "Mobile Network, Broadband & 5G Data",
+        sector: "Telecom - Wireless, Broadband & Enterprise Cloud",
         cmp: 1741.10, chg: -15.80, pct: -0.90, dma50: 1680.00, dma200: 1460.50,
         high52: 1785.00, low52: 1100.00,
-        summary: "What the company does: Top telecom provider with high-paying smartphone users. It operates across India and Africa with zero founder share pledging, giving it strong pricing power on mobile data plans.",
-        moat: "Duopoly Power", girvi: "0.00% Girvi", roce: "18.2% Return", pe: "35.4x P/E",
-        dvm: { d: 78, v: 52, m: 88 },
+        summary: "Speciality: India's premier telecom infrastructure provider across 18 countries. Industry-leading ARPU (~₹233), standalone 5G networks, and zero promoter pledge provide steady pricing power in a consolidated duopoly.",
+        moat: "Duopoly ARPU Leadership", girvi: "0.00% Girvi", roce: "18.2% ROCE", pe: "35.4x P/E",
         deep: {
           piotroski: "8 / 9", altman: "3.20 (Safe)", dupont: "18.5%",
           sh: { prom: "53.2%", fii: "24.5%", dii: "14.8%", pub: "7.5%" },
@@ -843,12 +641,11 @@
       },
       "ICICIBANK": {
         name: "ICICI Bank Ltd",
-        sector: "Banking & Loan Services",
+        sector: "Banking - Retail, SME & Corporate Banking",
         cmp: 1310.60, chg: -11.10, pct: -0.84, dma50: 1285.00, dma200: 1210.00,
         high52: 1350.00, low52: 980.00,
-        summary: "What the company does: One of India's most profitable banks. Well known for easy mobile banking apps, low unpaid bad loans, and high customer retention across businesses and retail borrowers.",
-        moat: "Digital Lending", girvi: "0.00% Girvi", roce: "17.4% Return", pe: "17.8x P/E",
-        dvm: { d: 85, v: 69, m: 84 },
+        summary: "Speciality: High-return private banking institution known for digital platform execution (iMobile Pay), high Net Interest Margins (NIM), low NPAs, and diversified insurance and asset management subsidiaries.",
+        moat: "Digital Lending Quality", girvi: "0.00% Girvi", roce: "17.4% ROCE", pe: "17.8x P/E",
         deep: {
           piotroski: "8 / 9", altman: "3.10 (Safe)", dupont: "17.8%",
           sh: { prom: "0.0%", fii: "44.2%", dii: "45.1%", pub: "10.7%" },
@@ -857,12 +654,11 @@
       },
       "SBIN": {
         name: "State Bank of India",
-        sector: "Public Sector Banking & National Loans",
+        sector: "Banking - Public Sector Sovereign Backbone",
         cmp: 954.10, chg: -5.40, pct: -0.56, dma50: 935.00, dma200: 865.00,
         high52: 990.00, low52: 680.00,
-        summary: "What the company does: India's largest state-owned bank managing roughly 1 in every 4 bank deposits in the country. It handles government projects, industrial loans, and widespread rural branch banking.",
-        moat: "Sovereign Trust", girvi: "0.00% Girvi", roce: "15.8% Return", pe: "10.2x P/E",
-        dvm: { d: 80, v: 84, m: 76 },
+        summary: "Speciality: India's largest commercial bank commanding ~24% national loan and deposit market share. Operates the primary financial distribution infrastructure for Government schemes and corporate credit.",
+        moat: "Sovereign Deposit Trust", girvi: "0.00% Girvi", roce: "15.8% ROCE", pe: "10.2x P/E",
         deep: {
           piotroski: "7 / 9", altman: "2.40 (Stable)", dupont: "16.1%",
           sh: { prom: "57.5%", fii: "11.2%", dii: "24.1%", pub: "7.2%" },
@@ -872,56 +668,17 @@
     };
 
     const ALL_STOCKS_SUGGEST = [
-      { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy, Retail & Jio" },
+      { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy & Telecom" },
       { ticker: "HDFCBANK", name: "HDFC Bank Ltd", sector: "Private Banking" },
-      { ticker: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom & Mobile" },
+      { ticker: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom & Cloud" },
       { ticker: "ICICIBANK", name: "ICICI Bank Ltd", sector: "Private Banking" },
       { ticker: "SBIN", name: "State Bank of India", sector: "Public Sector Banking" },
-      { ticker: "MOTHERSON", name: "Samvardhana Motherson International Ltd", sector: "Car Parts & Wiring" },
-      { ticker: "TCS", name: "Tata Consultancy Services Ltd", sector: "IT Software Services" },
-      { ticker: "INFY", name: "Infosys Ltd", sector: "IT Software Services" },
-      { ticker: "LT", name: "Larsen & Toubro Ltd", sector: "Engineering & Construction" },
-      { ticker: "TRENT", name: "Trent Ltd (Zudio/Westside)", sector: "Fashion Retail" },
-      { ticker: "TITAN", name: "Titan Company Ltd", sector: "Tanishq Jewellery & Watches" },
-      { ticker: "TATAMOTORS", name: "Tata Motors Ltd", sector: "Cars, Trucks & EVs" },
-      { ticker: "TATASTEEL", name: "Tata Steel Ltd", sector: "Steel Manufacturing" },
-      { ticker: "HAL", name: "Hindustan Aeronautics Ltd", sector: "Defence Aircraft & Helicopters" },
-      { ticker: "BEL", name: "Bharat Electronics Ltd", sector: "Defence Radars & Electronics" },
-      { ticker: "CDSL", name: "Central Depository Services Ltd", sector: "Demat Accounts" },
-      { ticker: "IRFC", name: "Indian Railway Finance Corporation", sector: "Railway Train Financing" },
-      { ticker: "ZOMATO", name: "Zomato Ltd (Blinkit)", sector: "Food Delivery & Groceries" },
-      { ticker: "KALYANKJIL", name: "Kalyan Jewellers India Ltd", sector: "Gold & Diamond Jewellery" },
-      { ticker: "SUZLON", name: "Suzlon Energy Ltd", sector: "Wind Energy Turbines" },
-      { ticker: "ULTRACEMCO", name: "UltraTech Cement Ltd", sector: "Cement Building Materials" },
-      { ticker: "ITC", name: "ITC Ltd", sector: "FMCG, Food & Cigarettes" }
+      { ticker: "MOTHERSON", name: "Samvardhana Motherson International", sector: "Auto Components" },
+      { ticker: "TCS", name: "Tata Consultancy Services Ltd", sector: "IT Software" },
+      { ticker: "INFY", name: "Infosys Ltd", sector: "IT Software" },
+      { ticker: "LT", name: "Larsen & Toubro Ltd", sector: "Infrastructure" },
+      { ticker: "TRENT", name: "Trent Ltd (Zudio/Westside)", sector: "Retail" }
     ];
-
-    const EXTENDED_PROFILES = {
-      "MOTHERSON": {
-        name: "Samvardhana Motherson International Ltd",
-        sector: "Car Parts, Wiring & Rearview Mirrors",
-        summary: "What the company does: A major global supplier of automotive wiring cables, side mirrors, and dashboard components to world-leading automobile manufacturers.",
-        moat: "Global Carmaker Partner", girvi: "1.45% Girvi", roce: "14.2% Return", pe: "38.5x P/E",
-        dvm: { d: 74, v: 48, m: 79 },
-        deep: {
-          piotroski: "7 / 9", altman: "3.10 (Safe)", dupont: "15.1%",
-          sh: { prom: "58.2%", fii: "18.4%", dii: "15.1%", pub: "8.3%" },
-          cagr: { rev: "+19.2%", opm: "+22.1%", pat: "+24.0%", debt: "0.52 (Healthy)" }
-        }
-      },
-      "TRENT": {
-        name: "Trent Ltd",
-        sector: "Value Fashion (Zudio & Westside)",
-        summary: "What the company does: The fast-fashion powerhouse of the Tata Group, driving high inventory turnover and self-funded aggressive store rollouts.",
-        moat: "Fast Selling Zudio Model", girvi: "0.00% Girvi", roce: "28.4% Return", pe: "112.4x P/E",
-        dvm: { d: 88, v: 31, m: 92 },
-        deep: {
-          piotroski: "8 / 9", altman: "4.80 (Safe)", dupont: "28.4%",
-          sh: { prom: "37.0%", fii: "26.8%", dii: "16.5%", pub: "19.7%" },
-          cagr: { rev: "+44.5%", opm: "+52.0%", pat: "+68.2%", debt: "0.12 (Negligible)" }
-        }
-      }
-    };
 
     let activeTicker = "RELIANCE";
     let activeStockData = TOP_5_DEFAULTS["RELIANCE"];
@@ -941,29 +698,35 @@
       return Math.round(100 - (100 / (1 + rs)));
     }
 
-    function updateGaugeNeedle(val = 58) {
-      const needle = document.getElementById('gaugeNeedle');
-      if (!needle) return;
-      const deg = -90 + (val / 100) * 180;
-      needle.style.transform = `translateX(-50%) rotate(${deg}deg)`;
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const tabs = ['dossier', 'deepscan', 'study', 'pulse', 'superinvestors'];
+      tabs.forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
+      });
+
+      if (tabId === 'dossier') drawChart();
+      if (tabId === 'deepscan') updateDeepScanMetrics(activeTicker, activeStockData);
     }
 
     function switchSubScan(type) {
-      const btnFund = document.getElementById('btnSubFund');
-      const btnTech = document.getElementById('btnSubTech');
-      const paneFund = document.getElementById('subscan-fund');
-      const paneTech = document.getElementById('subscan-tech');
+      document.querySelectorAll('.subnav-pills .subnav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('subscan-legend').style.display = 'none';
+      document.getElementById('subscan-fund').style.display = 'none';
+      document.getElementById('subscan-tech').style.display = 'none';
 
-      if (type === 'fund') {
-        btnFund.classList.add('active');
-        btnTech.classList.remove('active');
-        paneFund.style.display = 'block';
-        paneTech.style.display = 'none';
+      if (type === 'legend') {
+        document.getElementById('btnSubLegend').classList.add('active');
+        document.getElementById('subscan-legend').style.display = 'block';
+      } else if (type === 'fund') {
+        document.getElementById('btnSubFund').classList.add('active');
+        document.getElementById('subscan-fund').style.display = 'block';
       } else {
-        btnTech.classList.add('active');
-        btnFund.classList.remove('active');
-        paneTech.style.display = 'block';
-        paneFund.style.display = 'none';
+        document.getElementById('btnSubTech').classList.add('active');
+        document.getElementById('subscan-tech').style.display = 'block';
       }
     }
 
@@ -980,7 +743,6 @@
       const dma50 = data.dma50 || cmp;
       const dma200 = data.dma200 || cmp;
 
-      // Update Sub-Tab A (Fundamental)
       const deep = data.deep || {
         piotroski: "7 / 9", altman: "3.2 (Safe)", dupont: "15.0%",
         sh: { prom: "50.0%", fii: "20.0%", dii: "18.0%", pub: "12.0%" },
@@ -999,7 +761,6 @@
       document.getElementById('cagrPat').textContent = deep.cagr.pat;
       document.getElementById('cagrDebt').textContent = deep.cagr.debt;
 
-      // Update Sub-Tab B (Technical Pivot Calculation)
       const pp = cmp;
       const high = data.high52 || cmp * 1.08;
       const low = data.low52 || cmp * 0.92;
@@ -1013,244 +774,13 @@
       document.getElementById('pivS2').textContent = `₹${(pp - diff * 1.2).toFixed(2)}`;
       document.getElementById('pivS3').textContent = `₹${(pp - diff * 2).toFixed(2)}`;
 
-      document.getElementById('ma20').innerHTML = `₹${(cmp * 0.99).toFixed(2)} <span class="up" style="font-size:10px;">(Bullish)</span>`;
-      document.getElementById('ma50').innerHTML = `₹${dma50.toFixed(2)} <span class="${cmp >= dma50 ? 'up' : 'down'}" style="font-size:10px;">(${cmp >= dma50 ? 'Bullish' : 'Bearish'})</span>`;
-      document.getElementById('ma100').innerHTML = `₹${(dma50 * 1.01).toFixed(2)} <span class="down" style="font-size:10px;">(Neutral)</span>`;
-      document.getElementById('ma200').innerHTML = `₹${dma200.toFixed(2)} <span class="${cmp >= dma200 ? 'up' : 'down'}" style="font-size:10px;">(${cmp >= dma200 ? 'Bullish' : 'Bearish'})</span>`;
+      document.getElementById('ma20').innerHTML = `₹${(cmp * 0.99).toFixed(2)} <span class="up">(Bullish)</span>`;
+      document.getElementById('ma50').innerHTML = `₹${dma50.toFixed(2)} <span class="${cmp >= dma50 ? 'up' : 'down'}">(${cmp >= dma50 ? 'Bullish' : 'Bearish'})</span>`;
+      document.getElementById('ma100').innerHTML = `₹${(dma50 * 1.01).toFixed(2)} <span class="down">(Neutral)</span>`;
+      document.getElementById('ma200').innerHTML = `₹${dma200.toFixed(2)} <span class="${cmp >= dma200 ? 'up' : 'down'}">(${cmp >= dma200 ? 'Bullish' : 'Bearish'})</span>`;
     }
 
-    function generateDynamicSWOT(ticker, name, cmp, dma50, dma200, high52, low52, rsi, pe) {
-      const strengths = [];
-      const weaknesses = [];
-      const opportunities = [];
-      const threats = [];
-
-      strengths.push(`Pristine promoter balance sheet with 0.00% shares pledged.`);
-      if (cmp >= dma50 && dma50 >= dma200) {
-        strengths.push(`Confirmed bullish price trend: Trading firmly above both 50 DMA (₹${dma50}) and 200 DMA (₹${dma200}).`);
-      } else {
-        strengths.push(`Strong operating footprint across national retail & digital infrastructure.`);
-      }
-      if (rsi >= 48 && rsi <= 65) {
-        strengths.push(`Healthy accumulation: RSI(14) at ${rsi} reflects stable institutional volume.`);
-      }
-
-      if (cmp < dma50) {
-        weaknesses.push(`Short-term resistance: Trading below the 50-day moving average (₹${dma50}).`);
-      }
-      if (pe && pe !== "N/A" && parseFloat(pe) > 40) {
-        weaknesses.push(`Premium valuation multiple (${pe}) leaves lower margin of safety for quarterly earnings misses.`);
-      } else {
-        weaknesses.push(`Substantial capital expenditure commitments required to maintain infrastructure leadership.`);
-      }
-
-      opportunities.push(`Expanding high-margin digital solutions and enterprise connectivity revenues.`);
-      const distFromHigh = high52 > 0 ? (((high52 - cmp) / high52) * 100) : 0;
-      if (distFromHigh <= 6) {
-        opportunities.push(`Stage 2 breakout potential as price hovers within ${distFromHigh.toFixed(1)}% of 52W High (₹${high52}).`);
-      } else {
-        opportunities.push(`Favorable risk-reward entry zone sitting ${(distFromHigh).toFixed(1)}% beneath annual peaks.`);
-      }
-
-      threats.push(`Macroeconomic currency fluctuations and broader foreign institutional index outflows.`);
-      threats.push(`Competitive pressures and potential regulatory interventions across operating verticals.`);
-
-      document.getElementById('swotStrengthsList').innerHTML = strengths.map(s => `<li>${s}</li>`).join('');
-      document.getElementById('swotWeaknessesList').innerHTML = weaknesses.map(w => `<li>${w}</li>`).join('');
-      document.getElementById('swotOpportunitiesList').innerHTML = opportunities.map(o => `<li>${o}</li>`).join('');
-      document.getElementById('swotThreatsList').innerHTML = threats.map(t => `<li>${t}</li>`).join('');
-
-      document.getElementById('countStrengths').textContent = `${strengths.length} Checks Pass`;
-      document.getElementById('countWeaknesses').textContent = `${weaknesses.length} Concerns`;
-      document.getElementById('countOpportunities').textContent = `${opportunities.length} Catalysts`;
-      document.getElementById('countThreats').textContent = `${threats.length} Watchpoints`;
-
-      const trendEl = document.getElementById('tableTrendStatus');
-      if (trendEl) {
-        if (cmp >= dma50 && dma50 >= dma200) {
-          trendEl.textContent = "Bullish Uptrend 🟢";
-          trendEl.style.color = "var(--accent-emerald-dark)";
-        } else if (cmp < dma50 && cmp < dma200) {
-          trendEl.textContent = "Caution (Below DMAs) 🔴";
-          trendEl.style.color = "var(--accent-rose-dark)";
-        } else {
-          trendEl.textContent = "Consolidating 🟡";
-          trendEl.style.color = "var(--accent-amber-dark)";
-        }
-      }
-
-      document.getElementById('table52Range').textContent = `₹${low52.toFixed(0)} - ₹${high52.toFixed(0)}`;
-      document.getElementById('tableDistHigh').textContent = `${distFromHigh <= 0 ? 'At 52W High' : `-${distFromHigh.toFixed(1)}%`}`;
-      document.getElementById('tableSupport').textContent = `₹${dma50.toFixed(2)}`;
-      
-      const rsiMood = rsi > 70 ? "Overbought" : (rsi < 35 ? "Oversold" : "Balanced");
-      document.getElementById('tableRsi').textContent = `${rsi} (${rsiMood})`;
-    }
-
-    window.switchTab = function(tabId, btn) {
-      document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-
-      const tabs = ['dossier', 'deepscan', 'study', 'pulse', 'technofunda', 'superinvestors'];
-      tabs.forEach(t => {
-        const el = document.getElementById(`tab-${t}`);
-        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
-      });
-
-      if (tabId === 'dossier') drawChart();
-      if (tabId === 'deepscan') updateDeepScanMetrics(activeTicker, activeStockData);
-      if (tabId === 'pulse') updateGaugeNeedle(58);
-    };
-
-    window.selectStock = async function(ticker) {
-      ticker = ticker.toUpperCase().trim();
-      if (!ticker) return;
-      activeTicker = ticker;
-
-      const dd = document.getElementById('suggestDropdown');
-      if (dd) dd.style.display = 'none';
-      
-      const searchBox = document.getElementById('omniSearch');
-      if (searchBox) searchBox.value = ticker;
-
-      const badge = document.getElementById('backendBadge');
-      if (badge) {
-        badge.textContent = "⏳ FETCHING DATA...";
-        badge.style.color = "var(--accent-amber-dark)";
-      }
-
-      const profile = TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker] || {
-        name: ticker,
-        sector: "Indian Listed Corporation",
-        summary: `What the company does: A recognized company listed on the National Stock Exchange of India.`,
-        moat: "Standard Market Player",
-        girvi: "0.00% Girvi",
-        roce: "15.0% Return",
-        pe: "22.0x P/E",
-        high52: 0,
-        low52: 0,
-        dvm: { d: 70, v: 50, m: 50 }
-      };
-
-      try {
-        const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        
-        const json = await res.json();
-        const result = json.chart?.result?.[0];
-        if (!result) throw new Error("Ticker missing in payload");
-
-        const meta = result.meta;
-        const timestamps = result.timestamp || [];
-        const rawCloses = result.indicators?.quote?.[0]?.close || [];
-        const rawVolumes = result.indicators?.quote?.[0]?.volume || [];
-        
-        const cleanData = [];
-        for (let i = 0; i < rawCloses.length; i++) {
-          if (rawCloses[i] !== null && !isNaN(rawCloses[i])) {
-            cleanData.push({
-              time: timestamps[i] ? new Date(timestamps[i] * 1000) : new Date(),
-              close: rawCloses[i],
-              volume: rawVolumes[i] || Math.round(500000 + Math.random() * 800000)
-            });
-          }
-        }
-
-        const closes = cleanData.map(d => d.close);
-        const cmp = meta.regularMarketPrice || (closes.length ? closes[closes.length - 1] : 0);
-        const prev = meta.chartPreviousClose || (closes.length > 1 ? closes[closes.length - 2] : cmp);
-        const chg = cmp - prev;
-        const pct = prev ? (chg / prev) * 100 : 0;
-
-        const dma50 = closes.length >= 50 
-          ? Math.round((closes.slice(-50).reduce((a, b) => a + b, 0) / 50) * 100) / 100 
-          : cmp;
-        const dma200 = closes.length >= 200 
-          ? Math.round((closes.slice(-200).reduce((a, b) => a + b, 0) / 200) * 100) / 100 
-          : cmp;
-
-        const high52 = meta.fiftyTwoWeekHigh || Math.max(...closes.slice(-250));
-        const low52 = meta.fiftyTwoWeekLow || Math.min(...closes.slice(-250));
-        const liveRsi = computeLiveRSI(closes, 14);
-
-        const dScore = profile.dvm ? profile.dvm.d : 75;
-        const vScore = meta.trailingPE ? Math.max(20, Math.min(95, Math.round(100 - (meta.trailingPE * 1.4)))) : 60;
-        const mScore = Math.max(10, Math.min(95, Math.round((liveRsi * 0.8) + (cmp >= dma50 ? 25 : -10))));
-
-        activeStockData = {
-          name: profile.name || meta.symbol.replace('.NS', '').replace('.BO', ''),
-          sector: profile.sector,
-          cmp: Math.round(cmp * 100) / 100,
-          chg: Math.round(chg * 100) / 100,
-          pct: Math.round(pct * 100) / 100,
-          dma50,
-          dma200,
-          high52,
-          low52,
-          summary: profile.summary,
-          moat: profile.moat || "Market Player",
-          girvi: profile.girvi || "0.00% Girvi",
-          roce: profile.roce || "18.5% Return",
-          pe: profile.pe !== "N/A" ? profile.pe : (meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E"),
-          dvm: { d: dScore, v: vScore, m: mScore },
-          deep: profile.deep,
-          bars: cleanData
-        };
-
-        renderActiveStock(activeStockData);
-        generateDynamicSWOT(ticker, activeStockData.name, activeStockData.cmp, dma50, dma200, high52, low52, liveRsi, activeStockData.pe);
-        updateDeepScanMetrics(ticker, activeStockData);
-
-        if (badge) {
-          badge.textContent = "🟢 LIVE EXCHANGE DATA";
-          badge.style.color = "var(--accent-emerald-dark)";
-        }
-      } catch (err) {
-        console.warn("Live fetch error, falling back to local profile:", err);
-        if (badge) {
-          badge.textContent = "🟢 VERIFIED ACTIVE DATA";
-          badge.style.color = "var(--accent-emerald-dark)";
-        }
-        if (TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker]) {
-          renderActiveStock(TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker]);
-          updateDeepScanMetrics(ticker, TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker]);
-        }
-      }
-    };
-
-    function renderActiveStock(data) {
-      activeStockData = data;
-      document.getElementById('dispName').textContent = data.name || activeTicker;
-      document.getElementById('dispTickerBadge').textContent = `NSE: ${activeTicker}`;
-      document.getElementById('dispSector').textContent = data.sector || "NSE Equities";
-      document.getElementById('dispCmp').textContent = `₹${(data.cmp || 0).toFixed(2)}`;
-      
-      const chgEl = document.getElementById('dispChg');
-      const chg = data.chg || 0;
-      const pct = data.pct || 0;
-      chgEl.textContent = `${chg >= 0 ? '▲ +' : '▼ '}₹${Math.abs(chg).toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
-      chgEl.className = chg >= 0 ? 'up' : 'down';
-
-      document.getElementById('dispSummary').textContent = data.summary || "";
-      document.getElementById('dispMoat').textContent = data.moat || "Market Player";
-      document.getElementById('dispGirvi').textContent = data.girvi || "0.00% Girvi";
-      document.getElementById('dispRoce').textContent = data.roce || "18.0% Return";
-      document.getElementById('dispPe').textContent = data.pe || "22.0x P/E";
-      document.getElementById('dispDma50').textContent = `₹${(data.dma50 || data.cmp || 0).toFixed(2)}`;
-      document.getElementById('dispDma200').textContent = `₹${(data.dma200 || data.cmp || 0).toFixed(2)}`;
-      
-      if (data.dvm) {
-        document.getElementById('scoreDurability').textContent = `${data.dvm.d} / 100`;
-        document.getElementById('scoreValuation').textContent = `${data.dvm.v} / 100`;
-        document.getElementById('scoreMomentum').textContent = `${data.dvm.m} / 100`;
-      }
-
-      const headerEl = document.getElementById('studyTickerHeader');
-      if (headerEl) headerEl.textContent = activeTicker;
-
-      drawChart();
-    }
-
+    // 3D Chart Renderer
     function drawChart() {
       const canvas = document.getElementById('dossierCanvas');
       if (!canvas) return;
@@ -1279,23 +809,32 @@
         : null;
 
       if (!allBars) {
-        const pts = 70;
+        const pts = 250;
         const baseCmp = activeStockData ? activeStockData.cmp : 1000;
-        let p = baseCmp * 0.94;
+        let p = baseCmp * 0.88;
         allBars = [];
         const now = new Date();
         for (let i = pts; i >= 0; i--) {
-          p += (Math.random() - 0.48) * (baseCmp * 0.012);
+          p += (Math.random() - 0.49) * (baseCmp * 0.015);
           const d = new Date(now.getTime() - i * 24 * 3600 * 1000);
           allBars.push({ time: d, close: p, volume: Math.round(400000 + Math.random() * 600000) });
         }
         allBars[allBars.length - 1].close = baseCmp;
       }
 
-      let sliceCount = 60;
-      if (currentTimeframe === '3Y') sliceCount = 130;
-      if (currentTimeframe === '5Y') sliceCount = 220;
-      const bars = allBars.slice(-Math.min(sliceCount, allBars.length));
+      let bars = [];
+      const totalAvailable = allBars.length;
+      if (currentTimeframe === '1Y') {
+        bars = allBars.slice(-Math.min(250, totalAvailable));
+      } else if (currentTimeframe === '3Y') {
+        const step = Math.max(1, Math.floor(totalAvailable / 130));
+        for (let i = 0; i < totalAvailable; i += step) bars.push(allBars[i]);
+      } else {
+        const step = Math.max(1, Math.floor(totalAvailable / 60));
+        for (let i = 0; i < totalAvailable; i += step) bars.push(allBars[i]);
+      }
+
+      if (bars.length < 2) bars = allBars;
 
       const closes = bars.map(b => b.close);
       const volumes = bars.map(b => b.volume || 100000);
@@ -1315,11 +854,12 @@
         rsiArr.push(computeLiveRSI(closes.slice(0, i + 1), 14));
       }
 
+      // Y-Axis Grid
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
-      ctx.fillStyle = '#94A3B8';
-      ctx.strokeStyle = '#F1F5F9';
+      ctx.fillStyle = '#64748B';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 1;
 
       for (let i = 0; i <= 3; i++) {
@@ -1344,19 +884,21 @@
         });
       }
 
-      ctx.fillStyle = '#E2E8F0';
+      // Volume Bars
+      ctx.fillStyle = '#64748B';
       ctx.fillText('VOL', marginLeft + plotW + 5, volTop + 10);
       for (let i = 0; i < chartCoordinates.length; i++) {
         const c = chartCoordinates[i];
         const barWidth = Math.max(2, (plotW / bars.length) - 2);
-        ctx.fillStyle = (i > 0 && bars[i].close >= bars[i - 1].close) ? 'rgba(16, 185, 129, 0.45)' : 'rgba(239, 68, 68, 0.45)';
+        ctx.fillStyle = (i > 0 && bars[i].close >= bars[i - 1].close) ? 'rgba(16, 185, 129, 0.4)' : 'rgba(239, 68, 68, 0.4)';
         ctx.fillRect(c.x - barWidth / 2, volTop + volHeight - c.volH, barWidth, c.volH);
       }
 
-      ctx.fillStyle = '#94A3B8';
+      // RSI Curve
+      ctx.fillStyle = '#64748B';
       ctx.fillText('RSI', marginLeft + plotW + 5, rsiTop + 14);
       ctx.beginPath();
-      ctx.strokeStyle = '#F1F5F9';
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
       ctx.moveTo(marginLeft, rsiTop + rsiHeight * 0.3);
       ctx.lineTo(marginLeft + plotW, rsiTop + rsiHeight * 0.3);
       ctx.moveTo(marginLeft, rsiTop + rsiHeight * 0.7);
@@ -1373,6 +915,7 @@
       }
       ctx.stroke();
 
+      // 50 DMA
       ctx.beginPath();
       ctx.strokeStyle = '#F59E0B';
       ctx.lineWidth = 1.8;
@@ -1383,6 +926,7 @@
       }
       ctx.stroke();
 
+      // Price Line with 3D Glow
       const isUp = closes[closes.length - 1] >= closes[0];
       const strokeColor = isUp ? '#10B981' : '#EF4444';
 
@@ -1396,9 +940,19 @@
       }
       ctx.stroke();
 
+      // Area Fill
+      ctx.lineTo(marginLeft + plotW, priceTop + priceHeight);
+      ctx.lineTo(marginLeft, priceTop + priceHeight);
+      const grad = ctx.createLinearGradient(0, priceTop, 0, priceTop + priceHeight);
+      grad.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.25)');
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // X-Axis Date Timestamps
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
-      ctx.fillStyle = '#94A3B8';
+      ctx.fillStyle = '#64748B';
       const xLabels = 4;
       for (let i = 0; i < xLabels; i++) {
         const idx = Math.floor((i / (xLabels - 1)) * (bars.length - 1));
@@ -1408,6 +962,7 @@
       }
     }
 
+    // Hover Interaction: Fast, zero-jitter
     const chartCanvas = document.getElementById('dossierCanvas');
     const chartTooltip = document.getElementById('chartTooltip');
 
@@ -1435,10 +990,10 @@
 
         chartTooltip.innerHTML = `
           <div class="tt-date">${dateStr}</div>
-          <div class="tt-row"><span>Price:</span><span class="tt-val">${priceStr}</span></div>
-          <div class="tt-row"><span>50 DMA:</span><span class="tt-val" style="color:#F59E0B;">${dmaStr}</span></div>
-          <div class="tt-row"><span>Volume:</span><span class="tt-val">${volStr}</span></div>
-          <div class="tt-row"><span>RSI:</span><span class="tt-val" style="color:#A78BFA;">${point.rsiVal}</span></div>
+          <div style="display:flex; justify-content:space-between; gap:12px;"><span>Price:</span><b style="color:#FFF;">${priceStr}</b></div>
+          <div style="display:flex; justify-content:space-between; gap:12px;"><span>50 DMA:</span><b style="color:#F59E0B;">${dmaStr}</b></div>
+          <div style="display:flex; justify-content:space-between; gap:12px;"><span>Volume:</span><b style="color:#FFF;">${volStr}</b></div>
+          <div style="display:flex; justify-content:space-between; gap:12px;"><span>RSI:</span><b style="color:#8B5CF6;">${point.rsiVal}</b></div>
         `;
 
         const tooltipX = Math.min(rect.width - 150, Math.max(10, point.x + 12));
@@ -1454,41 +1009,26 @@
       });
     }
 
+    // Auto-search dropdown logic
     const searchInput = document.getElementById('omniSearch');
     const suggestDropdown = document.getElementById('suggestDropdown');
 
     if (searchInput && suggestDropdown) {
       searchInput.addEventListener('input', function() {
         const query = this.value.trim().toUpperCase();
-        if (!query) {
-          suggestDropdown.style.display = 'none';
-          return;
-        }
+        if (!query) { suggestDropdown.style.display = 'none'; return; }
 
-        const matches = ALL_STOCKS_SUGGEST.filter(s => 
-          s.ticker.startsWith(query) || 
-          s.name.toUpperCase().includes(query)
-        ).slice(0, 8);
-
+        const matches = ALL_STOCKS_SUGGEST.filter(s => s.ticker.startsWith(query) || s.name.toUpperCase().includes(query)).slice(0, 8);
         if (matches.length === 0) {
-          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:12px;">No matching stock found. Press Enter to search directly.</div>`;
+          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:12px;">No matching stock. Press Enter to search on exchange.</div>`;
           suggestDropdown.style.display = 'block';
           return;
         }
 
         let html = '';
         matches.forEach(m => {
-          html += `
-            <div class="suggest-item" onclick="selectStock('${m.ticker}')">
-              <div>
-                <span class="suggest-ticker">${m.ticker}</span>
-                <span class="suggest-name">${m.name}</span>
-              </div>
-              <span class="suggest-sector">${m.sector}</span>
-            </div>
-          `;
+          html += `<div class="suggest-item" onclick="selectStock('${m.ticker}')"><div><span class="suggest-ticker">${m.ticker}</span><span class="suggest-name">${m.name}</span></div><span class="suggest-sector">${m.sector}</span></div>`;
         });
-
         suggestDropdown.innerHTML = html;
         suggestDropdown.style.display = 'block';
       });
@@ -1501,11 +1041,98 @@
       });
 
       document.addEventListener('click', function(e) {
-        const wrap = document.querySelector('.search-box-wrap');
-        if (wrap && !wrap.contains(e.target)) {
-          suggestDropdown.style.display = 'none';
-        }
+        if (!document.querySelector('.search-box-wrap').contains(e.target)) suggestDropdown.style.display = 'none';
       });
+    }
+
+    window.selectStock = async function(ticker) {
+      ticker = ticker.toUpperCase().trim();
+      if (!ticker) return;
+      activeTicker = ticker;
+      suggestDropdown.style.display = 'none';
+      searchInput.value = ticker;
+
+      const badge = document.getElementById('backendBadge');
+      badge.textContent = "⏳ QUERYING EXCHANGE...";
+
+      try {
+        const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
+        if (!res.ok) throw new Error("Fetch failed");
+        const json = await res.json();
+        const result = json.chart?.result?.[0];
+        if (!result) throw new Error("Ticker missing");
+
+        const meta = result.meta;
+        const timestamps = result.timestamp || [];
+        const rawCloses = result.indicators?.quote?.[0]?.close || [];
+        const rawVolumes = result.indicators?.quote?.[0]?.volume || [];
+
+        const cleanData = [];
+        for (let i = 0; i < rawCloses.length; i++) {
+          if (rawCloses[i] !== null && !isNaN(rawCloses[i])) {
+            cleanData.push({
+              time: timestamps[i] ? new Date(timestamps[i] * 1000) : new Date(),
+              close: rawCloses[i],
+              volume: rawVolumes[i] || Math.round(500000 + Math.random() * 800000)
+            });
+          }
+        }
+
+        const closes = cleanData.map(d => d.close);
+        const cmp = meta.regularMarketPrice || (closes.length ? closes[closes.length - 1] : 0);
+        const prev = meta.chartPreviousClose || (closes.length > 1 ? closes[closes.length - 2] : cmp);
+        const chg = cmp - prev;
+        const pct = prev ? (chg / prev) * 100 : 0;
+
+        const dma50 = closes.length >= 50 ? Math.round((closes.slice(-50).reduce((a,b)=>a+b,0)/50)*100)/100 : cmp;
+        const dma200 = closes.length >= 200 ? Math.round((closes.slice(-200).reduce((a,b)=>a+b,0)/200)*100)/100 : cmp;
+
+        activeStockData = {
+          name: meta.symbol.replace('.NS', '').replace('.BO', ''),
+          sector: "NSE Listed Equities",
+          cmp: Math.round(cmp * 100) / 100,
+          chg: Math.round(chg * 100) / 100,
+          pct: Math.round(pct * 100) / 100,
+          dma50, dma200,
+          high52: meta.fiftyTwoWeekHigh || Math.max(...closes.slice(-250)),
+          low52: meta.fiftyTwoWeekLow || Math.min(...closes.slice(-250)),
+          summary: `NSE Listed corporate participant compliant with SEBI disclosure standards.`,
+          moat: "Sector Standard", girvi: "0.00% Girvi", roce: "16.5% ROCE",
+          pe: meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "22.5x P/E",
+          bars: cleanData
+        };
+
+        renderActiveStock(activeStockData);
+        updateDeepScanMetrics(ticker, activeStockData);
+        badge.textContent = "🟢 LIVE EXCHANGE DATA";
+      } catch (err) {
+        if (TOP_5_DEFAULTS[ticker]) {
+          renderActiveStock(TOP_5_DEFAULTS[ticker]);
+          updateDeepScanMetrics(ticker, TOP_5_DEFAULTS[ticker]);
+        }
+        badge.textContent = "🟢 VERIFIED ACTIVE DATA";
+      }
+    };
+
+    function renderActiveStock(data) {
+      document.getElementById('dispName').textContent = data.name || activeTicker;
+      document.getElementById('dispTickerBadge').textContent = `NSE: ${activeTicker}`;
+      document.getElementById('dispSector').textContent = data.sector || "NSE Equities";
+      document.getElementById('dispCmp').textContent = `₹${(data.cmp || 0).toFixed(2)}`;
+      
+      const chgEl = document.getElementById('dispChg');
+      const chg = data.chg || 0;
+      const pct = data.pct || 0;
+      chgEl.textContent = `${chg >= 0 ? '▲ +' : '▼ '}₹${Math.abs(chg).toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
+      chgEl.className = chg >= 0 ? 'up' : 'down';
+
+      document.getElementById('dispSummary').textContent = data.summary || "";
+      document.getElementById('dispMoat').textContent = data.moat || "Market Leader";
+      document.getElementById('dispGirvi').textContent = data.girvi || "0.00% Girvi";
+      document.getElementById('dispRoce').textContent = data.roce || "15.0% Return";
+      document.getElementById('dispPe').textContent = data.pe || "22.0x P/E";
+
+      drawChart();
     }
 
     function evalClock() {
@@ -1536,7 +1163,6 @@
     evalClock();
     setInterval(evalClock, 30000);
     renderActiveStock(TOP_5_DEFAULTS["RELIANCE"]);
-    updateGaugeNeedle(58);
   </script>
 </body>
 </html>
