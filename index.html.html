@@ -6,7 +6,7 @@
   <title>Market Drishti × Market Monk | Research Terminal</title>
   <style>
     :root {
-      /* Light Pastel Theme Palette */
+      /* Soft Light Theme Palette */
       --bg-canvas: #F8FAFC;
       --bg-surface: #FFFFFF;
       --bg-subtle: #F1F5F9;
@@ -30,7 +30,7 @@
       --accent-sapphire: #3B82F6;
       --accent-sapphire-dark: #1D4ED8;
 
-      /* Mild Pastel Fundamental Pillars */
+      /* 4 Soft Fundamental Color Cards */
       --pillar-sage-bg: #EDFDF4;
       --pillar-sage-border: #BBF7D0;
       --pillar-sage-text: #14532D;
@@ -51,20 +51,20 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif; }
     body { background-color: var(--bg-canvas); color: var(--text-main); font-size: 13px; line-height: 1.5; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
-    /* Top 3-Tier Executive Masthead */
+    /* Top Masthead */
     .masthead-t1 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-shrink: 0; position: relative; z-index: 100; }
     .brand-group { display: flex; align-items: center; gap: 10px; }
     .brand-mark { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; color: var(--text-main); }
     .brand-mark span { color: var(--brand-brass); }
     .brand-tag { font-size: 11px; color: var(--text-dim); border-left: 1px solid var(--border-subtle); padding-left: 10px; }
 
-    /* Moneycontrol-Style Auto-Suggest Search Bar */
+    /* Universal Search Bar */
     .search-box-wrap { position: relative; flex: 1; max-width: 520px; }
     .search-input-box { width: 100%; background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 12px 8px 34px; color: var(--text-main); font-size: 12.5px; outline: none; transition: all 0.2s; }
     .search-input-box:focus { border-color: var(--brand-brass); background: #fff; box-shadow: 0 0 0 2px rgba(176,141,87,0.18); }
     .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 12px; }
 
-    /* Dropdown Suggestions List */
+    /* Search Dropdown */
     .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; box-shadow: 0 8px 24px rgba(15,23,42,0.12); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
     .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; }
     .suggest-item:last-child { border-bottom: none; }
@@ -75,7 +75,7 @@
 
     .status-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); font-weight: 700; display: flex; align-items: center; gap: 5px; }
 
-    /* Tier 2: Real-Time Session Clock + Indices Tape */
+    /* Tier 2: Market Clock + Indices */
     .masthead-t2 { background: #F1F5F9; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
     .clock-pill { font-weight: 700; color: var(--text-main); }
     .clock-pill.closed { color: var(--accent-amber-dark); }
@@ -84,28 +84,28 @@
     .up { color: var(--accent-emerald-dark); font-weight: 600; }
     .down { color: var(--accent-rose-dark); font-weight: 600; }
 
-    /* Tier 3: Market Breadth Ribbon */
+    /* Tier 3: Market Summary Bar */
     .masthead-t3 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 5px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
     .breadth-pills { display: flex; align-items: center; gap: 14px; }
 
-    /* Main Workspace Layout */
+    /* Layout */
     .app-body { display: grid; grid-template-columns: 240px 1fr; flex: 1; overflow: hidden; }
 
-    /* Left Navigation Rail */
+    /* Left Menu */
     .sidebar { background: var(--bg-surface); border-right: 1px solid var(--border-subtle); padding: 14px 12px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
     .nav-header { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.08em; padding: 6px 10px 4px; }
     .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 9px 12px; font-size: 12.5px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.15s ease; }
     .nav-btn:hover { background: var(--bg-subtle); color: var(--text-main); }
     .nav-btn.active { background: var(--brand-brass-light); color: var(--brand-brass-dark); border-left: 3px solid var(--brand-brass); }
 
-    /* Content Area */
+    /* Main Viewport */
     .content-viewport { background: var(--bg-canvas); padding: 18px 24px; overflow-y: auto; height: 100%; }
 
-    /* Clean Pastel Cards */
+    /* Cards */
     .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
     .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass-dark); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
 
-    /* 4 Mild Pastel Fundamental Pillars */
+    /* 4 Color Pillars */
     .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
     @media (max-width: 1024px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
     .pillar { border-radius: 8px; padding: 14px; border: 1px solid transparent; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
@@ -123,7 +123,7 @@
     .pillar-val { font-size: 20px; font-weight: 900; color: var(--text-main); margin-bottom: 4px; }
     .pillar-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.45; }
 
-    /* T-Format Company Study */
+    /* Side-by-Side Pros/Cons */
     .t-format { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: var(--bg-surface); margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
     .t-col { padding: 16px 20px; }
     .t-col + .t-col { border-left: 1px solid var(--border-subtle); }
@@ -134,13 +134,13 @@
     .t-list { list-style: disc inside; font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
     .t-list li { margin-bottom: 4px; }
 
-    /* Technofunda Cards */
+    /* Handpicked Stocks */
     .tf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
     .tf-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
     .tf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
     .tf-score { width: 44px; height: 44px; border-radius: 50%; background: var(--brand-brass-light); border: 2px solid var(--brand-brass); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; color: var(--brand-brass-dark); }
 
-    /* Super Investors Table */
+    /* Big Investors Table */
     .si-table { width: 100%; border-collapse: collapse; font-size: 12px; }
     .si-table th { text-align: left; padding: 10px 14px; background: var(--bg-subtle); color: var(--text-muted); text-transform: uppercase; font-size: 10.5px; font-weight: 700; border-bottom: 1px solid var(--border-subtle); }
     .si-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--text-main); }
@@ -149,13 +149,13 @@
     .si-badge.same { background: var(--pillar-amber-bg); color: var(--accent-amber-dark); border: 1px solid var(--pillar-amber-border); }
     .si-badge.reduced { background: #FEF2F2; color: var(--accent-rose-dark); border: 1px solid #FECACA; }
 
-    /* Market Pulse & Sentiment Gauge */
+    /* Mood Gauge */
     .pulse-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .gauge-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 0; }
     .gauge-score { font-size: 32px; font-weight: 900; color: var(--text-main); margin-top: -12px; }
     .gauge-tag { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-brass-dark); }
 
-    /* Canvas Chart Panel */
+    /* Canvas Chart */
     .chart-box { height: 260px; width: 100%; position: relative; margin-top: 6px; }
     canvas { width: 100% !important; height: 100% !important; }
   </style>
@@ -166,104 +166,104 @@
   <div class="masthead-t1">
     <div class="brand-group">
       <div class="brand-mark">MARKET <span>DRISHTI</span></div>
-      <div class="brand-tag">Keep a 'dur-drishti' on your investments • Live v1.1</div>
+      <div class="brand-tag">Clear long-term view on your stocks</div>
     </div>
     
-    <!-- Universal Search Bar with Live Suggestion Dropdown -->
+    <!-- Search Bar with Live Suggestions -->
     <div class="search-box-wrap">
       <span class="search-icon">🔍</span>
-      <input type="text" id="omniSearch" class="search-input-box" placeholder="Type stock name or symbol (e.g. RELIANCE, MOTHERSON, TRENT)..." autocomplete="off" />
+      <input type="text" id="omniSearch" class="search-input-box" placeholder="Search company name or symbol (e.g. RELIANCE, MOTHERSON, TRENT)..." autocomplete="off" />
       <div id="suggestDropdown" class="suggest-dropdown"></div>
     </div>
 
-    <div class="status-badge" id="backendBadge">🟢 LIVE RESEARCH TERMINAL</div>
+    <div class="status-badge" id="backendBadge">🟢 LIVE TERMINAL</div>
   </div>
 
-  <!-- Tier 2: Real-Time Session Clock + Indices Tape -->
+  <!-- Tier 2: Simple Market Timers & Big Indices -->
   <div class="masthead-t2">
-    <div class="clock-pill" id="istClock">⏰ IST: 09:15 AM • NSE OPEN</div>
+    <div class="clock-pill" id="istClock">⏰ IST: 09:15 AM • MARKET OPEN</div>
     <div class="tape-items">
       <span>NIFTY 50: <span class="tape-val">24,852.40</span> <span class="up">▲ +0.58%</span></span>
       <span>SENSEX: <span class="tape-val">81,385.20</span> <span class="up">▲ +0.53%</span></span>
       <span>BANK NIFTY: <span class="tape-val">51,460.80</span> <span class="down">▼ -0.17%</span></span>
-      <span>INDIA VIX: <span class="tape-val">12.85</span> <span class="down">▼ -3.16%</span></span>
+      <span>MARKET FEAR INDEX: <span class="tape-val">12.85</span> <span class="down">▼ Calm</span></span>
     </div>
   </div>
 
-  <!-- Tier 3: Market Breadth Ribbon -->
+  <!-- Tier 3: Simple Market Health Ribbon -->
   <div class="masthead-t3">
     <div class="breadth-pills">
-      <span>NSE Market Breadth:</span>
-      <span class="up">▲ 1,514 Advances</span>
-      <span class="down">▼ 748 Declines</span>
-      <span>124 Unchanged</span>
+      <span>Market Activity Today:</span>
+      <span class="up">▲ 1,514 Stocks Rising</span>
+      <span class="down">▼ 748 Stocks Falling</span>
+      <span>124 No Change</span>
     </div>
-    <div>FII Cash: <span class="down">▼ -₹820 Cr</span> | DII Cash: <span class="up">▲ +₹1,450 Cr</span></div>
+    <div>Foreign Investors: <span class="down">Selling</span> | Indian Mutual Funds: <span class="up">Buying</span></div>
   </div>
 
-  <!-- App Body Layout -->
+  <!-- Main View -->
   <div class="app-body">
-    <!-- Left Navigation Rail -->
+    <!-- Left Navigation Menu -->
     <aside class="sidebar">
-      <div class="nav-header">Research Modules</div>
-      <button class="nav-btn active" onclick="switchTab('dossier', this)">📊 Deep Dossier</button>
-      <button class="nav-btn" onclick="switchTab('study', this)">⚖️ T-Study (Pros/Cons)</button>
-      <button class="nav-btn" onclick="switchTab('technofunda', this)">⚡ Technofunda Picks</button>
-      <button class="nav-btn" onclick="switchTab('superinvestors', this)">👥 Super Investors</button>
-      <button class="nav-btn" onclick="switchTab('pulse', this)">🧭 Market Pulse & VIX</button>
+      <div class="nav-header">Main Sections</div>
+      <button class="nav-btn active" onclick="switchTab('dossier', this)">📊 Quick Company Health</button>
+      <button class="nav-btn" onclick="switchTab('study', this)">⚖️ Good vs Bad Checklist</button>
+      <button class="nav-btn" onclick="switchTab('technofunda', this)">⚡ Strong Business Picks</button>
+      <button class="nav-btn" onclick="switchTab('superinvestors', this)">👥 Big Investor Portfolios</button>
+      <button class="nav-btn" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
     </aside>
 
     <!-- Main Viewport -->
     <main class="content-viewport">
       
-      <!-- TAB 1: DEEP DOSSIER -->
+      <!-- SECTION 1: QUICK COMPANY HEALTH -->
       <section id="tab-dossier">
         <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
             <div>
               <h1 id="dispName" style="font-size:20px; font-weight:800; color:var(--text-main);">Reliance Industries Ltd</h1>
-              <div id="dispSector" style="font-size:11.5px; color:var(--brand-brass-dark); font-weight:700;">Oil & Gas, Retail & Telecom Digital Conglomerate</div>
+              <div id="dispSector" style="font-size:11.5px; color:var(--brand-brass-dark); font-weight:700;">Oil & Energy, Reliance Retail & Jio Telecom</div>
             </div>
             <div style="text-align:right;">
               <div id="dispCmp" style="font-size:24px; font-weight:900; color:var(--text-main);">₹1,187.00</div>
               <div id="dispChg" class="up" style="font-weight:700;">▲ +₹5.00 (+0.42%)</div>
             </div>
           </div>
-          <!-- Real Company Speciality & Industry Profile -->
+          <!-- Plain English Company Summary -->
           <p id="dispSummary" style="font-size:12.5px; color:var(--text-muted); line-height:1.55; border-top:1px solid var(--border-subtle); padding-top:8px;">
-            Speciality: India's largest corporate powerhouse operating integrated refining petrochemical complexes (O2C), nationwide omni-channel retail distribution via Reliance Retail, and dominant 5G broadband wireless infrastructure through Jio.
+            What the company does: India's largest private company. It earns steady cash from its oil refining plants and reinvests that money to grow Reliance Retail stores across India and Jio 5G mobile networks.
           </p>
         </div>
 
-        <!-- 4 Mild Pastel Fundamental Pillars -->
+        <!-- 4 Plain English Fundamental Cards -->
         <div class="pillars-grid">
           <div class="pillar pillar-sage">
-            <div class="pillar-name">1. Economic Moat</div>
-            <div class="pillar-val" id="dispMoat">Integrated Moat</div>
-            <div class="pillar-desc">Dominant market share across downstream energy, retail footfall, and 5G connectivity.</div>
+            <div class="pillar-name">1. Competitive Edge</div>
+            <div class="pillar-val" id="dispMoat">Market Leader</div>
+            <div class="pillar-desc">Huge size and national presence make it very difficult for new competitors to take market share.</div>
           </div>
           <div class="pillar pillar-sapphire">
-            <div class="pillar-name">2. Zero Girvi / Debt</div>
+            <div class="pillar-name">2. Mortgaged Shares (Girvi)</div>
             <div class="pillar-val" id="dispGirvi">0.00% Girvi</div>
-            <div class="pillar-desc">Zero promoter share pledging; sustained institutional operating cash flow.</div>
+            <div class="pillar-desc">Owners have not pledged or mortgaged their personal shares for loans. A safe sign.</div>
           </div>
           <div class="pillar pillar-amber">
-            <div class="pillar-name">3. Capital Efficiency</div>
-            <div class="pillar-val" id="dispRoce">11.4% ROCE</div>
-            <div class="pillar-desc">Reinvesting capital heavily into clean energy gigafactories and deep retail supply chains.</div>
+            <div class="pillar-name">3. Business Profitability</div>
+            <div class="pillar-val" id="dispRoce">11.4% Return</div>
+            <div class="pillar-desc">Generates steady profits on its factories and reinvests actively into new green energy projects.</div>
           </div>
           <div class="pillar pillar-lavender">
-            <div class="pillar-name">4. Dur-Drishti Valuation</div>
+            <div class="pillar-name">4. Valuation Check</div>
             <div class="pillar-val" id="dispPe">21.8x P/E</div>
-            <div class="pillar-desc">Trading near historical multiple support relative to consumer business demerger optionality.</div>
+            <div class="pillar-desc">Currently trading at a fair and reasonable price compared to its long-term earnings track record.</div>
           </div>
         </div>
 
-        <!-- Squeezed Horizontal Technical View -->
+        <!-- Price Trend Chart -->
         <div class="card">
           <div class="card-title">
-            <span>Price Action & Moving Averages</span>
-            <span style="font-size:11px; color:var(--text-muted);">50 DMA: <strong id="dispDma50" style="color:var(--text-main);">₹1,220.40</strong> | 200 DMA: <strong id="dispDma200" style="color:var(--text-main);">₹1,280.00</strong></span>
+            <span>Recent Price Trend & Key Moving Averages</span>
+            <span style="font-size:11px; color:var(--text-muted);">50-Day Average: <strong id="dispDma50" style="color:var(--text-main);">₹1,220.40</strong> | 200-Day Average: <strong id="dispDma200" style="color:var(--text-main);">₹1,280.00</strong></span>
           </div>
           <div class="chart-box">
             <canvas id="dossierCanvas"></canvas>
@@ -271,138 +271,138 @@
         </div>
       </section>
 
-      <!-- TAB 2: T-FORMAT COMPANY STUDY -->
+      <!-- SECTION 2: GOOD VS BAD CHECKLIST -->
       <section id="tab-study" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">Institutional T-Format Study: <span id="studyTickerHeader">RELIANCE</span></div>
+        <div class="card-title" style="margin-bottom:12px;">Simple Good vs Bad Review: <span id="studyTickerHeader">RELIANCE</span></div>
         <div class="t-format">
           <div class="t-col">
-            <div class="t-head" style="color:var(--accent-sapphire-dark);">Technical Read</div>
-            <div class="t-sub pro">Pros</div>
+            <div class="t-head" style="color:var(--accent-sapphire-dark);">Price & Chart Check</div>
+            <div class="t-sub pro">Positives</div>
             <ul class="t-list" id="studyTechPros">
-              <li>Consolidating above multi-month accumulation base support.</li>
-              <li>Low beta characteristics offering defensive resilience against wider market pullbacks.</li>
-              <li>RSI(14) recovering from oversold territory toward neutral 48-52 range.</li>
+              <li>Stock price is finding solid floor support after a recent correction.</li>
+              <li>Price moves steadily without sudden chaotic swings.</li>
+              <li>Momentum indicator shows buying interest is returning.</li>
             </ul>
-            <div class="t-sub con">Cons</div>
+            <div class="t-sub con">Things to Watch</div>
             <ul class="t-list" id="studyTechCons">
-              <li>Trading beneath its 200-day moving average requiring clear volume expansion to regain trend momentum.</li>
-              <li>Heavy index weighting subjects it to broad FII index arbitrage selling.</li>
+              <li>Needs more trading volume to cross above its 200-day average.</li>
+              <li>Being a very large index stock, foreign fund selling affects it quickly.</li>
             </ul>
           </div>
           <div class="t-col">
-            <div class="t-head" style="color:var(--brand-brass-dark);">Fundamental Read</div>
-            <div class="t-sub pro">Pros</div>
+            <div class="t-head" style="color:var(--brand-brass-dark);">Business & Financial Check</div>
+            <div class="t-sub pro">Positives</div>
             <ul class="t-list" id="studyFundPros">
-              <li>High-quality balance sheet: Zero promoter share pledging.</li>
-              <li>Unrivaled cash flow generator from O2C business reinvested into high-growth digital and retail engines.</li>
-              <li>Upcoming value-unlock catalysts via prospective retail and telecom IPO listings.</li>
+              <li>Clean record: The promoter family has not mortgaged company shares.</li>
+              <li>Large regular cash flows from oil and retail fund new business growth.</li>
+              <li>Potential future value unlock when Retail or Jio launch their own public IPOs.</li>
             </ul>
-            <div class="t-sub con">Cons</div>
+            <div class="t-sub con">Things to Watch</div>
             <ul class="t-list" id="studyFundCons">
-              <li>Large capital expenditure in New Energy sector involves long gestation periods before generating cash returns.</li>
-              <li>Global refining margin volatility occasionally impacts near-term chemical earnings.</li>
+              <li>New green energy factories require large cash spending before giving profits.</li>
+              <li>Global oil price fluctuations occasionally affect quarterly margins.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- TAB 3: TECHNOFUNDA PICKS -->
+      <!-- SECTION 3: STRONG BUSINESS PICKS -->
       <section id="tab-technofunda" style="display:none;">
-        <div class="card-title" style="margin-bottom:14px;">Technofunda Leaders (Simultaneous Technical & Fundamental Strength)</div>
+        <div class="card-title" style="margin-bottom:14px;">Handpicked Leaders (Both Strong Business & Strong Chart)</div>
         <div class="tf-grid">
           <div class="tf-card">
             <div class="tf-header">
               <div>
                 <strong style="color:var(--text-main); font-size:14px;">Bharti Airtel (BHARTIARTL)</strong>
-                <div style="font-size:11px; color:var(--text-dim);">Telecom Infrastructure</div>
+                <div style="font-size:11px; color:var(--text-dim);">Mobile & Broadband Telecom</div>
               </div>
               <div class="tf-score">86</div>
             </div>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Industry-leading ARPU expansion coupled with Stage 2 all-time high breakouts.</p>
-            <div style="font-size:11px; color:var(--accent-emerald-dark); font-weight:700;">Technical: Clear breakout over 50-day average on above-average volume.</div>
-            <div style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Fundamental: Pricing power in a consolidated duopoly; expanding FCF.</div>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Customers are paying higher monthly mobile bills, and the stock is hitting new all-time highs.</p>
+            <div style="font-size:11px; color:var(--accent-emerald-dark); font-weight:700;">Price Trend: Trading smoothly above its 50-day average with strong buyer interest.</div>
+            <div style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Business: Dominant position in India with growing profits every quarter.</div>
           </div>
 
           <div class="tf-card">
             <div class="tf-header">
               <div>
                 <strong style="color:var(--text-main); font-size:14px;">Trent Ltd (TRENT)</strong>
-                <div style="font-size:11px; color:var(--text-dim);">Fast Fashion & Retail</div>
+                <div style="font-size:11px; color:var(--text-dim);">Zudio & Westside Fashion Stores</div>
               </div>
               <div class="tf-score">84</div>
             </div>
-            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Zudio store rollout operating as a high-ROIC negative working capital flywheel.</p>
-            <div style="font-size:11px; color:var(--accent-emerald-dark); font-weight:700;">Technical: Sustained relative strength versus the broader Nifty 50.</div>
-            <div style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Fundamental: Superior inventory turns delivering 28%+ return on capital.</div>
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Zudio store openings across India are creating rapid sales and strong returns on investment.</p>
+            <div style="font-size:11px; color:var(--accent-emerald-dark); font-weight:700;">Price Trend: Outperforming the broader stock market week after week.</div>
+            <div style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Business: Sells clothes quickly with minimal waste and excellent profit margins.</div>
           </div>
         </div>
       </section>
 
-      <!-- TAB 4: SUPER INVESTORS -->
+      <!-- SECTION 4: BIG INVESTORS -->
       <section id="tab-superinvestors" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">Super Investor Tracked Disclosures</div>
+        <div class="card-title" style="margin-bottom:12px;">What India's Famous Investors Are Holding</div>
         <div class="card" style="padding:0; overflow:hidden;">
           <table class="si-table">
             <thead>
               <tr>
-                <th>Investor / Fund</th>
+                <th>Investor Name</th>
                 <th>Company</th>
-                <th>Stake</th>
-                <th>Recent Action</th>
-                <th>Investment Thesis Read</th>
+                <th>Shareholding</th>
+                <th>Recent Move</th>
+                <th>Why They Own It</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Rakesh Jhunjhunwala (RARE)</strong></td>
+                <td><strong>Rakesh Jhunjhunwala Portfolio</strong></td>
                 <td>Titan Company Ltd</td>
                 <td>~5.1%</td>
-                <td><span class="si-badge same">Unchanged</span></td>
-                <td>Secular formalization of Indian jewelry; durable brand trust.</td>
+                <td><span class="si-badge same">Holding Constant</span></td>
+                <td>Indians prefer trusted brands like Tanishq over local unorganized jewelers.</td>
               </tr>
               <tr>
-                <td><strong>Radhakishan Damani</strong></td>
+                <td><strong>Radhakishan Damani (DMart Founder)</strong></td>
                 <td>V-Guard Industries</td>
                 <td>~1.8%</td>
-                <td><span class="si-badge added">Added Stake</span></td>
-                <td>Expanding pan-India distribution across consumer durables.</td>
+                <td><span class="si-badge added">Bought More</span></td>
+                <td>Expanding store network for fans, heaters, and home electrical appliances.</td>
               </tr>
               <tr>
                 <td><strong>Ashish Kacholia</strong></td>
                 <td>Safari Industries</td>
                 <td>~2.2%</td>
-                <td><span class="si-badge reduced">Trimmed</span></td>
-                <td>Discretionary luggage penetration play; valuation multiple expansion.</td>
+                <td><span class="si-badge reduced">Sold Some</span></td>
+                <td>Growth in leisure travel is driving strong trolley bag sales across India.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <!-- TAB 5: MARKET PULSE & VIX -->
+      <!-- SECTION 5: MARKET MOOD METER -->
       <section id="tab-pulse" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">Market Pulse & Sentiment Engine</div>
+        <div class="card-title" style="margin-bottom:12px;">Market Mood & Volatility</div>
         <div class="pulse-grid">
           <div class="card gauge-wrap">
-            <div class="card-title" style="margin-bottom:0;">Fear & Greed Sentiment</div>
+            <div class="card-title" style="margin-bottom:0;">Fear vs Greed Meter</div>
             <svg viewBox="0 0 200 110" width="220">
               <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#E2E8F0" stroke-width="14" />
               <path d="M 20 100 A 80 80 0 0 1 145 38" fill="none" stroke="var(--brand-brass)" stroke-width="14" />
             </svg>
             <div class="gauge-score">58</div>
-            <div class="gauge-tag">Mild Greed</div>
+            <div class="gauge-tag">Mildly Optimistic</div>
             <p style="font-size:11.5px; color:var(--text-dim); text-align:center; margin-top:8px; max-width:280px;">
-              Supported by healthy domestic liquidity (DII flows) and a calm India VIX below 15.
+              Indian mutual fund investors are steadily buying, keeping overall market panic low.
             </p>
           </div>
           <div class="card">
-            <div class="card-title">Volatility & Net Liquidity Flows</div>
+            <div class="card-title">Daily Market Swings (Volatility)</div>
             <div style="margin-bottom:12px;">
-              <div style="font-size:11px; color:var(--text-dim);">India VIX Volatility</div>
-              <div style="font-size:24px; font-weight:900; color:var(--text-main);">12.85 <span class="up" style="font-size:13px;">(-3.16%)</span></div>
+              <div style="font-size:11px; color:var(--text-dim);">Market Calmness Score (India VIX)</div>
+              <div style="font-size:24px; font-weight:900; color:var(--text-main);">12.85 <span class="up" style="font-size:13px;">(Low Panic)</span></div>
             </div>
             <div style="font-size:12px; color:var(--text-muted); line-height:1.55;">
-              VIX readings under 15 reflect low market-implied pricing of near-term turbulence, creating an accommodating environment for Stage 2 breakouts.
+              A reading below 15 means the stock market is moving calmly without major wild daily swings. This creates a good environment for quality companies to trend upward.
             </div>
           </div>
         </div>
@@ -413,116 +413,116 @@
 
   <script>
     // -----------------------------------------------------------------
-    // 1. TOP 5 DEFAULT STOCKS
+    // 1. TOP 5 DEFAULT STOCKS (Simplified Plain English Profiles)
     // -----------------------------------------------------------------
     const TOP_5_DEFAULTS = {
       "RELIANCE": {
         name: "Reliance Industries Ltd",
-        sector: "Oil & Gas, Retail & Telecom Digital Conglomerate",
+        sector: "Oil Refining, Reliance Retail & Jio Telecom",
         cmp: 1187.00, chg: 5.00, pct: 0.42, dma50: 1220.40, dma200: 1280.00,
-        summary: "Speciality: India's largest corporate powerhouse operating integrated refining petrochemical complexes (O2C), nationwide omni-channel retail distribution via Reliance Retail, and dominant 5G broadband wireless infrastructure through Jio.",
-        moat: "Integrated Energy & Digital Moat", girvi: "0.00% Girvi", roce: "11.4% ROCE", pe: "21.8x P/E"
+        summary: "What the company does: India's largest private company. It earns steady cash from its oil refining plants and reinvests that money to grow Reliance Retail stores across India and Jio 5G mobile networks.",
+        moat: "Dominant Market Leader", girvi: "0.00% Girvi", roce: "11.4% Return", pe: "21.8x P/E"
       },
       "HDFCBANK": {
         name: "HDFC Bank Ltd",
-        sector: "Banking - Private Sector Commercial & Retail Banking",
+        sector: "Banking & Financial Services",
         cmp: 721.20, chg: 12.50, pct: 1.76, dma50: 710.20, dma200: 742.00,
-        summary: "Speciality: India's largest private sector bank following its mega-merger with HDFC Ltd. Dominates retail credit, wholesale corporate banking, credit card issuances, and nationwide branch distribution with a premier low-cost CASA base.",
-        moat: "Low-Cost CASA & Underwriting Scale", girvi: "0.00% Girvi", roce: "16.8% ROCE", pe: "14.2x P/E"
+        summary: "What the company does: India's largest private bank. Millions of Indians keep savings and salary accounts here, giving the bank low-cost funds to issue home loans, car loans, and credit cards safely.",
+        moat: "Trusted National Brand", girvi: "0.00% Girvi", roce: "16.8% Return", pe: "14.2x P/E"
       },
       "BHARTIARTL": {
         name: "Bharti Airtel Ltd",
-        sector: "Telecommunications - Wireless, Broadband & Enterprise Cloud",
+        sector: "Mobile Network, Broadband & 5G Data",
         cmp: 1741.10, chg: -15.80, pct: -0.90, dma50: 1680.00, dma200: 1460.50,
-        summary: "Speciality: India's premier telecom infrastructure provider across 18 countries. Industry-leading ARPU (~₹233), 5G standalone networks, enterprise data centers, and zero promoter pledge yield steady pricing power in a consolidated duopoly.",
-        moat: "Telecom Duopoly & ARPU Leadership", girvi: "0.00% Girvi", roce: "18.2% ROCE", pe: "35.4x P/E"
+        summary: "What the company does: Top telecom provider with high-paying smartphone users. It operates across India and Africa with zero founder share pledging, giving it strong pricing power on mobile data plans.",
+        moat: "Duopoly Market Power", girvi: "0.00% Girvi", roce: "18.2% Return", pe: "35.4x P/E"
       },
       "ICICIBANK": {
         name: "ICICI Bank Ltd",
-        sector: "Banking - Retail, SME & Corporate Banking Services",
+        sector: "Banking & Loan Services",
         cmp: 1310.60, chg: -11.10, pct: -0.84, dma50: 1285.00, dma200: 1210.00,
-        summary: "Speciality: High-return private banking institution renowned for digital platform execution (iMobile Pay), high Net Interest Margins (NIM), industry-low NPAs, and diversified insurance and asset management subsidiaries.",
-        moat: "Digital Lending & Underwriting Quality", girvi: "0.00% Girvi", roce: "17.4% ROCE", pe: "17.8x P/E"
+        summary: "What the company does: One of India's most profitable banks. Well known for easy mobile banking apps, low unpaid bad loans, and high customer retention across businesses and retail borrowers.",
+        moat: "Strong Digital Banking", girvi: "0.00% Girvi", roce: "17.4% Return", pe: "17.8x P/E"
       },
       "SBIN": {
         name: "State Bank of India",
-        sector: "Banking - Public Sector Banking & Sovereign Financial Backbone",
+        sector: "Public Sector Banking & National Loans",
         cmp: 954.10, chg: -5.40, pct: -0.56, dma50: 935.00, dma200: 865.00,
-        summary: "Speciality: India's largest commercial bank commanding ~24% national loan and deposit market share. Operates the primary financial distribution infrastructure for Government schemes, large corporate credit, and sovereign treasury operations.",
-        moat: "Sovereign Deposit Trust & Massive Scale", girvi: "0.00% Girvi", roce: "15.8% ROCE", pe: "10.2x P/E"
+        summary: "What the company does: India's largest state-owned bank managing roughly 1 in every 4 bank deposits in the country. It handles government projects, industrial loans, and widespread rural branch banking.",
+        moat: "Government Backed Trust", girvi: "0.00% Girvi", roce: "15.8% Return", pe: "10.2x P/E"
       }
     };
 
     // -----------------------------------------------------------------
-    // 2. MONEYCONTROL-STYLE SUGGESTION DATABASE
+    // 2. SEARCH AUTOCOMPLETE DATABASE
     // -----------------------------------------------------------------
     const ALL_STOCKS_SUGGEST = [
-      { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Oil & Gas, Retail & Telecom" },
+      { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy, Retail & Jio" },
       { ticker: "HDFCBANK", name: "HDFC Bank Ltd", sector: "Private Banking" },
-      { ticker: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom & Cloud" },
+      { ticker: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom & Mobile" },
       { ticker: "ICICIBANK", name: "ICICI Bank Ltd", sector: "Private Banking" },
       { ticker: "SBIN", name: "State Bank of India", sector: "Public Sector Banking" },
-      { ticker: "MOTHERSON", name: "Samvardhana Motherson International Ltd", sector: "Auto Components & Wiring" },
-      { ticker: "TCS", name: "Tata Consultancy Services Ltd", sector: "IT Services & Consulting" },
-      { ticker: "INFY", name: "Infosys Ltd", sector: "IT Services & Software" },
-      { ticker: "LT", name: "Larsen & Toubro Ltd", sector: "Infrastructure & Engineering" },
-      { ticker: "TRENT", name: "Trent Ltd (Zudio/Westside)", sector: "Retail & Apparel" },
-      { ticker: "TITAN", name: "Titan Company Ltd", sector: "Jewellery & Watches" },
-      { ticker: "TATAMOTORS", name: "Tata Motors Ltd", sector: "Auto & EV Mobility" },
-      { ticker: "TATASTEEL", name: "Tata Steel Ltd", sector: "Metals & Mining" },
-      { ticker: "HAL", name: "Hindustan Aeronautics Ltd", sector: "Aerospace & Defence" },
-      { ticker: "BEL", name: "Bharat Electronics Ltd", sector: "Defence Electronics" },
-      { ticker: "CDSL", name: "Central Depository Services Ltd", sector: "Financial Market Infrastructure" },
-      { ticker: "IRFC", name: "Indian Railway Finance Corporation", sector: "Railway Infrastructure Finance" },
-      { ticker: "ZOMATO", name: "Zomato Ltd (Blinkit)", sector: "Quick Commerce & Delivery" },
-      { ticker: "KALYANKJIL", name: "Kalyan Jewellers India Ltd", sector: "Jewellery Retail" },
-      { ticker: "SUZLON", name: "Suzlon Energy Ltd", sector: "Wind Energy Equipment" },
-      { ticker: "ULTRACEMCO", name: "UltraTech Cement Ltd", sector: "Cement & Building Materials" },
-      { ticker: "ITC", name: "ITC Ltd", sector: "FMCG, Cigarettes & Hotels" }
+      { ticker: "MOTHERSON", name: "Samvardhana Motherson International Ltd", sector: "Car Parts & Wiring" },
+      { ticker: "TCS", name: "Tata Consultancy Services Ltd", sector: "IT Software Services" },
+      { ticker: "INFY", name: "Infosys Ltd", sector: "IT Software Services" },
+      { ticker: "LT", name: "Larsen & Toubro Ltd", sector: "Engineering & Construction" },
+      { ticker: "TRENT", name: "Trent Ltd (Zudio/Westside)", sector: "Fashion Retail" },
+      { ticker: "TITAN", name: "Titan Company Ltd", sector: "Tanishq Jewellery & Watches" },
+      { ticker: "TATAMOTORS", name: "Tata Motors Ltd", sector: "Cars, Trucks & EVs" },
+      { ticker: "TATASTEEL", name: "Tata Steel Ltd", sector: "Steel Manufacturing" },
+      { ticker: "HAL", name: "Hindustan Aeronautics Ltd", sector: "Defence Aircraft & Helicopters" },
+      { ticker: "BEL", name: "Bharat Electronics Ltd", sector: "Defence Radars & Electronics" },
+      { ticker: "CDSL", name: "Central Depository Services Ltd", sector: "Demat Accounts" },
+      { ticker: "IRFC", name: "Indian Railway Finance Corporation", sector: "Railway Train Financing" },
+      { ticker: "ZOMATO", name: "Zomato Ltd (Blinkit)", sector: "Food Delivery & Groceries" },
+      { ticker: "KALYANKJIL", name: "Kalyan Jewellers India Ltd", sector: "Gold & Diamond Jewellery" },
+      { ticker: "SUZLON", name: "Suzlon Energy Ltd", sector: "Wind Energy Turbines" },
+      { ticker: "ULTRACEMCO", name: "UltraTech Cement Ltd", sector: "Cement Building Materials" },
+      { ticker: "ITC", name: "ITC Ltd", sector: "FMCG, Food & Cigarettes" }
     ];
 
     const EXTENDED_PROFILES = {
       "MOTHERSON": {
         name: "Samvardhana Motherson International Ltd",
-        sector: "Auto Ancillary - Global Tier-1 Systems & Components",
-        summary: "Speciality: Global automotive system supplier with leadership in wiring harnesses, vision systems (exterior/interior mirrors, camera monitoring), and polymer modules. Serves world-leading OEMs across North America, Europe, and Asia with 300+ facilities globally.",
-        moat: "Global OEM Integration & Deep Tier-1 Moat", girvi: "1.45% Girvi", roce: "14.2% ROCE", pe: "38.5x P/E"
+        sector: "Car Parts, Wiring & Rearview Mirrors",
+        summary: "What the company does: A major global supplier of automotive wiring cables, side mirrors, and dashboard components. It sells directly to almost every top global car company across North America, Europe, and Asia.",
+        moat: "Global Carmaker Partner", girvi: "1.45% Girvi", roce: "14.2% Return", pe: "38.5x P/E"
       },
       "TRENT": {
         name: "Trent Ltd",
-        sector: "Consumer Discretionary - Fast Fashion & Value Retail",
-        summary: "Speciality: Tata Group's high-velocity retail engine powering Zudio and Westside. Characterized by rapid inventory turnaround, in-house private-label design, and high-ROIC negative working capital expansion.",
-        moat: "Zudio Retail Flywheel & High Inventory Velocity", girvi: "0.00% Girvi", roce: "28.4% ROCE", pe: "112.4x P/E"
+        sector: "Value Fashion (Zudio & Westside)",
+        summary: "What the company does: The retail success story of the Tata Group. Known for affordable trendy clothing through Zudio, it sells clothes very fast and opens new stores entirely using money earned from existing profits.",
+        moat: "Fast Selling Zudio Model", girvi: "0.00% Girvi", roce: "28.4% Return", pe: "112.4x P/E"
       },
       "HAL": {
         name: "Hindustan Aeronautics Ltd",
-        sector: "Aerospace & Defence - Indigenous Fighter Jets & Helicopters",
-        summary: "Speciality: Sovereign aerospace monopoly designing, manufacturing, and overhauling combat aircraft (LCA Tejas, Su-30 MKI), attack helicopters (LCH Prachand), and gas turbine aero-engines for the Indian Armed Forces.",
-        moat: "Sovereign Defence Manufacturing Monopoly", girvi: "0.00% Girvi", roce: "30.5% ROCE", pe: "34.2x P/E"
+        sector: "Military Fighter Jets & Helicopters",
+        summary: "What the company does: India's government-owned manufacturer of fighter aircraft (Tejas) and army helicopters (Prachand). It holds almost exclusive rights to build and repair combat airplanes for the Indian Armed Forces.",
+        moat: "Government Defence Monopoly", girvi: "0.00% Girvi", roce: "30.5% Return", pe: "34.2x P/E"
       },
       "BEL": {
         name: "Bharat Electronics Ltd",
-        sector: "Defence Electronics - Radars, Missiles & Electronic Warfare",
-        summary: "Speciality: India's premier defence electronics supplier commanding 50%+ domestic market share in tactical radars, electronic warfare systems, avionics, night vision equipment, and naval weapon systems.",
-        moat: "Indigenous Defence Avionics & Radar Monopoly", girvi: "0.00% Girvi", roce: "32.0% ROCE", pe: "41.5x P/E"
+        sector: "Military Radars & Defence Electronics",
+        summary: "What the company does: Supplies advanced military radars, weapon electronics, and fighter jet systems for the Indian Army, Navy, and Air Force.",
+        moat: "Exclusive Defence Supplier", girvi: "0.00% Girvi", roce: "32.0% Return", pe: "41.5x P/E"
       },
       "CDSL": {
         name: "Central Depository Services (India) Ltd",
-        sector: "Capital Markets - Electronic Securities Depository",
-        summary: "Speciality: Market infrastructure institution (MII) holding ~75%+ share of active Demat accounts in India. Monetizes annual issuer fees, corporate actions, and transactional debit charges with near-zero variable cost.",
-        moat: "Duopoly Market Infrastructure Institution (MII)", girvi: "0.00% Girvi", roce: "34.8% ROCE", pe: "52.0x P/E"
+        sector: "Demat Accounts & Share Holding",
+        summary: "What the company does: Safely holds electronic shares for over 75% of Indian retail demat accounts. It earns a small fee every time someone sells shares or a company pays dividends.",
+        moat: "Nearly Irreplaceable Infrastructure", girvi: "0.00% Girvi", roce: "34.8% Return", pe: "52.0x P/E"
       },
       "IRFC": {
         name: "Indian Railway Finance Corporation",
-        sector: "Financial Services - Specialized Railway Infrastructure Financing",
-        summary: "Speciality: Dedicated financing arm of the Ministry of Railways. Finances acquisition of national rolling stock (locomotives, coaches, wagons) with guaranteed lease rentals, zero NPAs, and statutory tax-free bond mechanisms.",
-        moat: "Exclusive Sovereign Railway Leasing Mandate", girvi: "0.00% Girvi", roce: "9.8% ROCE", pe: "28.5x P/E"
+        sector: "Indian Railways Train Financing",
+        summary: "What the company does: The dedicated financing arm of Indian Railways. It buys all train engines, wagons, and coaches and leases them back to the government with practically zero risk of unpaid loans.",
+        moat: "Sole Railway Financier", girvi: "0.00% Girvi", roce: "9.8% Return", pe: "28.5x P/E"
       },
       "ZOMATO": {
         name: "Zomato Ltd",
-        sector: "Consumer Internet - Food Delivery & Quick Commerce Infrastructure",
-        summary: "Speciality: Duopoly online food delivery operator and owner of Blinkit (quick commerce leader). Operates dense hyperlocal dark-store infrastructure monetizing 10-minute grocery delivery and brand advertising.",
-        moat: "Hyperlocal Dark-Store Network & Duopoly Delivery", girvi: "0.00% Girvi", roce: "14.5% ROCE", pe: "95.0x P/E"
+        sector: "Food Delivery & Blinkit Quick Delivery",
+        summary: "What the company does: India's top online food delivery app and owner of Blinkit. It makes money through restaurant delivery commissions and 10-minute grocery deliveries from neighborhood mini-warehouses.",
+        moat: "Neighborhood 10-Min Network", girvi: "0.00% Girvi", roce: "14.5% Return", pe: "95.0x P/E"
       }
     };
 
@@ -530,7 +530,7 @@
     let activeStockData = TOP_5_DEFAULTS["RELIANCE"];
 
     // -----------------------------------------------------------------
-    // 3. DYNAMIC TECHNICAL & FUNDAMENTAL ENGINES
+    // 3. DYNAMIC PLAIN-ENGLISH CHECKLIST ENGINE
     // -----------------------------------------------------------------
     function computeLiveRSI(closes, period = 14) {
       if (!closes || closes.length <= period) return 52;
@@ -551,38 +551,38 @@
       const fundPros = [];
       const fundCons = [];
 
-      // Technical Rules
+      // Plain English Price Checks
       if (cmp >= dma50 && dma50 >= dma200) {
-        techPros.push(`Confirmed Stage 2 Uptrend: CMP (₹${cmp}) trades firmly above rising 50 DMA (₹${dma50}) and 200 DMA (₹${dma200}).`);
+        techPros.push(`Strong Upward Trend: The stock price (₹${cmp}) is trading comfortably above both its 50-day average (₹${dma50}) and 200-day average (₹${dma200}).`);
       } else if (cmp < dma50 && cmp < dma200) {
-        techCons.push(`Downtrend Pressure: Currently trading below both 50 DMA (₹${dma50}) and 200 DMA (₹${dma200}).`);
+        techCons.push(`Short-Term Pressure: Currently trading below its 50-day average (₹${dma50}) and 200-day average (₹${dma200}).`);
       } else {
-        techPros.push(`Moving Average Equilibrium: Testing support near 50 DMA (₹${dma50}).`);
+        techPros.push(`Steady Range: The stock is hovering near its medium-term support level of ₹${dma50}.`);
       }
 
       if (rsi >= 50 && rsi <= 68) {
-        techPros.push(`Healthy Relative Strength: RSI(14) at ${rsi} indicates constructive accumulation without overbought extension.`);
+        techPros.push(`Healthy Buying: Regular investors are steadily buying without pushing the stock into an over-hyped zone.`);
       } else if (rsi > 70) {
-        techCons.push(`Overbought Zone: RSI(14) at ${rsi} signals elevated short-term risk of profit taking.`);
+        techCons.push(`Short-Term Heated: The stock has run up very fast recently, which might lead to temporary profit booking.`);
       } else if (rsi < 35) {
-        techPros.push(`Oversold Reversal Territory: RSI(14) at ${rsi} indicates technical mean-reversion opportunity.`);
+        techPros.push(`Oversold Opportunity: The stock has dropped sharply and may soon find bargain buyers.`);
       }
 
       const distFromHigh = high52 > 0 ? (((high52 - cmp) / high52) * 100) : 0;
       if (distFromHigh <= 5) {
-        techPros.push(`Breakout Setup: Hovering within ${distFromHigh.toFixed(1)}% of its 52-week peak (₹${high52}).`);
+        techPros.push(`Near Yearly Peak: Sitting within ${distFromHigh.toFixed(1)}% of its 1-year high (₹${high52}), showing strong investor confidence.`);
       } else {
-        techCons.push(`Overhead Supply: Sits ${distFromHigh.toFixed(1)}% below its 52-week high resistance (₹${high52}).`);
+        techCons.push(`Distance from Top: Currently ${distFromHigh.toFixed(1)}% below its 1-year highest price (₹${high52}).`);
       }
 
-      // Fundamental Rules
-      fundPros.push(`Clean Compliance & Governance: Registered under SEBI reporting standards with active institutional participation.`);
+      // Plain English Business Checks
+      fundPros.push(`Transparent Disclosures: Properly registered with Indian regulators with active tracking by mutual funds.`);
       if (pe && pe !== "N/A" && parseFloat(pe) < 25) {
-        fundPros.push(`Valuation Margin of Safety: P/E multiple (${pe}) offers relative value compared to broader index averages.`);
+        fundPros.push(`Attractive Valuation: The stock price multiple (${pe}) looks reasonably priced compared to wider market averages.`);
       } else if (pe && pe !== "N/A" && parseFloat(pe) >= 45) {
-        fundCons.push(`High Valuation Multiple: Trading at ${pe}, demanding steady quarterly earnings acceleration.`);
+        fundCons.push(`Priced for High Growth: Trading at an expensive multiple of ${pe}, meaning the company must deliver high profit growth every quarter.`);
       } else {
-        fundPros.push(`Operating Reinvestment: Cash generation utilized to reinforce domain distribution.`);
+        fundPros.push(`Reinvesting in Growth: Profits are being put back into strengthening stores and operations.`);
       }
 
       const tpEl = document.getElementById('studyTechPros');
@@ -597,7 +597,7 @@
     }
 
     // -----------------------------------------------------------------
-    // 4. GLOBAL INTERACTION HANDLERS
+    // 4. NAVIGATION & SEARCH ACTIONS
     // -----------------------------------------------------------------
     window.switchTab = function(tabId, btn) {
       document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
@@ -625,17 +625,17 @@
 
       const badge = document.getElementById('backendBadge');
       if (badge) {
-        badge.textContent = "⏳ QUERYING EXCHANGE...";
+        badge.textContent = "⏳ FETCHING DATA...";
         badge.style.color = "var(--accent-amber-dark)";
       }
 
       const profile = TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker] || {
         name: ticker,
-        sector: "NSE Listed Equities",
-        summary: `Speciality: Listed corporation active in the Indian National Stock Exchange equity universe under SEBI compliance standards.`,
-        moat: "Sector Standard",
+        sector: "Indian Listed Corporation",
+        summary: `What the company does: A recognized company listed on the National Stock Exchange of India, operating in specialized manufacturing, consumer, or financial services.`,
+        moat: "Standard Market Player",
         girvi: "0.00% Girvi",
-        roce: "15.0% ROCE",
+        roce: "15.0% Return",
         pe: "22.0x P/E"
       };
 
@@ -676,9 +676,9 @@
           dma50,
           dma200,
           summary: profile.summary,
-          moat: profile.moat || "Market Infrastructure",
+          moat: profile.moat || "Market Player",
           girvi: profile.girvi || "0.00% Girvi",
-          roce: profile.roce || "18.5% ROCE",
+          roce: profile.roce || "18.5% Return",
           pe: profile.pe !== "N/A" ? profile.pe : (meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E"),
           closes: closes.slice(-60)
         };
@@ -687,11 +687,11 @@
         generateDynamicTStudy(ticker, activeStockData.name, activeStockData.cmp, dma50, dma200, high52, low52, liveRsi, activeStockData.pe);
 
         if (badge) {
-          badge.textContent = "🟢 LIVE VERCEL EDGE FEED";
+          badge.textContent = "🟢 LIVE EXCHANGE DATA";
           badge.style.color = "var(--accent-emerald-dark)";
         }
       } catch (err) {
-        console.warn("Live edge call failed, falling back to profile:", err);
+        console.warn("Live fetch error, falling back to local snapshot:", err);
         if (badge) {
           badge.textContent = "🟢 VERIFIED ACTIVE DATA";
           badge.style.color = "var(--accent-emerald-dark)";
@@ -715,9 +715,9 @@
       chgEl.className = chg >= 0 ? 'up' : 'down';
 
       document.getElementById('dispSummary').textContent = data.summary || "";
-      document.getElementById('dispMoat').textContent = data.moat || "Verified Listing";
+      document.getElementById('dispMoat').textContent = data.moat || "Market Player";
       document.getElementById('dispGirvi').textContent = data.girvi || "0.00% Girvi";
-      document.getElementById('dispRoce').textContent = data.roce || "18.0% ROCE";
+      document.getElementById('dispRoce').textContent = data.roce || "18.0% Return";
       document.getElementById('dispPe').textContent = data.pe || "22.0x P/E";
       document.getElementById('dispDma50').textContent = `₹${(data.dma50 || data.cmp || 0).toFixed(2)}`;
       document.getElementById('dispDma200').textContent = `₹${(data.dma200 || data.cmp || 0).toFixed(2)}`;
@@ -745,7 +745,7 @@
         ).slice(0, 8);
 
         if (matches.length === 0) {
-          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:12px;">No matching stock found. Press Enter to search on exchange.</div>`;
+          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:12px;">No matching stock found. Press Enter to search directly.</div>`;
           suggestDropdown.style.display = 'block';
           return;
         }
@@ -803,7 +803,7 @@
         ctx.stroke();
       }
 
-      // Plot true historical closes if available
+      // Draw real closing series
       const series = (activeStockData && activeStockData.closes && activeStockData.closes.length > 5)
         ? activeStockData.closes
         : [activeStockData.cmp * 0.95, activeStockData.cmp * 0.98, activeStockData.cmp];
@@ -835,6 +835,7 @@
       ctx.fill();
     }
 
+    // Market Open/Close Clock
     function evalClock() {
       const now = new Date();
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -851,10 +852,10 @@
       const timeStr = ist.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
       if (isOpen) {
-        clockEl.textContent = `⏰ IST: ${timeStr} • NSE OPEN`;
+        clockEl.textContent = `⏰ IST: ${timeStr} • MARKET OPEN`;
         clockEl.className = 'clock-pill';
       } else {
-        clockEl.textContent = `⏰ IST: ${timeStr} • MARKET CLOSED (LTP)`;
+        clockEl.textContent = `⏰ IST: ${timeStr} • MARKET CLOSED`;
         clockEl.className = 'clock-pill closed';
       }
     }
