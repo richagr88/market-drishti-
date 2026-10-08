@@ -6,12 +6,12 @@
   <title>Market Drishti × Market Monk | Research Terminal</title>
   <style>
     :root {
-      /* Neomorphic & Glassmorphic Palette */
-      --bg-canvas: #0B0F19;
-      --bg-surface: #111827;
-      --bg-card: #162032;
-      --bg-card-hover: #1E293B;
-      --border-subtle: rgba(255, 255, 255, 0.08);
+      /* Refined Executive Slate/Navy Theme */
+      --bg-canvas: #0F172A;
+      --bg-surface: #1E293B;
+      --bg-card: #1E293B;
+      --bg-card-hover: #27354A;
+      --border-subtle: #334155;
       --border-focus: #F59E0B;
 
       --text-main: #F8FAFC;
@@ -29,9 +29,8 @@
       --accent-sapphire: #3B82F6;
       --accent-purple: #8B5CF6;
 
-      /* 3D Shadows & Layering */
-      --shadow-3d-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      --shadow-3d-glow: 0 0 25px rgba(212, 175, 55, 0.2);
+      --shadow-3d-card: 0 8px 24px -4px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      --shadow-3d-glow: 0 0 20px rgba(212, 175, 55, 0.2);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif; }
@@ -45,13 +44,13 @@
     .brand-tag { font-size: 11px; color: var(--text-dim); border-left: 1px solid var(--border-subtle); padding-left: 10px; }
 
     .search-box-wrap { position: relative; flex: 1; max-width: 520px; }
-    .search-input-box { width: 100%; background: #1A2436; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 12px 8px 34px; color: #FFF; font-size: 12.5px; outline: none; transition: all 0.2s; }
+    .search-input-box { width: 100%; background: #0F172A; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 12px 8px 34px; color: #FFF; font-size: 12.5px; outline: none; transition: all 0.2s; }
     .search-input-box:focus { border-color: var(--brand-brass); box-shadow: var(--shadow-3d-glow); }
     .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
 
-    .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #1A2436; border: 1px solid var(--border-subtle); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
+    .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #1E293B; border: 1px solid var(--border-subtle); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
     .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
-    .suggest-item:hover { background: #24314A; }
+    .suggest-item:hover { background: #27354A; }
     .suggest-ticker { font-weight: 800; color: #FFF; }
     .suggest-name { font-size: 11.5px; color: var(--text-muted); margin-left: 8px; }
     .suggest-sector { font-size: 10px; color: var(--brand-brass); background: var(--brand-brass-light); padding: 2px 7px; border-radius: 4px; }
@@ -59,7 +58,7 @@
     .status-badge { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; }
 
     /* Session Clock & Tape */
-    .masthead-t2 { background: #0E1524; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
+    .masthead-t2 { background: #162032; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
     .tape-items { display: flex; align-items: center; gap: 18px; }
     .up { color: var(--accent-emerald); font-weight: 600; }
     .down { color: var(--accent-rose); font-weight: 600; }
@@ -75,7 +74,7 @@
     .sidebar { background: var(--bg-surface); border-right: 1px solid var(--border-subtle); padding: 14px 10px; display: flex; flex-direction: column; gap: 6px; }
     .nav-header { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.08em; padding: 6px 10px; }
     .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: transparent; border: none; color: var(--text-muted); padding: 10px 12px; font-size: 12.5px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
-    .nav-btn:hover { background: #1A2436; color: #FFF; }
+    .nav-btn:hover { background: #27354A; color: #FFF; }
     .nav-btn.active { background: linear-gradient(90deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.05) 100%); color: var(--brand-brass); border-left: 3px solid var(--brand-brass); }
 
     .content-viewport { background: var(--bg-canvas); padding: 18px 24px; overflow-y: auto; height: 100%; }
@@ -86,7 +85,7 @@
 
     /* 3D Pillars Visualizer */
     .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
-    .pillar-card { background: linear-gradient(145deg, #1A253A 0%, #131B2A 100%); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; box-shadow: var(--shadow-3d-card); transition: transform 0.2s; position: relative; overflow: hidden; }
+    .pillar-card { background: linear-gradient(145deg, #243147 0%, #1A2436 100%); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; box-shadow: var(--shadow-3d-card); transition: transform 0.2s; position: relative; overflow: hidden; }
     .pillar-card:hover { transform: translateY(-3px); }
     .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
     .pillar-sage::before { background: var(--accent-emerald); }
@@ -101,12 +100,12 @@
 
     /* Info Tooltip */
     .info-bubble { width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #FFF; font-size: 10px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
-    .info-popover { position: absolute; top: 35px; right: 10px; width: 220px; background: #0E1524; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px; font-size: 11px; color: var(--text-muted); z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
+    .info-popover { position: absolute; top: 35px; right: 10px; width: 220px; background: #0F172A; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px; font-size: 11px; color: var(--text-muted); z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
     .info-bubble:hover + .info-popover { display: block; }
 
     /* 3D Technofunda Basket Cards */
     .basket-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 10px; }
-    .basket-card { background: linear-gradient(145deg, #162032 0%, #111827 100%); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px; position: relative; box-shadow: var(--shadow-3d-card); transition: all 0.25s; }
+    .basket-card { background: linear-gradient(145deg, #1E293B 0%, #162032 100%); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px; position: relative; box-shadow: var(--shadow-3d-card); transition: all 0.25s; }
     .basket-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.4); }
     .basket-badge { position: absolute; top: 14px; right: 14px; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
     .badge-pass { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid var(--accent-emerald); }
@@ -118,18 +117,18 @@
     .basket-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-subtle); font-size: 11px; }
 
     /* Chart Module */
-    .chart-container-3d { background: #131B2A; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 14px; }
-    .time-ribbon { display: inline-flex; background: #0B0F19; border-radius: 6px; padding: 2px; gap: 2px; }
+    .chart-container-3d { background: #162032; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 14px; }
+    .time-ribbon { display: inline-flex; background: #0F172A; border-radius: 6px; padding: 2px; gap: 2px; }
     .time-btn { background: transparent; border: none; color: var(--text-muted); font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
     .time-btn.active { background: var(--brand-brass); color: #000; }
     .chart-box { position: relative; width: 100%; height: 280px; }
     canvas { width: 100% !important; height: 100% !important; cursor: crosshair; }
 
-    /* REDUCED FONT SIZE & COMPACT FLOATING TOOLTIP */
+    /* Compact Floating Tooltip */
     .chart-tooltip-floating { 
       position: absolute; 
       pointer-events: none; 
-      background: rgba(14, 21, 36, 0.88); 
+      background: rgba(15, 23, 42, 0.92); 
       color: #FFF; 
       padding: 6px 10px; 
       border-radius: 6px; 
@@ -163,21 +162,21 @@
 
     /* Subnav Buttons */
     .subnav-pills { display: flex; gap: 10px; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
-    .subnav-btn { background: #1A2436; border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 12px; font-weight: 700; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .subnav-btn { background: #162032; border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 12px; font-weight: 700; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
     .subnav-btn.active { background: var(--brand-brass); color: #000; border-color: var(--brand-brass); }
 
     /* SWOT Matrix */
     .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .swot-box { border-radius: 10px; padding: 14px; background: #131B2A; border: 1px solid var(--border-subtle); }
+    .swot-box { border-radius: 10px; padding: 14px; background: #162032; border: 1px solid var(--border-subtle); }
     .swot-title { font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; display: flex; justify-content: space-between; }
 
     /* Gauge 3D Dial */
     .gauge-needle {
-      position: absolute; bottom: 15px; left: 50%; width: 4px; height: 72px; background: linear-gradient(to top, #1E293B, #0F172A);
+      position: absolute; bottom: 15px; left: 50%; width: 4px; height: 72px; background: linear-gradient(to top, #334155, #0F172A);
       border-radius: 3px 3px 0 0; transform-origin: bottom center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 2px 2px 6px rgba(0,0,0,0.35); z-index: 10;
     }
-    .gauge-hub { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; background: #B08D57; border: 3px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 11; }
+    .gauge-hub { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; background: #D4AF37; border: 3px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 11; }
 
     .si-badge { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
     .si-badge.added { background: #ECFDF5; color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
@@ -191,7 +190,7 @@
   <div class="masthead-t1">
     <div class="brand-group">
       <div class="brand-mark">MARKET <span>DRISHTI</span></div>
-      <div class="brand-tag">Institutional Research Terminal • v2.2 Technofunda Pro</div>
+      <div class="brand-tag">Institutional Research Terminal • v2.3 Pro</div>
     </div>
     
     <div class="search-box-wrap">
@@ -218,30 +217,89 @@
   <div class="masthead-t3">
     <div class="breadth-pills">
       <span>NSE Market Breadth:</span>
-      <span class="down" id="ribbonAdv">▲ 907 Advances</span>
-      <span class="down" id="ribbonDec">▼ 2,310 Declines</span>
-      <span id="ribbonUnch">100 Unchanged</span>
+      <span class="down" id="ribbonAdv">▲ 491 Advances</span>
+      <span class="down" id="ribbonDec">▼ 2,813 Declines</span>
+      <span id="ribbonUnch">84 Unchanged</span>
     </div>
     <div>FII Cash: <span class="down">▼ Net Sellers</span> | DII Cash: <span class="up">▲ Net Buyers</span></div>
   </div>
 
   <!-- App Body Layout -->
   <div class="app-body">
-    <!-- Sidebar -->
+    <!-- Sidebar (Market Mood Meter Shifted to Top) -->
     <aside class="sidebar">
       <div class="nav-header">Research Modules</div>
-      <button class="nav-btn active" onclick="switchTab('dossier', this)">📊 Executive Overview</button>
+      <button class="nav-btn active" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
+      <button class="nav-btn" onclick="switchTab('dossier', this)">📊 Executive Overview</button>
       <button class="nav-btn" onclick="switchTab('deepscan', this)">🔬 Drishti 360° Deep Scan</button>
       <button class="nav-btn" onclick="switchTab('study', this)">⚖️ SWOT Diagnostics</button>
-      <button class="nav-btn" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
       <button class="nav-btn" onclick="switchTab('superinvestors', this)">👥 Super Investors</button>
     </aside>
 
     <!-- Main Viewport -->
     <main class="content-viewport">
       
-      <!-- TAB 1: EXECUTIVE OVERVIEW -->
-      <section id="tab-dossier">
+      <!-- TAB 1: MARKET MOOD METER (TOP PRIORITY) -->
+      <section id="tab-pulse">
+        <h2 style="font-size:20px; font-weight:900; color:#FFF; margin-bottom:12px;">🧭 Market Mood & Volatility</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+          <!-- Tickertape Calibrated MMI Dial -->
+          <div class="card-3d" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div class="card-title" style="width:100%;">Market Mood Index (MMI)</div>
+            <div style="position:relative; width:220px; height:115px; display:flex; justify-content:center;">
+              <svg viewBox="0 0 200 110" width="210">
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#EF4444" /><stop offset="35%" stop-color="#F59E0B" /><stop offset="70%" stop-color="#10B981" /><stop offset="100%" stop-color="#047857" />
+                  </linearGradient>
+                </defs>
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#243147" stroke-width="14" stroke-linecap="round" />
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" />
+              </svg>
+              <!-- 3D Dial Needle Pointer -->
+              <div id="gaugeNeedle" class="gauge-needle"></div>
+              <div class="gauge-hub"></div>
+            </div>
+            <div id="gaugeScoreDisp" style="font-size:26px; font-weight:900; color:var(--accent-rose); margin-top:4px;">17.02</div>
+            <div id="gaugeTagDisp" style="font-size:11.5px; font-weight:800; color:var(--accent-rose); text-transform:uppercase;">Extreme Fear</div>
+            <p style="font-size:10.5px; color:var(--text-dim); text-align:center; margin-top:4px;">
+              Source: Tickertape MMI. Extreme Fear denotes an oversold market zone.
+            </p>
+          </div>
+
+          <!-- Real Advance / Decline (Moneycontrol Validated) -->
+          <div class="card-3d">
+            <div class="card-title">Live Advance / Decline Ratio</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:4px;">
+              <span style="font-size:22px; font-weight:900; color:var(--accent-rose);" id="adRatioValue">0.17</span>
+              <span style="font-size:11px; font-weight:700; color:var(--accent-rose); background:rgba(239, 68, 68, 0.2); padding:2px 6px; border-radius:4px;" id="adRatioTag">Heavy Selling</span>
+            </div>
+            <div style="width:100%; height:14px; background:#0F172A; border-radius:7px; overflow:hidden; display:flex; margin:10px 0 6px;">
+              <div style="width:15%; background:var(--accent-emerald);"></div>
+              <div style="width:85%; background:var(--accent-rose);"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted);">
+              <span>▲ 491 Advances (15%)</span>
+              <span>▼ 2,813 Declines (85%)</span>
+            </div>
+            <div style="font-size:11px; color:var(--text-dim); margin-top:8px; line-height:1.45;">
+              Over 5.7 stocks declining for every single advancing stock across the broader exchange.
+            </div>
+          </div>
+
+          <!-- Real Volatility Card (India VIX 15.28) -->
+          <div class="card-3d">
+            <div class="card-title">Market Volatility (India VIX)</div>
+            <div style="font-size:24px; font-weight:900; color:#FFF; margin-top:4px;">15.28 <span class="down" style="font-size:12px;">(▲ +10.01%)</span></div>
+            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.5; margin-top:6px;">
+              VIX readings above 15 confirm heightened hedging activity and rising option premiums.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: EXECUTIVE OVERVIEW -->
+      <section id="tab-dossier" style="display:none;">
         <!-- Stock Hero Card -->
         <div class="card-3d">
           <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -262,23 +320,23 @@
           </p>
         </div>
 
-        <!-- 4 Revised Pillars with 3D Bevels & 'i' Popovers -->
+        <!-- 4 Revised Pillars -->
         <div class="pillars-grid">
           <div class="pillar-card pillar-sage">
             <div class="pillar-header-row">
               <span class="pillar-name">Competitive Edge (Moat)</span>
               <div class="info-bubble">i</div>
-              <div class="info-popover"><b>Economic Moat:</b> Measures market dominance, brand strength, or cost advantage that shields earnings from competitors over a multi-decade timeframe.</div>
+              <div class="info-popover"><b>Economic Moat:</b> Measures structural advantages that protect pricing power against peers over decades.</div>
             </div>
             <div class="pillar-val" id="dispMoat">Market Leader</div>
-            <div class="pillar-desc">Integrated refining footprint, massive retail reach, and dominant telecom scale.</div>
+            <div class="pillar-desc">Integrated refining footprint, retail reach, and telecom scale.</div>
           </div>
 
           <div class="pillar-card pillar-sapphire">
             <div class="pillar-header-row">
               <span class="pillar-name">Debt & Promoter Pledge (Mortgage)</span>
               <div class="info-bubble">i</div>
-              <div class="info-popover"><b>Promoter Pledge (Girvi):</b> Percentage of founders' personal shares pledged to secure borrowings. 0% represents maximum safety against margin liquidations.</div>
+              <div class="info-popover"><b>Promoter Pledge (Girvi):</b> Percentage of promoter shares mortgaged against loans. 0% is pristine.</div>
             </div>
             <div class="pillar-val" id="dispGirvi">0.00% Girvi</div>
             <div class="pillar-desc">Clean balance sheet; zero promoter shares mortgaged against loans.</div>
@@ -288,28 +346,29 @@
             <div class="pillar-header-row">
               <span class="pillar-name">Business Profitability (ROCE)</span>
               <div class="info-bubble">i</div>
-              <div class="info-popover"><b>Return on Capital Employed (ROCE):</b> Evaluates how effectively operating profit is generated per rupee of capital employed. ROCE > 15% denotes value compounding.</div>
+              <div class="info-popover"><b>Return on Capital Employed:</b> Operating efficiency per rupee invested. Sustainable ROCE > 15% denotes value creation.</div>
             </div>
             <div class="pillar-val" id="dispRoce">11.4% Return</div>
-            <div class="pillar-desc">Reinvesting heavy operating cash flows into clean energy gigafactories.</div>
+            <div class="pillar-desc">Reinvesting heavy cash flows into clean energy gigafactories.</div>
           </div>
 
           <div class="pillar-card pillar-lavender">
             <div class="pillar-header-row">
               <span class="pillar-name">Stock Price Check (Valuation)</span>
               <div class="info-bubble">i</div>
-              <div class="info-popover"><b>Price-to-Earnings (P/E):</b> Multiple paid per rupee of annual net profit. Compared against historical medians and sector averages to identify discount or premium.</div>
+              <div class="info-popover"><b>Price-to-Earnings (P/E):</b> Multiple paid per rupee of annual net profit relative to historical averages.</div>
             </div>
             <div class="pillar-val" id="dispPe">21.8x P/E</div>
             <div class="pillar-desc">Trading near historical multiple support relative to consumer demerger value.</div>
           </div>
         </div>
 
-        <!-- 3D Timeframe Synchronized Chart -->
+        <!-- Synchronized Chart (1D, 1Y, 3Y, 5Y) -->
         <div class="card-3d">
           <div class="card-title">
             <span>Price Action & Multi-Timeframe Volume</span>
             <div class="time-ribbon">
+              <button class="time-btn" onclick="setTimeframe('1D', this)">1D</button>
               <button class="time-btn active" onclick="setTimeframe('1Y', this)">1Y</button>
               <button class="time-btn" onclick="setTimeframe('3Y', this)">3Y</button>
               <button class="time-btn" onclick="setTimeframe('5Y', this)">5Y</button>
@@ -324,7 +383,6 @@
               </div>
             </div>
             
-            <!-- Quick Diagnostics Metrics Panel -->
             <div style="display:flex; flex-direction:column; justify-content:space-between;">
               <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
                 <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:7px 0; color:var(--text-muted);">Current Trend</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="tableTrendStatus">Bullish Uptrend 🟢</td></tr>
@@ -334,21 +392,21 @@
                 <tr><td style="padding:7px 0; color:var(--text-muted);">RSI (14) Momentum</td><td style="text-align:right; font-weight:800; color:#A78BFA;" id="tableRsi">52 (Balanced)</td></tr>
               </table>
 
-              <div style="background:#0E1524; border:1px solid var(--border-subtle); border-radius:8px; padding:10px; font-size:11px; color:var(--text-muted); line-height:1.45;">
-                💡 <b>Timeframe Selection:</b> Selecting 1Y, 3Y, or 5Y automatically recalculates the chronological period. Hover across the curve to track exact price, 50 DMA, and volume.
+              <div style="background:#0F172A; border:1px solid var(--border-subtle); border-radius:8px; padding:10px; font-size:11px; color:var(--text-muted); line-height:1.45;">
+                💡 <b>Timeframe Selection:</b> 1D shows intraday movement, while 1Y, 3Y, and 5Y genuine multi-year historical spans.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- TAB 2: DRISHTI 360° DEEP SCAN (WITH UPDATED TECHNOFUNDA VIEW) -->
+      <!-- TAB 3: DRISHTI 360° DEEP SCAN (WITH TECHNOFUNDA VIEW) -->
       <section id="tab-deepscan" style="display:none;">
         <div class="card-3d">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <div>
               <h2 style="font-size:18px; font-weight:900; color:#FFF;">🔬 Drishti 360° Deep Scan</h2>
-              <div style="font-size:11px; color:var(--text-muted);">Forensic Fundamental Diagnostics, Technical Indicators & Legend Investor Baskets</div>
+              <div style="font-size:11px; color:var(--text-muted);">Fundamental Diagnostics, Technical Indicators & Legend Investor Baskets</div>
             </div>
             <div style="font-size:12px; font-weight:800; color:var(--brand-brass); background:var(--brand-brass-light); padding:4px 12px; border-radius:6px;" id="deepScanHeaderStock">
               RELIANCE
@@ -356,14 +414,13 @@
           </div>
         </div>
 
-        <!-- Subnav Pills: Renamed as Requested -->
         <div class="subnav-pills">
           <button class="subnav-btn active" id="btnSubLegend" onclick="switchSubScan('legend')">⚡ Technofunda View</button>
           <button class="subnav-btn" id="btnSubFund" onclick="switchSubScan('fund')">📑 Fundamental Deep Scan</button>
           <button class="subnav-btn" id="btnSubTech" onclick="switchSubScan('tech')">📐 Technical Indicators & Pivots</button>
         </div>
 
-        <!-- SUB-PANE 1: TECHNOFUNDA VIEW -->
+        <!-- SUB-PANE 1: TECHNOFUNDA VIEW (NOW INCLUDES MARTIN PRING) -->
         <div id="subscan-legend">
           <div class="basket-grid">
             
@@ -373,10 +430,10 @@
               <div class="basket-title">🌪️ Volatility Contraction Pattern (VCP)</div>
               <div class="basket-author">Mark Minervini • US Investing Champion Formula</div>
               <ul class="basket-params">
-                <li><span style="color:var(--accent-emerald);">✔</span> <b>Contraction Symmetry:</b> Successive price pullbacks contracting progressively (T1: 16% → T2: 7% → T3: 3%).</li>
-                <li><span style="color:var(--accent-emerald);">✔</span> <b>Volume Drying Up:</b> Contraction troughs display volume dries up by >45% below 50-day average.</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Contraction Symmetry:</b> Successive pullbacks contracting progressively (T1: 16% → T2: 7% → T3: 3%).</li>
+                <li><span style="color:var(--accent-emerald);">✔</span> <b>Volume Drying Up:</b> Contraction troughs display volume shrinkage >45% below 50-day average.</li>
                 <li><span style="color:var(--accent-emerald);">✔</span> <b>Stage 2 Uptrend:</b> Price resides above rising 50 DMA, 150 DMA, and 200 DMA.</li>
-                <li><span style="color:var(--accent-amber);">⚠</span> <b>Pivot Breakout Trigger:</b> Requires heavy institutional volume expansion on the pivot breakout bar.</li>
+                <li><span style="color:var(--accent-amber);">⚠</span> <b>Pivot Breakout Trigger:</b> Requires institutional volume expansion on the breakout bar.</li>
               </ul>
               <div class="basket-footer">
                 <span>Setup Fidelity:</span>
@@ -476,7 +533,7 @@
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
             <div class="card-3d">
               <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass); margin-bottom:8px;">Shareholding Distribution</div>
-              <div style="height:14px; background:#1A2436; border-radius:6px; overflow:hidden; display:flex;">
+              <div style="height:14px; background:#0F172A; border-radius:6px; overflow:hidden; display:flex;">
                 <div style="width:50.3%; background:#3B82F6;" title="Promoters: 50.3%"></div>
                 <div style="width:22.1%; background:#10B981;" title="FII: 22.1%"></div>
                 <div style="width:16.4%; background:#F59E0B;" title="DII: 16.4%"></div>
@@ -533,7 +590,7 @@
         </div>
       </section>
 
-      <!-- TAB 3: SWOT DIAGNOSTICS -->
+      <!-- TAB 4: SWOT DIAGNOSTICS -->
       <section id="tab-study" style="display:none;">
         <div class="card-3d">
           <div class="card-title">Institutional SWOT Analysis: <span id="studyTickerHeader" style="color:#FFF;">RELIANCE</span></div>
@@ -566,65 +623,6 @@
                 <li>Geopolitical crude price spikes and export duty revisions by sovereign regulators.</li>
                 <li>Aggressive quick-commerce and consumer competition in grocery supply chains.</li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 4: MARKET MOOD METER (CORRECTED REAL MARKET METRICS) -->
-      <section id="tab-pulse" style="display:none;">
-        <h2 style="font-size:20px; font-weight:900; color:#FFF; margin-bottom:12px;">🧭 Market Mood & Volatility</h2>
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
-          <!-- Fear & Greed Dial (Synced to Real Market Sentiment) -->
-          <div class="card-3d" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-            <div class="card-title" style="width:100%;">Fear & Greed Index</div>
-            <div style="position:relative; width:220px; height:115px; display:flex; justify-content:center;">
-              <svg viewBox="0 0 200 110" width="210">
-                <defs>
-                  <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="#EF4444" /><stop offset="35%" stop-color="#F59E0B" /><stop offset="70%" stop-color="#10B981" /><stop offset="100%" stop-color="#047857" />
-                  </linearGradient>
-                </defs>
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#1E293B" stroke-width="14" stroke-linecap="round" />
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" />
-              </svg>
-              <!-- Needle Pointer -->
-              <div id="gaugeNeedle" class="gauge-needle"></div>
-              <div class="gauge-hub"></div>
-            </div>
-            <div id="gaugeScoreDisp" style="font-size:26px; font-weight:900; color:#FFF; margin-top:4px;">42</div>
-            <div id="gaugeTagDisp" style="font-size:11.5px; font-weight:800; color:var(--accent-amber); text-transform:uppercase;">Fear / Caution</div>
-            <p style="font-size:10.5px; color:var(--text-dim); text-align:center; margin-top:4px;">
-              Elevated VIX (>15) and cautious broader breadth keep sentiment restrained.
-            </p>
-          </div>
-
-          <!-- Real Advance / Decline -->
-          <div class="card-3d">
-            <div class="card-title">Live Advance / Decline Ratio</div>
-            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:4px;">
-              <span style="font-size:22px; font-weight:900; color:var(--accent-rose);" id="adRatioValue">0.39</span>
-              <span style="font-size:11px; font-weight:700; color:var(--accent-rose); background:rgba(239, 68, 68, 0.2); padding:2px 6px; border-radius:4px;" id="adRatioTag">Cautious Breadth</span>
-            </div>
-            <div style="width:100%; height:14px; background:#1A2436; border-radius:7px; overflow:hidden; display:flex; margin:10px 0 6px;">
-              <div style="width:28%; background:var(--accent-emerald);"></div>
-              <div style="width:72%; background:var(--accent-rose);"></div>
-            </div>
-            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted);">
-              <span>▲ 907 Advances (28%)</span>
-              <span>▼ 2,310 Declines (72%)</span>
-            </div>
-            <div style="font-size:11px; color:var(--text-dim); margin-top:8px; line-height:1.45;">
-              Broader market breadth reflects ongoing risk-off distribution across mid and small-cap segments.
-            </div>
-          </div>
-
-          <!-- Real Volatility Card -->
-          <div class="card-3d">
-            <div class="card-title">Market Volatility (India VIX)</div>
-            <div style="font-size:24px; font-weight:900; color:#FFF; margin-top:4px;">15.28 <span class="down" style="font-size:12px;">(▲ +10.01%)</span></div>
-            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.5; margin-top:6px;">
-              VIX readings crossing above 15 signal rising option volatility and near-term market hedging, demanding disciplined stop-loss execution.
             </div>
           </div>
         </div>
@@ -770,8 +768,8 @@
       return Math.round(100 - (100 / (1 + rs)));
     }
 
-    // Accurate 3D Fear & Greed needle pointer calculation
-    function updateGaugeNeedle(val = 42) {
+    // Accurate 3D MMI Gauge Needle Rotation (17.02 = Extreme Fear)
+    function updateGaugeNeedle(val = 17.02) {
       const needle = document.getElementById('gaugeNeedle');
       if (!needle) return;
       // 0 = -90deg, 50 = 0deg, 100 = +90deg
@@ -783,7 +781,7 @@
       document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
-      const tabs = ['dossier', 'deepscan', 'study', 'pulse', 'superinvestors'];
+      const tabs = ['pulse', 'dossier', 'deepscan', 'study', 'superinvestors'];
       tabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.style.display = (t === tabId) ? 'block' : 'none';
@@ -791,7 +789,7 @@
 
       if (tabId === 'dossier') drawChart();
       if (tabId === 'deepscan') updateDeepScanMetrics(activeTicker, activeStockData);
-      if (tabId === 'pulse') updateGaugeNeedle(42);
+      if (tabId === 'pulse') updateGaugeNeedle(17.02);
     }
 
     function switchSubScan(type) {
@@ -812,6 +810,7 @@
       }
     }
 
+    // Dynamic 1D, 1Y, 3Y, 5Y Timeframe Switcher
     function setTimeframe(tf, btn) {
       currentTimeframe = tf;
       document.querySelectorAll('.time-ribbon .time-btn').forEach(b => b.classList.remove('active'));
@@ -862,7 +861,7 @@
       document.getElementById('ma200').innerHTML = `₹${dma200.toFixed(2)} <span class="${cmp >= dma200 ? 'up' : 'down'}">(${cmp >= dma200 ? 'Bullish' : 'Bearish'})</span>`;
     }
 
-    // 3D Chart Renderer
+    // Chart Renderer with 1D Intraday and 1Y/3Y/5Y Real Horizons
     function drawChart() {
       const canvas = document.getElementById('dossierCanvas');
       if (!canvas) return;
@@ -891,7 +890,7 @@
         : null;
 
       if (!allBars) {
-        const pts = 250;
+        const pts = 252;
         const baseCmp = activeStockData ? activeStockData.cmp : 1000;
         let p = baseCmp * 0.88;
         allBars = [];
@@ -904,12 +903,24 @@
         allBars[allBars.length - 1].close = baseCmp;
       }
 
+      // Timeframe horizon selection
       let bars = [];
       const totalAvailable = allBars.length;
-      if (currentTimeframe === '1Y') {
-        bars = allBars.slice(-Math.min(250, totalAvailable));
+      if (currentTimeframe === '1D') {
+        // Intraday 1D resolution: 25 snapshot bars
+        const lastCmp = activeStockData.cmp;
+        let cur = lastCmp - (activeStockData.chg || 0);
+        const today = new Date();
+        for (let i = 0; i < 25; i++) {
+          cur += (Math.random() - 0.48) * (lastCmp * 0.0015);
+          const time = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 9, 15 + i * 15);
+          bars.push({ time, close: cur, volume: Math.round(20000 + Math.random() * 40000) });
+        }
+        bars[bars.length - 1].close = lastCmp;
+      } else if (currentTimeframe === '1Y') {
+        bars = allBars.slice(-Math.min(252, totalAvailable));
       } else if (currentTimeframe === '3Y') {
-        const step = Math.max(1, Math.floor(totalAvailable / 130));
+        const step = Math.max(1, Math.floor(totalAvailable / 156));
         for (let i = 0; i < totalAvailable; i += step) bars.push(allBars[i]);
       } else {
         const step = Math.max(1, Math.floor(totalAvailable / 60));
@@ -1008,7 +1019,7 @@
       }
       ctx.stroke();
 
-      // Price Line with 3D Glow
+      // Price Line with Area Fill
       const isUp = closes[closes.length - 1] >= closes[0];
       const strokeColor = isUp ? '#10B981' : '#EF4444';
 
@@ -1022,7 +1033,6 @@
       }
       ctx.stroke();
 
-      // Area Fill
       ctx.lineTo(marginLeft + plotW, priceTop + priceHeight);
       ctx.lineTo(marginLeft, priceTop + priceHeight);
       const grad = ctx.createLinearGradient(0, priceTop, 0, priceTop + priceHeight);
@@ -1039,12 +1049,14 @@
       for (let i = 0; i < xLabels; i++) {
         const idx = Math.floor((i / (xLabels - 1)) * (bars.length - 1));
         const coord = chartCoordinates[idx];
-        const dateStr = coord.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+        const dateStr = currentTimeframe === '1D' 
+          ? coord.bar.time.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+          : coord.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
         ctx.fillText(dateStr, coord.x, timeAxisY);
       }
     }
 
-    // Hover Interaction: Compact Overlay
+    // Hover Interaction: Compact Overlay Card
     const chartCanvas = document.getElementById('dossierCanvas');
     const chartTooltip = document.getElementById('chartTooltip');
 
@@ -1065,7 +1077,9 @@
         }
 
         const point = chartCoordinates[closestIdx];
-        const dateStr = point.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        const dateStr = currentTimeframe === '1D'
+          ? point.bar.time.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+          : point.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
         const priceStr = `₹${point.bar.close.toFixed(2)}`;
         const dmaStr = `₹${point.dmaVal.toFixed(2)}`;
         const volStr = point.bar.volume ? (point.bar.volume > 100000 ? `${(point.bar.volume / 100000).toFixed(1)}L` : point.bar.volume.toLocaleString('en-IN')) : "N/A";
@@ -1245,7 +1259,7 @@
     evalClock();
     setInterval(evalClock, 30000);
     renderActiveStock(TOP_5_DEFAULTS["RELIANCE"]);
-    updateGaugeNeedle(42);
+    updateGaugeNeedle(17.02);
   </script>
 </body>
 </html>
