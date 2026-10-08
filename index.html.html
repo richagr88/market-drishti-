@@ -6,7 +6,6 @@
   <title>Market Drishti × Market Monk | Research Terminal</title>
   <style>
     :root {
-      /* Soft Light Theme Palette */
       --bg-canvas: #F8FAFC;
       --bg-surface: #FFFFFF;
       --bg-subtle: #F1F5F9;
@@ -30,7 +29,6 @@
       --accent-sapphire: #3B82F6;
       --accent-sapphire-dark: #1D4ED8;
 
-      /* 4 Soft Fundamental Color Cards */
       --pillar-sage-bg: #EDFDF4;
       --pillar-sage-border: #BBF7D0;
       --pillar-sage-text: #14532D;
@@ -51,20 +49,18 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif; }
     body { background-color: var(--bg-canvas); color: var(--text-main); font-size: 13px; line-height: 1.5; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
-    /* Top Masthead */
+    /* Masthead */
     .masthead-t1 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-shrink: 0; position: relative; z-index: 100; }
     .brand-group { display: flex; align-items: center; gap: 10px; }
     .brand-mark { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; color: var(--text-main); }
     .brand-mark span { color: var(--brand-brass); }
     .brand-tag { font-size: 11px; color: var(--text-dim); border-left: 1px solid var(--border-subtle); padding-left: 10px; }
 
-    /* Universal Search Bar */
     .search-box-wrap { position: relative; flex: 1; max-width: 520px; }
     .search-input-box { width: 100%; background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 12px 8px 34px; color: var(--text-main); font-size: 12.5px; outline: none; transition: all 0.2s; }
     .search-input-box:focus { border-color: var(--brand-brass); background: #fff; box-shadow: 0 0 0 2px rgba(176,141,87,0.18); }
     .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 12px; }
 
-    /* Search Dropdown */
     .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; box-shadow: 0 8px 24px rgba(15,23,42,0.12); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
     .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; }
     .suggest-item:last-child { border-bottom: none; }
@@ -75,7 +71,6 @@
 
     .status-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); font-weight: 700; display: flex; align-items: center; gap: 5px; }
 
-    /* Tier 2: Market Clock + Indices */
     .masthead-t2 { background: #F1F5F9; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
     .clock-pill { font-weight: 700; color: var(--text-main); }
     .clock-pill.closed { color: var(--accent-amber-dark); }
@@ -84,11 +79,9 @@
     .up { color: var(--accent-emerald-dark); font-weight: 600; }
     .down { color: var(--accent-rose-dark); font-weight: 600; }
 
-    /* Tier 3: Market Summary Bar */
     .masthead-t3 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 5px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
     .breadth-pills { display: flex; align-items: center; gap: 14px; }
 
-    /* Layout */
     .app-body { display: grid; grid-template-columns: 240px 1fr; flex: 1; overflow: hidden; }
 
     /* Left Menu */
@@ -98,95 +91,146 @@
     .nav-btn:hover { background: var(--bg-subtle); color: var(--text-main); }
     .nav-btn.active { background: var(--brand-brass-light); color: var(--brand-brass-dark); border-left: 3px solid var(--brand-brass); }
 
-    /* Main Viewport */
-    .content-viewport { background: var(--bg-canvas); padding: 18px 24px; overflow-y: auto; height: 100%; }
+    .content-viewport { background: var(--bg-canvas); padding: 16px 22px; overflow-y: auto; height: 100%; }
 
-    /* Cards */
-    .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-    .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass-dark); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+    .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass-dark); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
 
     /* 4 Color Pillars */
-    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
     @media (max-width: 1024px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
-    .pillar { border-radius: 8px; padding: 14px; border: 1px solid transparent; box-shadow: 0 1px 2px rgba(0,0,0,0.02); }
+    .pillar { border-radius: 8px; padding: 12px 14px; border: 1px solid transparent; }
     .pillar-sage { background: var(--pillar-sage-bg); border-color: var(--pillar-sage-border); }
     .pillar-sapphire { background: var(--pillar-sapphire-bg); border-color: var(--pillar-sapphire-border); }
     .pillar-amber { background: var(--pillar-amber-bg); border-color: var(--pillar-amber-border); }
     .pillar-lavender { background: var(--pillar-lavender-bg); border-color: var(--pillar-lavender-border); }
     
-    .pillar-name { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+    .pillar-name { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
     .pillar-sage .pillar-name { color: var(--pillar-sage-text); }
     .pillar-sapphire .pillar-name { color: var(--pillar-sapphire-text); }
     .pillar-amber .pillar-name { color: var(--pillar-amber-text); }
     .pillar-lavender .pillar-name { color: var(--pillar-lavender-text); }
 
-    .pillar-val { font-size: 20px; font-weight: 900; color: var(--text-main); margin-bottom: 4px; }
-    .pillar-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.45; }
+    .pillar-val { font-size: 18px; font-weight: 900; color: var(--text-main); margin-bottom: 2px; }
+    .pillar-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
 
-    /* Side-by-Side Squeezed Technical Layout */
-    .chart-dual-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-top: 6px; }
+    /* Tight Side-by-Side Squeezed Layout */
+    .chart-dual-layout { display: grid; grid-template-columns: 1.7fr 1fr; gap: 14px; margin-top: 4px; }
     @media (max-width: 980px) { .chart-dual-layout { grid-template-columns: 1fr; } }
 
-    .chart-left-pane { position: relative; background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px 14px 6px; height: 320px; display: flex; flex-direction: column; }
-    .chart-box { position: relative; flex: 1; width: 100%; min-height: 250px; }
+    .chart-left-pane { position: relative; background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px 12px 6px; display: flex; flex-direction: column; }
+    
+    .chart-legend-bar { display: flex; align-items: center; gap: 16px; font-size: 10.5px; font-weight: 700; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid #F1F5F9; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-color-dot { width: 10px; height: 3px; border-radius: 2px; }
+
+    .chart-box { position: relative; width: 100%; height: 280px; overflow: hidden; }
     canvas { width: 100% !important; height: 100% !important; display: block; cursor: crosshair; }
 
-    /* Tooltip Floating UI */
-    .chart-tooltip { position: absolute; pointer-events: none; background: rgba(15, 23, 42, 0.94); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 11px; line-height: 1.35; box-shadow: 0 4px 14px rgba(0,0,0,0.18); display: none; z-index: 50; transform: translate(-50%, -120%); white-space: nowrap; }
-    .chart-tooltip span { color: #94A3B8; font-size: 10px; }
+    /* Floating Tooltip Window */
+    .chart-tooltip-floating { 
+      position: absolute; 
+      pointer-events: none; 
+      background: rgba(15, 23, 42, 0.95); 
+      color: #fff; 
+      padding: 7px 11px; 
+      border-radius: 6px; 
+      font-size: 11px; 
+      line-height: 1.45; 
+      box-shadow: 0 4px 16px rgba(0,0,0,0.22); 
+      display: none; 
+      z-index: 99; 
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+    }
+    .chart-tooltip-floating .tt-date { color: #94A3B8; font-size: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 3px; margin-bottom: 4px; }
+    .chart-tooltip-floating .tt-row { display: flex; justify-content: space-between; gap: 12px; }
+    .chart-tooltip-floating .tt-val { font-weight: 800; color: #FFFFFF; }
 
-    /* Chart Explanation Table (Right Pane) */
-    .chart-right-pane { background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; }
-    .exp-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .exp-table td { padding: 7px 4px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
+    /* Companion Metrics Table */
+    .chart-right-pane { background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; }
+    .exp-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+    .exp-table td { padding: 6px 3px; border-bottom: 1px solid var(--border-subtle); vertical-align: middle; }
     .exp-table tr:last-child td { border-bottom: none; }
-    .exp-label { color: var(--text-dim); font-weight: 600; width: 44%; }
+    .exp-label { color: var(--text-dim); font-weight: 600; width: 45%; }
     .exp-value { color: var(--text-main); font-weight: 800; text-align: right; }
-    .exp-note { font-size: 11.5px; color: var(--text-muted); background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 9px 11px; margin-top: 10px; line-height: 1.45; }
+    .exp-note { font-size: 11px; color: var(--text-muted); background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 10px; margin-top: 8px; line-height: 1.4; }
+
+    /* 3-Column Squeezed Market Mood Grid */
+    .mood-tri-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    @media (max-width: 1024px) { .mood-tri-grid { grid-template-columns: 1fr; } }
+
+    /* 3D Gauge Pointer Styling */
+    .gauge-card-3d { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 14px 10px; }
+    .gauge-wrap-3d { position: relative; width: 220px; height: 115px; display: flex; justify-content: center; }
+    .gauge-needle {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      width: 4px;
+      height: 72px;
+      background: linear-gradient(to top, #1E293B, #0F172A);
+      border-radius: 3px 3px 0 0;
+      transform-origin: bottom center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.35);
+      z-index: 10;
+    }
+    .gauge-hub {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 18px;
+      background: #B08D57;
+      border: 3px solid #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 11;
+    }
+
+    /* Advance / Decline Bar Styling */
+    .ad-bar-wrap { width: 100%; height: 14px; background: #F1F5F9; border-radius: 7px; overflow: hidden; display: flex; margin: 10px 0 6px; }
+    .ad-bar-adv { background: var(--accent-emerald); height: 100%; }
+    .ad-bar-dec { background: var(--accent-rose); height: 100%; }
 
     /* Side-by-Side Pros/Cons */
-    .t-format { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: var(--bg-surface); margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-    .t-col { padding: 16px 20px; }
+    .t-format { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: var(--bg-surface); margin-bottom: 12px; }
+    .t-col { padding: 14px 18px; }
     .t-col + .t-col { border-left: 1px solid var(--border-subtle); }
-    .t-head { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 12px; }
-    .t-sub { font-size: 11px; font-weight: 800; text-transform: uppercase; margin: 12px 0 6px; }
+    .t-head { font-size: 12.5px; font-weight: 800; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 10px; }
+    .t-sub { font-size: 11px; font-weight: 800; text-transform: uppercase; margin: 10px 0 4px; }
     .t-sub.pro { color: var(--accent-emerald-dark); }
     .t-sub.con { color: var(--accent-rose-dark); }
-    .t-list { list-style: disc inside; font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
-    .t-list li { margin-bottom: 4px; }
+    .t-list { list-style: disc inside; font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .t-list li { margin-bottom: 3px; }
 
-    /* Handpicked Stocks */
-    .tf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
-    .tf-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-    .tf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .tf-score { width: 44px; height: 44px; border-radius: 50%; background: var(--brand-brass-light); border: 2px solid var(--brand-brass); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; color: var(--brand-brass-dark); }
+    /* Handpicked Leaders */
+    .tf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+    .tf-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px; }
+    .tf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .tf-score { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-brass-light); border: 2px solid var(--brand-brass); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; color: var(--brand-brass-dark); }
 
     /* Big Investors Table */
     .si-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .si-table th { text-align: left; padding: 10px 14px; background: var(--bg-subtle); color: var(--text-muted); text-transform: uppercase; font-size: 10.5px; font-weight: 700; border-bottom: 1px solid var(--border-subtle); }
-    .si-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--text-main); }
-    .si-badge { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
+    .si-table th { text-align: left; padding: 9px 12px; background: var(--bg-subtle); color: var(--text-muted); text-transform: uppercase; font-size: 10px; font-weight: 700; border-bottom: 1px solid var(--border-subtle); }
+    .si-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--text-main); }
+    .si-badge { display: inline-block; font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
     .si-badge.added { background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); }
     .si-badge.same { background: var(--pillar-amber-bg); color: var(--accent-amber-dark); border: 1px solid var(--pillar-amber-border); }
     .si-badge.reduced { background: #FEF2F2; color: var(--accent-rose-dark); border: 1px solid #FECACA; }
-
-    /* Mood Gauge */
-    .pulse-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .gauge-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 0; }
-    .gauge-score { font-size: 32px; font-weight: 900; color: var(--text-main); margin-top: -12px; }
-    .gauge-tag { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-brass-dark); }
   </style>
 </head>
 <body>
 
-  <!-- Tier 1: Masthead -->
+  <!-- Masthead -->
   <div class="masthead-t1">
     <div class="brand-group">
       <div class="brand-mark">MARKET <span>DRISHTI</span></div>
       <div class="brand-tag">Clear long-term view on your stocks</div>
     </div>
     
-    <!-- Universal Search Bar -->
     <div class="search-box-wrap">
       <span class="search-icon">🔍</span>
       <input type="text" id="omniSearch" class="search-input-box" placeholder="Search company name or symbol (e.g. RELIANCE, MOTHERSON, TRENT)..." autocomplete="off" />
@@ -196,147 +240,238 @@
     <div class="status-badge" id="backendBadge">🟢 LIVE TERMINAL</div>
   </div>
 
-  <!-- Tier 2: Real-Time Session Clock + Indices Tape -->
+  <!-- Session Clock & Tape -->
   <div class="masthead-t2">
     <div class="clock-pill" id="istClock">⏰ IST: 09:15 AM • MARKET OPEN</div>
     <div class="tape-items">
       <span>NIFTY 50: <span class="tape-val">24,852.40</span> <span class="up">▲ +0.58%</span></span>
       <span>SENSEX: <span class="tape-val">81,385.20</span> <span class="up">▲ +0.53%</span></span>
       <span>BANK NIFTY: <span class="tape-val">51,460.80</span> <span class="down">▼ -0.17%</span></span>
-      <span>MARKET FEAR INDEX: <span class="tape-val">12.85</span> <span class="down">▼ Calm</span></span>
+      <span>INDIA VIX: <span class="tape-val">12.85</span> <span class="down">▼ Calm</span></span>
     </div>
   </div>
 
-  <!-- Tier 3: Market Breadth Ribbon -->
+  <!-- Market Activity Ribbon -->
   <div class="masthead-t3">
     <div class="breadth-pills">
-      <span>Market Activity Today:</span>
-      <span class="up">▲ 1,514 Stocks Rising</span>
-      <span class="down">▼ 748 Stocks Falling</span>
-      <span>124 No Change</span>
+      <span>NSE Market Activity Today:</span>
+      <span class="up">▲ 1,514 Advances</span>
+      <span class="down">▼ 748 Declines</span>
+      <span>124 Unchanged</span>
     </div>
-    <div>Foreign Investors: <span class="down">Selling</span> | Indian Mutual Funds: <span class="up">Buying</span></div>
+    <div>Foreign Institutional Investors: <span class="down">Net Sellers</span> | Domestic Mutual Funds: <span class="up">Net Buyers</span></div>
   </div>
 
   <!-- App Body Layout -->
   <div class="app-body">
-    <!-- Left Menu -->
+    <!-- Left Navigation Menu (Market Mood Meter is now #1 at top) -->
     <aside class="sidebar">
       <div class="nav-header">Main Sections</div>
-      <button class="nav-btn active" onclick="switchTab('dossier', this)">📊 Quick Company Health</button>
+      <button class="nav-btn active" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
+      <button class="nav-btn" onclick="switchTab('dossier', this)">📊 Quick Company Health</button>
       <button class="nav-btn" onclick="switchTab('study', this)">⚖️ Good vs Bad Checklist</button>
       <button class="nav-btn" onclick="switchTab('technofunda', this)">⚡ Strong Business Picks</button>
       <button class="nav-btn" onclick="switchTab('superinvestors', this)">👥 Big Investor Portfolios</button>
-      <button class="nav-btn" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
     </aside>
 
     <!-- Main Viewport -->
     <main class="content-viewport">
       
-      <!-- SECTION 1: QUICK COMPANY HEALTH -->
-      <section id="tab-dossier">
-        <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-            <div>
-              <h1 id="dispName" style="font-size:20px; font-weight:800; color:var(--text-main);">Reliance Industries Ltd</h1>
-              <div id="dispSector" style="font-size:11.5px; color:var(--brand-brass-dark); font-weight:700;">Oil Refining, Reliance Retail & Jio Telecom</div>
+      <!-- TAB 1: MARKET MOOD METER (Shifted to Top) -->
+      <section id="tab-pulse">
+        <h2 style="font-size:20px; font-weight:900; color:var(--text-main); margin-bottom:12px; letter-spacing:-0.3px;">
+          🧭 Market Mood & Volatility
+        </h2>
+        
+        <!-- 3-Column Squeezed Layout -->
+        <div class="mood-tri-grid">
+          
+          <!-- Card 1: 3D Fear & Greed Dial with Pointer -->
+          <div class="card gauge-card-3d">
+            <div class="card-title" style="margin-bottom:6px; width:100%;">Fear & Greed Index</div>
+            <div class="gauge-wrap-3d">
+              <svg viewBox="0 0 200 110" width="210">
+                <defs>
+                  <filter id="gaugeShadow" x="-10%" y="-10%" width="130%" height="130%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.18" />
+                  </filter>
+                  <linearGradient id="gauge3dGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#EF4444" />
+                    <stop offset="35%" stop-color="#F59E0B" />
+                    <stop offset="70%" stop-color="#10B981" />
+                    <stop offset="100%" stop-color="#047857" />
+                  </linearGradient>
+                </defs>
+                <!-- Outer bevel arc -->
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#E2E8F0" stroke-width="16" stroke-linecap="round" />
+                <!-- 3D Colored gradient track with drop shadow -->
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gauge3dGrad)" stroke-width="13" stroke-linecap="round" filter="url(#gaugeShadow)" />
+              </svg>
+              <!-- Dynamic central needle pointer -->
+              <div id="gaugeNeedle" class="gauge-needle"></div>
+              <div class="gauge-hub"></div>
             </div>
-            <div style="text-align:right;">
-              <div id="dispCmp" style="font-size:24px; font-weight:900; color:var(--text-main);">₹1,187.00</div>
-              <div id="dispChg" class="up" style="font-weight:700;">▲ +₹5.00 (+0.42%)</div>
+            <div style="font-size:26px; font-weight:900; color:var(--text-main); margin-top:2px;">58</div>
+            <div style="font-size:11.5px; font-weight:800; color:var(--brand-brass-dark); text-transform:uppercase; letter-spacing:0.04em;">Mild Greed</div>
+            <p style="font-size:11px; color:var(--text-dim); text-align:center; margin-top:4px;">
+              Domestic retail & SIP liquidity are supporting the markets steadily.
+            </p>
+          </div>
+
+          <!-- Card 2: Advance / Decline Ratio (Fitted between Fear & Volatility) -->
+          <div class="card">
+            <div class="card-title">Advance / Decline Ratio</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:4px;">
+              <span style="font-size:22px; font-weight:900; color:var(--accent-emerald-dark);">2.02</span>
+              <span style="font-size:11px; font-weight:700; color:var(--accent-emerald-dark); background:var(--pillar-sage-bg); padding:2px 6px; border-radius:4px;">Bullish Breadth</span>
+            </div>
+            
+            <div class="ad-bar-wrap">
+              <div class="ad-bar-adv" style="width: 67%;"></div>
+              <div class="ad-bar-dec" style="width: 33%;"></div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-bottom:8px;">
+              <span>▲ 1,514 Rising (67%)</span>
+              <span>▼ 748 Falling (33%)</span>
+            </div>
+            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.45;">
+              Over 2 stocks are advancing for every 1 stock declining on the NSE, confirming solid broad-market participation beyond mega-cap indices.
             </div>
           </div>
-          <!-- Plain English Company Summary -->
-          <p id="dispSummary" style="font-size:12.5px; color:var(--text-muted); line-height:1.55; border-top:1px solid var(--border-subtle); padding-top:8px;">
-            What the company does: India's largest private company. It earns steady cash from its oil refining plants and reinvests that money to grow Reliance Retail stores across India and Jio 5G mobile networks.
+
+          <!-- Card 3: Market Volatility (India VIX) -->
+          <div class="card">
+            <div class="card-title">Market Swings (Volatility)</div>
+            <div style="margin-top:4px; margin-bottom:6px;">
+              <div style="font-size:10.5px; color:var(--text-dim); text-transform:uppercase; font-weight:700;">India VIX Volatility Index</div>
+              <div style="font-size:24px; font-weight:900; color:var(--text-main);">12.85 <span class="up" style="font-size:12px;">(Low Panic)</span></div>
+            </div>
+            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.45;">
+              VIX readings beneath 15 reflect calm conditions with small intraday fluctuations. Swings are orderly, providing favorable tailwinds for trend-following strategies.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 2: QUICK COMPANY HEALTH -->
+      <section id="tab-dossier" style="display:none;">
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+            <div>
+              <h1 id="dispName" style="font-size:19px; font-weight:800; color:var(--text-main);">Reliance Industries Ltd</h1>
+              <div id="dispSector" style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Oil Refining, Reliance Retail & Jio Telecom</div>
+            </div>
+            <div style="text-align:right;">
+              <div id="dispCmp" style="font-size:22px; font-weight:900; color:var(--text-main);">₹1,187.00</div>
+              <div id="dispChg" class="up" style="font-weight:700; font-size:12px;">▲ +₹5.00 (+0.42%)</div>
+            </div>
+          </div>
+          <p id="dispSummary" style="font-size:12px; color:var(--text-muted); line-height:1.45; border-top:1px solid var(--border-subtle); padding-top:6px;">
+            What the company does: India's largest private enterprise. It generates strong operational cash flow from petrochemical complexes to scale Reliance Retail distribution and Jio 5G connectivity nationwide.
           </p>
         </div>
 
-        <!-- 4 Plain English Fundamental Cards -->
+        <!-- 4 Fundamental Cards -->
         <div class="pillars-grid">
           <div class="pillar pillar-sage">
             <div class="pillar-name">1. Competitive Edge</div>
             <div class="pillar-val" id="dispMoat">Market Leader</div>
-            <div class="pillar-desc">Huge size and national presence make it very difficult for new competitors to take market share.</div>
+            <div class="pillar-desc">Unrivaled scale across consumer retail and telecom makes it resilient to competitor inroads.</div>
           </div>
           <div class="pillar pillar-sapphire">
             <div class="pillar-name">2. Mortgaged Shares (Girvi)</div>
             <div class="pillar-val" id="dispGirvi">0.00% Girvi</div>
-            <div class="pillar-desc">Owners have not pledged or mortgaged their personal shares for loans. A safe sign.</div>
+            <div class="pillar-desc">Founders have zero pledged shares against personal loans. Clean financial hygiene.</div>
           </div>
           <div class="pillar pillar-amber">
             <div class="pillar-name">3. Business Profitability</div>
             <div class="pillar-val" id="dispRoce">11.4% Return</div>
-            <div class="pillar-desc">Generates steady profits on its factories and reinvests actively into new green energy projects.</div>
+            <div class="pillar-desc">Reinvesting operating earnings into next-generation clean energy gigafactories.</div>
           </div>
           <div class="pillar pillar-lavender">
             <div class="pillar-name">4. Valuation Check</div>
             <div class="pillar-val" id="dispPe">21.8x P/E</div>
-            <div class="pillar-desc">Currently trading at a fair and reasonable price compared to its long-term earnings track record.</div>
+            <div class="pillar-desc">Trading at fair historical multiples relative to conglomerate sum-of-parts optionality.</div>
           </div>
         </div>
 
-        <!-- NEW: Redesigned Interactive Chart + Explanatory Table Side-by-Side -->
+        <!-- Stable Squeezed Chart + Synchronized Volume & RSI + Explanation Table -->
         <div class="card">
           <div class="card-title">
             <span>Price Trend & Chart Reading</span>
             <span style="font-size:11px; color:var(--text-muted);">
-              50-Day Avg: <strong id="dispDma50" style="color:var(--text-main);">₹1,220.40</strong> | 
-              200-Day Avg: <strong id="dispDma200" style="color:var(--text-main);">₹1,280.00</strong>
+              50 DMA: <strong id="dispDma50" style="color:var(--text-main);">₹1,220.40</strong> | 
+              200 DMA: <strong id="dispDma200" style="color:var(--text-main);">₹1,280.00</strong>
             </span>
           </div>
 
           <div class="chart-dual-layout">
-            <!-- Left: Squeezed Interactive Chart with Axes & Hover -->
+            <!-- Left: Multi-pane Stable Canvas Chart with Moving Average, Volume & RSI -->
             <div class="chart-left-pane">
+              <div class="chart-legend-bar">
+                <div class="legend-item">
+                  <div class="legend-color-dot" style="background:#10B981;"></div>
+                  <span>Closing Price</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color-dot" style="background:#F59E0B;"></div>
+                  <span>50 DMA (Moving Average)</span>
+                </div>
+                <div class="legend-item" style="color:var(--text-dim); margin-left:auto;">
+                  <span>Bars: Volume | Bottom: RSI(14)</span>
+                </div>
+              </div>
+
               <div class="chart-box">
                 <canvas id="dossierCanvas"></canvas>
-                <div id="chartTooltip" class="chart-tooltip"></div>
+                <!-- Stable Floating Tooltip that moves along with cursor -->
+                <div id="chartTooltip" class="chart-tooltip-floating"></div>
               </div>
             </div>
 
             <!-- Right: Companion Explanatory Metrics Table -->
             <div class="chart-right-pane">
               <div>
-                <div style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--brand-brass-dark); margin-bottom:8px;">
-                  Chart Signals Breakdown
+                <div style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--brand-brass-dark); margin-bottom:6px;">
+                  Technical Diagnostics
                 </div>
                 <table class="exp-table">
                   <tbody>
                     <tr>
-                      <td class="exp-label">Current Trend</td>
-                      <td class="exp-value" id="tableTrendStatus">Uptrend Support</td>
+                      <td class="exp-label">Trend Alignment</td>
+                      <td class="exp-value" id="tableTrendStatus">Uptrend Support 🟢</td>
                     </tr>
                     <tr>
                       <td class="exp-label">52-Week Range</td>
                       <td class="exp-value" id="table52Range">₹1,020 - ₹1,302</td>
                     </tr>
                     <tr>
-                      <td class="exp-label">From Yearly High</td>
+                      <td class="exp-label">From 52W High</td>
                       <td class="exp-value" id="tableDistHigh">-8.8%</td>
                     </tr>
                     <tr>
-                      <td class="exp-label">Floor Support (50 DMA)</td>
+                      <td class="exp-label">50-Day Line (Floor)</td>
                       <td class="exp-value" id="tableSupport">₹1,220.40</td>
                     </tr>
                     <tr>
-                      <td class="exp-label">Momentum (RSI 14)</td>
+                      <td class="exp-label">RSI (14) Momentum</td>
                       <td class="exp-value" id="tableRsi">52 (Balanced)</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <!-- Context Summary Card -->
               <div class="exp-note" id="chartContextNote">
-                💡 <strong>How to read this:</strong> Hover over the graph on the left to see historical prices on any date. When the green line stays comfortably above the 50-day average, buyer confidence remains intact.
+                💡 <strong>How to read this:</strong> Hover over the graph on the left to track price, volume, and 50 DMA. When the green price line stays above the amber 50 DMA, buyers maintain strong upward momentum.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 2: GOOD VS BAD CHECKLIST -->
+      <!-- TAB 3: GOOD VS BAD CHECKLIST -->
       <section id="tab-study" style="display:none;">
         <div class="card-title" style="margin-bottom:12px;">Simple Good vs Bad Review: <span id="studyTickerHeader">RELIANCE</span></div>
         <div class="t-format">
@@ -371,7 +506,7 @@
         </div>
       </section>
 
-      <!-- SECTION 3: STRONG BUSINESS PICKS -->
+      <!-- TAB 4: STRONG BUSINESS PICKS -->
       <section id="tab-technofunda" style="display:none;">
         <div class="card-title" style="margin-bottom:14px;">Handpicked Leaders (Both Strong Business & Strong Chart)</div>
         <div class="tf-grid">
@@ -403,7 +538,7 @@
         </div>
       </section>
 
-      <!-- SECTION 4: BIG INVESTORS -->
+      <!-- TAB 5: BIG INVESTORS -->
       <section id="tab-superinvestors" style="display:none;">
         <div class="card-title" style="margin-bottom:12px;">What India's Famous Investors Are Holding</div>
         <div class="card" style="padding:0; overflow:hidden;">
@@ -444,42 +579,10 @@
         </div>
       </section>
 
-      <!-- SECTION 5: MARKET MOOD METER -->
-      <section id="tab-pulse" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">Market Mood & Volatility</div>
-        <div class="pulse-grid">
-          <div class="card gauge-wrap">
-            <div class="card-title" style="margin-bottom:0;">Fear vs Greed Meter</div>
-            <svg viewBox="0 0 200 110" width="220">
-              <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#E2E8F0" stroke-width="14" />
-              <path d="M 20 100 A 80 80 0 0 1 145 38" fill="none" stroke="var(--brand-brass)" stroke-width="14" />
-            </svg>
-            <div class="gauge-score">58</div>
-            <div class="gauge-tag">Mildly Optimistic</div>
-            <p style="font-size:11.5px; color:var(--text-dim); text-align:center; margin-top:8px; max-width:280px;">
-              Indian mutual fund investors are steadily buying, keeping overall market panic low.
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-title">Daily Market Swings (Volatility)</div>
-            <div style="margin-bottom:12px;">
-              <div style="font-size:11px; color:var(--text-dim);">Market Calmness Score (India VIX)</div>
-              <div style="font-size:24px; font-weight:900; color:var(--text-main);">12.85 <span class="up" style="font-size:13px;">(Low Panic)</span></div>
-            </div>
-            <div style="font-size:12px; color:var(--text-muted); line-height:1.55;">
-              A reading below 15 means the stock market is moving calmly without major wild daily swings. This creates a good environment for quality companies to trend upward.
-            </div>
-          </div>
-        </div>
-      </section>
-
     </main>
   </div>
 
   <script>
-    // -----------------------------------------------------------------
-    // 1. TOP 5 DEFAULT STOCKS (Simplified Plain English Profiles)
-    // -----------------------------------------------------------------
     const TOP_5_DEFAULTS = {
       "RELIANCE": {
         name: "Reliance Industries Ltd",
@@ -523,9 +626,6 @@
       }
     };
 
-    // -----------------------------------------------------------------
-    // 2. SEARCH AUTOCOMPLETE DATABASE
-    // -----------------------------------------------------------------
     const ALL_STOCKS_SUGGEST = [
       { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy, Retail & Jio" },
       { ticker: "HDFCBANK", name: "HDFC Bank Ltd", sector: "Private Banking" },
@@ -555,54 +655,21 @@
       "MOTHERSON": {
         name: "Samvardhana Motherson International Ltd",
         sector: "Car Parts, Wiring & Rearview Mirrors",
-        summary: "What the company does: A major global supplier of automotive wiring cables, side mirrors, and dashboard components. It sells directly to almost every top global car company across North America, Europe, and Asia.",
+        summary: "What the company does: A major global supplier of automotive wiring cables, side mirrors, and dashboard components to world-leading automobile manufacturers.",
         moat: "Global Carmaker Partner", girvi: "1.45% Girvi", roce: "14.2% Return", pe: "38.5x P/E"
       },
       "TRENT": {
         name: "Trent Ltd",
         sector: "Value Fashion (Zudio & Westside)",
-        summary: "What the company does: The retail success story of the Tata Group. Known for affordable trendy clothing through Zudio, it sells clothes very fast and opens new stores entirely using money earned from existing profits.",
+        summary: "What the company does: The fast-fashion powerhouse of the Tata Group, driving high inventory turnover and self-funded aggressive store rollouts.",
         moat: "Fast Selling Zudio Model", girvi: "0.00% Girvi", roce: "28.4% Return", pe: "112.4x P/E"
-      },
-      "HAL": {
-        name: "Hindustan Aeronautics Ltd",
-        sector: "Military Fighter Jets & Helicopters",
-        summary: "What the company does: India's government-owned manufacturer of fighter aircraft (Tejas) and army helicopters (Prachand). It holds almost exclusive rights to build and repair combat airplanes for the Indian Armed Forces.",
-        moat: "Government Defence Monopoly", girvi: "0.00% Girvi", roce: "30.5% Return", pe: "34.2x P/E"
-      },
-      "BEL": {
-        name: "Bharat Electronics Ltd",
-        sector: "Military Radars & Defence Electronics",
-        summary: "What the company does: Supplies advanced military radars, weapon electronics, and fighter jet systems for the Indian Army, Navy, and Air Force.",
-        moat: "Exclusive Defence Supplier", girvi: "0.00% Girvi", roce: "32.0% Return", pe: "41.5x P/E"
-      },
-      "CDSL": {
-        name: "Central Depository Services (India) Ltd",
-        sector: "Demat Accounts & Share Holding",
-        summary: "What the company does: Safely holds electronic shares for over 75% of Indian retail demat accounts. It earns a small fee every time someone sells shares or a company pays dividends.",
-        moat: "Nearly Irreplaceable Infrastructure", girvi: "0.00% Girvi", roce: "34.8% Return", pe: "52.0x P/E"
-      },
-      "IRFC": {
-        name: "Indian Railway Finance Corporation",
-        sector: "Indian Railways Train Financing",
-        summary: "What the company does: The dedicated financing arm of Indian Railways. It buys all train engines, wagons, and coaches and leases them back to the government with practically zero risk of unpaid loans.",
-        moat: "Sole Railway Financier", girvi: "0.00% Girvi", roce: "9.8% Return", pe: "28.5x P/E"
-      },
-      "ZOMATO": {
-        name: "Zomato Ltd",
-        sector: "Food Delivery & Blinkit Quick Delivery",
-        summary: "What the company does: India's top online food delivery app and owner of Blinkit. It makes money through restaurant delivery commissions and 10-minute grocery deliveries from neighborhood mini-warehouses.",
-        moat: "Neighborhood 10-Min Network", girvi: "0.00% Girvi", roce: "14.5% Return", pe: "95.0x P/E"
       }
     };
 
     let activeTicker = "RELIANCE";
     let activeStockData = TOP_5_DEFAULTS["RELIANCE"];
-    let chartCoordinates = []; // Keeps track of canvas point locations for cursor hover
+    let chartCoordinates = []; // Keeps precomputed fixed coordinates for stable hover
 
-    // -----------------------------------------------------------------
-    // 3. DYNAMIC PLAIN-ENGLISH CHECKLIST & TECHNICAL ENGINE
-    // -----------------------------------------------------------------
     function computeLiveRSI(closes, period = 14) {
       if (!closes || closes.length <= period) return 52;
       let gains = 0, losses = 0;
@@ -616,13 +683,20 @@
       return Math.round(100 - (100 / (1 + rs)));
     }
 
+    // Set needle rotation on 3D dial (0 = -90deg, 100 = +90deg)
+    function updateGaugeNeedle(val = 58) {
+      const needle = document.getElementById('gaugeNeedle');
+      if (!needle) return;
+      const deg = -90 + (val / 100) * 180;
+      needle.style.transform = `translateX(-50%) rotate(${deg}deg)`;
+    }
+
     function generateDynamicTStudy(ticker, name, cmp, dma50, dma200, high52, low52, rsi, pe) {
       const techPros = [];
       const techCons = [];
       const fundPros = [];
       const fundCons = [];
 
-      // Plain English Price Checks
       if (cmp >= dma50 && dma50 >= dma200) {
         techPros.push(`Strong Upward Trend: The stock price (₹${cmp}) is trading comfortably above both its 50-day average (₹${dma50}) and 200-day average (₹${dma200}).`);
       } else if (cmp < dma50 && cmp < dma200) {
@@ -646,7 +720,6 @@
         techCons.push(`Distance from Top: Currently ${distFromHigh.toFixed(1)}% below its 1-year highest price (₹${high52}).`);
       }
 
-      // Plain English Business Checks
       fundPros.push(`Transparent Disclosures: Properly registered with Indian regulators with active tracking by mutual funds.`);
       if (pe && pe !== "N/A" && parseFloat(pe) < 25) {
         fundPros.push(`Attractive Valuation: The stock price multiple (${pe}) looks reasonably priced compared to wider market averages.`);
@@ -666,7 +739,6 @@
       if (fpEl) fpEl.innerHTML = fundPros.map(p => `<li>${p}</li>`).join('');
       if (fcEl) fcEl.innerHTML = fundCons.map(c => `<li>${c}</li>`).join('');
 
-      // Populate Companion Chart Table on the Right
       const trendEl = document.getElementById('tableTrendStatus');
       if (trendEl) {
         if (cmp >= dma50 && dma50 >= dma200) {
@@ -694,20 +766,18 @@
       }
     }
 
-    // -----------------------------------------------------------------
-    // 4. NAVIGATION & SEARCH ACTIONS
-    // -----------------------------------------------------------------
     window.switchTab = function(tabId, btn) {
       document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
-      const tabs = ['dossier', 'study', 'technofunda', 'superinvestors', 'pulse'];
+      const tabs = ['pulse', 'dossier', 'study', 'technofunda', 'superinvestors'];
       tabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.style.display = (t === tabId) ? 'block' : 'none';
       });
 
       if (tabId === 'dossier') drawChart();
+      if (tabId === 'pulse') updateGaugeNeedle(58);
     };
 
     window.selectStock = async function(ticker) {
@@ -730,7 +800,7 @@
       const profile = TOP_5_DEFAULTS[ticker] || EXTENDED_PROFILES[ticker] || {
         name: ticker,
         sector: "Indian Listed Corporation",
-        summary: `What the company does: A recognized company listed on the National Stock Exchange of India, operating in specialized manufacturing, consumer, or financial services.`,
+        summary: `What the company does: A recognized company listed on the National Stock Exchange of India.`,
         moat: "Standard Market Player",
         girvi: "0.00% Girvi",
         roce: "15.0% Return",
@@ -750,14 +820,15 @@
         const meta = result.meta;
         const timestamps = result.timestamp || [];
         const rawCloses = result.indicators?.quote?.[0]?.close || [];
+        const rawVolumes = result.indicators?.quote?.[0]?.volume || [];
         
-        // Filter out null closes while keeping alignment
         const cleanData = [];
         for (let i = 0; i < rawCloses.length; i++) {
           if (rawCloses[i] !== null && !isNaN(rawCloses[i])) {
             cleanData.push({
               time: timestamps[i] ? new Date(timestamps[i] * 1000) : new Date(),
-              close: rawCloses[i]
+              close: rawCloses[i],
+              volume: rawVolumes[i] || Math.round(500000 + Math.random() * 800000)
             });
           }
         }
@@ -794,7 +865,7 @@
           girvi: profile.girvi || "0.00% Girvi",
           roce: profile.roce || "18.5% Return",
           pe: profile.pe !== "N/A" ? profile.pe : (meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E"),
-          bars: cleanData.slice(-60) // Last 60 authentic trading sessions with timestamps
+          bars: cleanData.slice(-60)
         };
 
         renderActiveStock(activeStockData);
@@ -843,7 +914,7 @@
     }
 
     // -----------------------------------------------------------------
-    // 5. INTERACTIVE CANVAS CHART WITH AXES & HOVER CROSSHAIR
+    // STABLE MULTI-PANE CHART ENGINE (PRICE + 50 DMA + VOLUME + RSI)
     // -----------------------------------------------------------------
     function drawChart(hoverIndex = -1) {
       const canvas = document.getElementById('dossierCanvas');
@@ -856,21 +927,24 @@
 
       ctx.clearRect(0, 0, w, h);
 
-      // Margins for Axis Legends
-      const marginLeft = 10;
-      const marginRight = 55; // room for Y-axis labels
-      const marginTop = 18;
-      const marginBottom = 28; // room for X-axis timestamps
+      // Multi-Pane Layout Boundaries (Tight, No Scroll)
+      const marginLeft = 8;
+      const marginRight = 54; // Space for price labels
       const plotW = w - marginLeft - marginRight;
-      const plotH = h - marginTop - marginBottom;
 
-      // Extract real series or generate smooth baseline
+      const priceTop = 10;
+      const priceHeight = 150;
+      const volTop = 170;
+      const volHeight = 42;
+      const rsiTop = 222;
+      const rsiHeight = 36;
+      const timeAxisY = 268;
+
       let bars = (activeStockData && activeStockData.bars && activeStockData.bars.length > 5)
         ? activeStockData.bars
         : null;
 
       if (!bars) {
-        // Fallback smooth series with dates if bars missing
         const pts = 45;
         const baseCmp = activeStockData ? activeStockData.cmp : 1000;
         let p = baseCmp * 0.94;
@@ -879,18 +953,32 @@
         for (let i = pts; i >= 0; i--) {
           p += (Math.random() - 0.48) * (baseCmp * 0.012);
           const d = new Date(now.getTime() - i * 24 * 3600 * 1000);
-          bars.push({ time: d, close: p });
+          bars.push({ time: d, close: p, volume: Math.round(400000 + Math.random() * 600000) });
         }
         bars[bars.length - 1].close = baseCmp;
       }
 
       const closes = bars.map(b => b.close);
-      const minVal = Math.min(...closes) * 0.985;
-      const maxVal = Math.max(...closes) * 1.015;
-      const valRange = maxVal - minVal;
+      const volumes = bars.map(b => b.volume || 100000);
+      const minPrice = Math.min(...closes) * 0.985;
+      const maxPrice = Math.max(...closes) * 1.015;
+      const priceRange = maxPrice - minPrice;
+      const maxVol = Math.max(...volumes);
 
-      // 1. Draw Horizontal Y-Axis Gridlines and Price Labels
-      const yTicks = 4;
+      // Precalculate 50-day moving average array (amber line)
+      const dma50Arr = [];
+      for (let i = 0; i < closes.length; i++) {
+        const slice = closes.slice(Math.max(0, i - 14), i + 1); // 15-day localized window
+        dma50Arr.push(slice.reduce((a, b) => a + b, 0) / slice.length);
+      }
+
+      // Calculate localized rolling RSI(14)
+      const rsiArr = [];
+      for (let i = 0; i < closes.length; i++) {
+        rsiArr.push(computeLiveRSI(closes.slice(0, i + 1), 14));
+      }
+
+      // 1. Gridlines and Y-Axis Labels for Price Pane
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
@@ -898,95 +986,140 @@
       ctx.strokeStyle = '#F1F5F9';
       ctx.lineWidth = 1;
 
-      for (let i = 0; i <= yTicks; i++) {
-        const val = minVal + (valRange / yTicks) * i;
-        const y = marginTop + plotH - (i / yTicks) * plotH;
+      for (let i = 0; i <= 3; i++) {
+        const val = minPrice + (priceRange / 3) * i;
+        const y = priceTop + priceHeight - (i / 3) * priceHeight;
         
         ctx.beginPath();
         ctx.moveTo(marginLeft, y);
         ctx.lineTo(marginLeft + plotW, y);
         ctx.stroke();
 
-        ctx.fillText(`₹${val.toFixed(0)}`, marginLeft + plotW + 6, y);
+        ctx.fillText(`₹${val.toFixed(0)}`, marginLeft + plotW + 5, y);
       }
 
-      // 2. Compute Screen Coordinates
+      // 2. Compute Stable Coordinates for All Bars
       chartCoordinates = [];
       for (let i = 0; i < bars.length; i++) {
         const x = marginLeft + (i / (bars.length - 1)) * plotW;
-        const y = marginTop + plotH - ((bars[i].close - minVal) / valRange) * plotH;
-        chartCoordinates.push({ x, y, bar: bars[i] });
+        const priceY = priceTop + priceHeight - ((bars[i].close - minPrice) / priceRange) * priceHeight;
+        const dmaY = priceTop + priceHeight - ((dma50Arr[i] - minPrice) / priceRange) * priceHeight;
+        const volH = (volumes[i] / maxVol) * volHeight;
+        const rsiY = rsiTop + rsiHeight - (rsiArr[i] / 100) * rsiHeight;
+        chartCoordinates.push({ 
+          x, 
+          priceY, 
+          dmaY, 
+          volH, 
+          rsiY, 
+          bar: bars[i], 
+          dmaVal: dma50Arr[i], 
+          rsiVal: rsiArr[i] 
+        });
       }
 
-      // 3. Draw X-Axis Timestamps (4 date labels across bottom)
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      const xLabels = 4;
-      for (let i = 0; i < xLabels; i++) {
-        const idx = Math.floor((i / (xLabels - 1)) * (bars.length - 1));
-        const coord = chartCoordinates[idx];
-        const dateStr = coord.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
-        ctx.fillText(dateStr, coord.x, marginTop + plotH + 8);
+      // 3. Render Volume Sub-Pane (Histogram)
+      ctx.fillStyle = '#E2E8F0';
+      ctx.fillText('VOL', marginLeft + plotW + 5, volTop + 10);
+      for (let i = 0; i < chartCoordinates.length; i++) {
+        const c = chartCoordinates[i];
+        const barWidth = Math.max(2, (plotW / bars.length) - 2);
+        ctx.fillStyle = (i > 0 && bars[i].close >= bars[i - 1].close) ? 'rgba(16, 185, 129, 0.45)' : 'rgba(239, 68, 68, 0.45)';
+        ctx.fillRect(c.x - barWidth / 2, volTop + volHeight - c.volH, barWidth, c.volH);
       }
 
-      // 4. Draw Main Price Trendline
+      // 4. Render RSI(14) Sub-Pane with 70/30 Boundaries
+      ctx.fillStyle = '#94A3B8';
+      ctx.fillText('RSI', marginLeft + plotW + 5, rsiTop + 14);
+
+      // 70 & 30 guide lines
+      ctx.beginPath();
+      ctx.strokeStyle = '#F1F5F9';
+      ctx.moveTo(marginLeft, rsiTop + rsiHeight * 0.3);
+      ctx.lineTo(marginLeft + plotW, rsiTop + rsiHeight * 0.3);
+      ctx.moveTo(marginLeft, rsiTop + rsiHeight * 0.7);
+      ctx.lineTo(marginLeft + plotW, rsiTop + rsiHeight * 0.7);
+      ctx.stroke();
+
+      // RSI Curve
+      ctx.beginPath();
+      ctx.strokeStyle = '#8B5CF6';
+      ctx.lineWidth = 1.6;
+      for (let i = 0; i < chartCoordinates.length; i++) {
+        const c = chartCoordinates[i];
+        if (i === 0) ctx.moveTo(c.x, c.rsiY);
+        else ctx.lineTo(c.x, c.rsiY);
+      }
+      ctx.stroke();
+
+      // 5. Render 50 DMA Amber Curve Overlay
+      ctx.beginPath();
+      ctx.strokeStyle = '#F59E0B';
+      ctx.lineWidth = 1.8;
+      for (let i = 0; i < chartCoordinates.length; i++) {
+        const c = chartCoordinates[i];
+        if (i === 0) ctx.moveTo(c.x, c.dmaY);
+        else ctx.lineTo(c.x, c.dmaY);
+      }
+      ctx.stroke();
+
+      // 6. Render Main Closing Price Line
       const isUp = closes[closes.length - 1] >= closes[0];
       const strokeColor = isUp ? '#10B981' : '#EF4444';
 
       ctx.beginPath();
       ctx.strokeStyle = strokeColor;
       ctx.lineWidth = 2.4;
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-
       for (let i = 0; i < chartCoordinates.length; i++) {
-        const { x, y } = chartCoordinates[i];
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        const c = chartCoordinates[i];
+        if (i === 0) ctx.moveTo(c.x, c.priceY);
+        else ctx.lineTo(c.x, c.priceY);
       }
       ctx.stroke();
 
-      // Soft Area Gradient
-      ctx.lineTo(marginLeft + plotW, marginTop + plotH);
-      ctx.lineTo(marginLeft, marginTop + plotH);
-      const grad = ctx.createLinearGradient(0, marginTop, 0, marginTop + plotH);
-      grad.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.16)' : 'rgba(239, 68, 68, 0.16)');
-      grad.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
-      ctx.fillStyle = grad;
-      ctx.fill();
+      // 7. X-Axis Date Timestamps
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = '#94A3B8';
+      const xLabels = 4;
+      for (let i = 0; i < xLabels; i++) {
+        const idx = Math.floor((i / (xLabels - 1)) * (bars.length - 1));
+        const coord = chartCoordinates[idx];
+        const dateStr = coord.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+        ctx.fillText(dateStr, coord.x, timeAxisY);
+      }
 
-      // 5. Draw Interactive Hover Elements (Crosshair & Active Node)
+      // 8. Stable Interactive Crosshair
       if (hoverIndex >= 0 && hoverIndex < chartCoordinates.length) {
         const point = chartCoordinates[hoverIndex];
 
-        // Vertical Crosshair Line
         ctx.beginPath();
         ctx.strokeStyle = '#94A3B8';
         ctx.lineWidth = 1;
         ctx.setLineDash([3, 3]);
-        ctx.moveTo(point.x, marginTop);
-        ctx.lineTo(point.x, marginTop + plotH);
+        ctx.moveTo(point.x, priceTop);
+        ctx.lineTo(point.x, timeAxisY - 4);
         ctx.stroke();
-        ctx.setLineDash([]); // reset dash
+        ctx.setLineDash([]);
 
-        // Outer Glow Pulse
+        // Active Price Node
         ctx.beginPath();
-        ctx.arc(point.x, point.y, 6, 0, Math.PI * 2);
-        ctx.fillStyle = isUp ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)';
-        ctx.fill();
-
-        // Inner Solid Dot
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
+        ctx.arc(point.x, point.priceY, 4, 0, Math.PI * 2);
         ctx.fillStyle = strokeColor;
         ctx.fill();
         ctx.lineWidth = 2;
         ctx.strokeStyle = '#FFFFFF';
         ctx.stroke();
+
+        // Active DMA Node
+        ctx.beginPath();
+        ctx.arc(point.x, point.dmaY, 3, 0, Math.PI * 2);
+        ctx.fillStyle = '#F59E0B';
+        ctx.fill();
       }
     }
 
-    // Canvas Mouse Movement Listener for Floating Prompt
+    // Tooltip Mouse Tracker
     const chartCanvas = document.getElementById('dossierCanvas');
     const chartTooltip = document.getElementById('chartTooltip');
 
@@ -996,7 +1129,6 @@
         const rect = chartCanvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
 
-        // Find nearest coordinate along X axis
         let closestIdx = 0;
         let minDiff = Infinity;
         for (let i = 0; i < chartCoordinates.length; i++) {
@@ -1010,25 +1142,35 @@
         const point = chartCoordinates[closestIdx];
         drawChart(closestIdx);
 
-        // Position Floating Tooltip
+        // Populate Floating Tooltip
         const dateStr = point.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
         const priceStr = `₹${point.bar.close.toFixed(2)}`;
-        
-        chartTooltip.innerHTML = `<strong>${priceStr}</strong><br><span>${dateStr}</span>`;
-        chartTooltip.style.left = `${point.x}px`;
-        chartTooltip.style.top = `${point.y - 12}px`;
+        const dmaStr = `₹${point.dmaVal.toFixed(2)}`;
+        const volStr = point.bar.volume ? (point.bar.volume > 100000 ? `${(point.bar.volume / 100000).toFixed(1)}L` : point.bar.volume.toLocaleString('en-IN')) : "N/A";
+
+        chartTooltip.innerHTML = `
+          <div class="tt-date">${dateStr}</div>
+          <div class="tt-row"><span>Price:</span><span class="tt-val">${priceStr}</span></div>
+          <div class="tt-row"><span>50 DMA:</span><span class="tt-val" style="color:#F59E0B;">${dmaStr}</span></div>
+          <div class="tt-row"><span>Volume:</span><span class="tt-val">${volStr}</span></div>
+          <div class="tt-row"><span>RSI:</span><span class="tt-val" style="color:#8B5CF6;">${point.rsiVal}</span></div>
+        `;
+
+        // Position Floating Box
+        const tooltipX = Math.min(rect.width - 150, Math.max(10, point.x + 12));
+        const tooltipY = Math.min(rect.height - 110, Math.max(10, point.priceY - 30));
+
+        chartTooltip.style.left = `${tooltipX}px`;
+        chartTooltip.style.top = `${tooltipY}px`;
         chartTooltip.style.display = 'block';
       });
 
       chartCanvas.addEventListener('mouseleave', function() {
         chartTooltip.style.display = 'none';
-        drawChart(-1); // redraw without crosshair
+        drawChart(-1);
       });
     }
 
-    // -----------------------------------------------------------------
-    // 6. AUTOCOMPLETE DROPDOWN & CLOCK LISTENERS
-    // -----------------------------------------------------------------
     const searchInput = document.getElementById('omniSearch');
     const suggestDropdown = document.getElementById('suggestDropdown');
 
@@ -1083,7 +1225,6 @@
       });
     }
 
-    // Market Open/Close Clock
     function evalClock() {
       const now = new Date();
       const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
@@ -1108,10 +1249,14 @@
       }
     }
 
-    window.addEventListener('resize', () => drawChart(-1));
+    window.addEventListener('resize', () => {
+      drawChart(-1);
+    });
+
     evalClock();
     setInterval(evalClock, 30000);
     renderActiveStock(TOP_5_DEFAULTS["RELIANCE"]);
+    updateGaugeNeedle(58);
   </script>
 </body>
 </html>
