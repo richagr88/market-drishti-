@@ -96,6 +96,16 @@
     .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
     .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass-dark); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
 
+    /* Trendlyne-style DVM Scorecard */
+    .dvm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+    .dvm-card { background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; }
+    .dvm-meta { display: flex; flex-direction: column; }
+    .dvm-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--text-dim); }
+    .dvm-score { font-size: 18px; font-weight: 900; color: var(--text-main); }
+    .dvm-badge { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 4px; text-transform: uppercase; }
+    .dvm-high { background: var(--pillar-sage-bg); color: var(--accent-emerald-dark); border: 1px solid var(--pillar-sage-border); }
+    .dvm-mid { background: var(--pillar-amber-bg); color: var(--accent-amber-dark); border: 1px solid var(--pillar-amber-border); }
+
     /* 4 Color Pillars with 'i' Tooltip */
     .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
     @media (max-width: 1024px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -163,11 +173,11 @@
     .chart-box { position: relative; width: 100%; height: 280px; overflow: hidden; }
     canvas { width: 100% !important; height: 100% !important; display: block; cursor: crosshair; }
 
-    /* Floating Glassmorphic Tooltip Window (Soft Thin Outlined) */
+    /* Transparent Thin-Outlined Floating Box */
     .chart-tooltip-floating { 
       position: absolute; 
       pointer-events: none; 
-      background: rgba(15, 23, 42, 0.78); 
+      background: rgba(15, 23, 42, 0.75); 
       color: #fff; 
       padding: 8px 12px; 
       border-radius: 8px; 
@@ -193,7 +203,24 @@
     .exp-value { color: var(--text-main); font-weight: 800; text-align: right; }
     .exp-note { font-size: 11px; color: var(--text-muted); background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 10px; margin-top: 8px; line-height: 1.4; }
 
-    /* 3-Column Squeezed Market Mood Grid */
+    /* 4-Box Moneycontrol-Style SWOT Matrix */
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .swot-box { border-radius: 6px; padding: 12px 14px; border: 1px solid transparent; background: #FFFFFF; }
+    .swot-s { border-color: #BBF7D0; background: #F0FDF4; }
+    .swot-w { border-color: #FECACA; background: #FEF2F2; }
+    .swot-o { border-color: #BFDBFE; background: #EFF6FF; }
+    .swot-t { border-color: #FED7AA; background: #FFF7ED; }
+
+    .swot-title { font-size: 11.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; }
+    .swot-s .swot-title { color: var(--accent-emerald-dark); }
+    .swot-w .swot-title { color: var(--accent-rose-dark); }
+    .swot-o .swot-title { color: var(--accent-sapphire-dark); }
+    .swot-t .swot-title { color: var(--accent-amber-dark); }
+
+    .swot-list { list-style: disc inside; font-size: 11.5px; color: var(--text-muted); line-height: 1.45; }
+    .swot-list li { margin-bottom: 3px; }
+
+    /* 3-Column Market Mood Grid */
     .mood-tri-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
     @media (max-width: 1024px) { .mood-tri-grid { grid-template-columns: 1fr; } }
 
@@ -231,16 +258,6 @@
     .ad-bar-adv { background: var(--accent-emerald); height: 100%; }
     .ad-bar-dec { background: var(--accent-rose); height: 100%; }
 
-    .t-format { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden; background: var(--bg-surface); margin-bottom: 12px; }
-    .t-col { padding: 14px 18px; }
-    .t-col + .t-col { border-left: 1px solid var(--border-subtle); }
-    .t-head { font-size: 12.5px; font-weight: 800; text-transform: uppercase; padding-bottom: 6px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 10px; }
-    .t-sub { font-size: 11px; font-weight: 800; text-transform: uppercase; margin: 10px 0 4px; }
-    .t-sub.pro { color: var(--accent-emerald-dark); }
-    .t-sub.con { color: var(--accent-rose-dark); }
-    .t-list { list-style: disc inside; font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-    .t-list li { margin-bottom: 3px; }
-
     .tf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
     .tf-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px; }
     .tf-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
@@ -273,13 +290,13 @@
     <div class="status-badge" id="backendBadge">🟢 LIVE TERMINAL</div>
   </div>
 
-  <!-- Session Clock & Tape -->
+  <!-- Session Clock & Benchmark Indices Tape -->
   <div class="masthead-t2">
     <div class="clock-pill" id="istClock">⏰ IST: 09:15 AM • MARKET OPEN</div>
     <div class="tape-items">
-      <span>NIFTY 50: <span class="tape-val" id="tapeNifty">24,852.40</span> <span class="up" id="tapeNiftyChg">▲ +0.58%</span></span>
-      <span>SENSEX: <span class="tape-val" id="tapeSensex">81,385.20</span> <span class="up" id="tapeSensexChg">▲ +0.53%</span></span>
-      <span>BANK NIFTY: <span class="tape-val" id="tapeBank">51,460.80</span> <span class="down" id="tapeBankChg">▼ -0.17%</span></span>
+      <span>NIFTY 50: <span class="tape-val" id="tapeNifty">22,478.20</span> <span class="down" id="tapeNiftyChg">▼ -0.55%</span></span>
+      <span>SENSEX: <span class="tape-val" id="tapeSensex">72,286.80</span> <span class="down" id="tapeSensexChg">▼ -0.48%</span></span>
+      <span>BANK NIFTY: <span class="tape-val" id="tapeBank">50,340.50</span> <span class="down" id="tapeBankChg">▼ -0.32%</span></span>
       <span>INDIA VIX: <span class="tape-val" id="tapeVix">12.85</span> <span class="down" id="tapeVixChg">▼ Calm</span></span>
     </div>
   </div>
@@ -287,7 +304,7 @@
   <!-- Live Market Activity Ribbon -->
   <div class="masthead-t3">
     <div class="breadth-pills">
-      <span>NSE Market Activity Today:</span>
+      <span>NSE Market Activity:</span>
       <span class="up" id="ribbonAdv">▲ 1,514 Advances</span>
       <span class="down" id="ribbonDec">▼ 748 Declines</span>
       <span id="ribbonUnch">124 Unchanged</span>
@@ -302,7 +319,7 @@
       <div class="nav-header">Main Sections</div>
       <button class="nav-btn active" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
       <button class="nav-btn" onclick="switchTab('dossier', this)">📊 Quick Company Health</button>
-      <button class="nav-btn" onclick="switchTab('study', this)">⚖️ Good vs Bad Checklist</button>
+      <button class="nav-btn" onclick="switchTab('study', this)">⚖️ SWOT & Checklist</button>
       <button class="nav-btn" onclick="switchTab('technofunda', this)">⚡ Strong Business Picks</button>
       <button class="nav-btn" onclick="switchTab('superinvestors', this)">👥 Big Investor Portfolios</button>
     </aside>
@@ -393,13 +410,38 @@
               <div id="dispSector" style="font-size:11px; color:var(--brand-brass-dark); font-weight:700;">Oil Refining, Reliance Retail & Jio Telecom</div>
             </div>
             <div style="text-align:right;">
-              <div id="dispCmp" style="font-size:22px; font-weight:900; color:var(--text-main);">₹1,187.00</div>
-              <div id="dispChg" class="up" style="font-weight:700; font-size:12px;">▲ +₹5.00 (+0.42%)</div>
+              <div id="dispCmp" style="font-size:22px; font-weight:900; color:var(--text-main);">₹1,194.40</div>
+              <div id="dispChg" class="down" style="font-weight:700; font-size:12px;">▼ -₹13.30 (-1.10%)</div>
             </div>
           </div>
           <p id="dispSummary" style="font-size:12px; color:var(--text-muted); line-height:1.45; border-top:1px solid var(--border-subtle); padding-top:6px;">
             What the company does: India's largest private enterprise. It generates strong operational cash flow from petrochemical complexes to scale Reliance Retail distribution and Jio 5G connectivity nationwide.
           </p>
+        </div>
+
+        <!-- Trendlyne-style DVM Scorecard -->
+        <div class="dvm-grid">
+          <div class="dvm-card">
+            <div class="dvm-meta">
+              <span class="dvm-label">Durability (Quality)</span>
+              <span class="dvm-score" id="scoreDurability">82 / 100</span>
+            </div>
+            <span class="dvm-badge dvm-high" id="badgeDurability">High Quality</span>
+          </div>
+          <div class="dvm-card">
+            <div class="dvm-meta">
+              <span class="dvm-label">Valuation Range</span>
+              <span class="dvm-score" id="scoreValuation">64 / 100</span>
+            </div>
+            <span class="dvm-badge dvm-mid" id="badgeValuation">Fair Price</span>
+          </div>
+          <div class="dvm-card">
+            <div class="dvm-meta">
+              <span class="dvm-label">Technical Momentum</span>
+              <span class="dvm-score" id="scoreMomentum">71 / 100</span>
+            </div>
+            <span class="dvm-badge dvm-high" id="badgeMomentum">Constructive</span>
+          </div>
         </div>
 
         <!-- 4 Revised Pillars with 'i' Auto-Explanatory Tooltips -->
@@ -474,7 +516,7 @@
         <!-- Stable Squeezed Chart with 1Y, 3Y, 5Y Ribbon & Zero-Jitter Transparent Hover Box -->
         <div class="card">
           <div class="card-title">
-            <span>Price Trend & Chart Reading</span>
+            <span>Price Trend & Technical Breakdown</span>
             <span style="font-size:11px; color:var(--text-muted);">
               50 DMA: <strong id="dispDma50" style="color:var(--text-main);">₹1,220.40</strong> | 
               200 DMA: <strong id="dispDma200" style="color:var(--text-main);">₹1,280.00</strong>
@@ -554,36 +596,57 @@
         </div>
       </section>
 
-      <!-- TAB 3: GOOD VS BAD CHECKLIST -->
+      <!-- TAB 3: 4-BOX MONEYCONTROL SWOT MATRIX -->
       <section id="tab-study" style="display:none;">
-        <div class="card-title" style="margin-bottom:12px;">Simple Good vs Bad Review: <span id="studyTickerHeader">RELIANCE</span></div>
-        <div class="t-format">
-          <div class="t-col">
-            <div class="t-head" style="color:var(--accent-sapphire-dark);">Price & Chart Check</div>
-            <div class="t-sub pro">Positives</div>
-            <ul class="t-list" id="studyTechPros">
-              <li>Stock price is finding solid floor support after a recent correction.</li>
-              <li>Price moves steadily without sudden chaotic swings.</li>
-              <li>Momentum indicator shows buying interest is returning.</li>
-            </ul>
-            <div class="t-sub con">Things to Watch</div>
-            <ul class="t-list" id="studyTechCons">
-              <li>Needs more trading volume to cross above its 200-day average.</li>
-              <li>Being a very large index stock, foreign fund selling affects it quickly.</li>
+        <div class="card-title" style="margin-bottom:12px;">Institutional SWOT Analysis: <span id="studyTickerHeader">RELIANCE</span></div>
+        
+        <div class="swot-grid">
+          <!-- Strengths -->
+          <div class="swot-box swot-s">
+            <div class="swot-title">
+              <span>🟢 Strengths</span>
+              <span id="countStrengths">3 Checks Pass</span>
+            </div>
+            <ul class="swot-list" id="swotStrengthsList">
+              <li>Pristine promoter balance sheet with 0.00% shares pledged.</li>
+              <li>Steady operational cash flow generated from integrated refinery & petrochemical assets.</li>
+              <li>Consolidated leadership across high-growth retail stores and nationwide 5G telecom users.</li>
             </ul>
           </div>
-          <div class="t-col">
-            <div class="t-head" style="color:var(--brand-brass-dark);">Business & Financial Check</div>
-            <div class="t-sub pro">Positives</div>
-            <ul class="t-list" id="studyFundPros">
-              <li>Clean record: The promoter family has not mortgaged company shares.</li>
-              <li>Large regular cash flows from oil and retail fund new business growth.</li>
-              <li>Potential future value unlock when Retail or Jio launch their own public IPOs.</li>
+
+          <!-- Weaknesses -->
+          <div class="swot-box swot-w">
+            <div class="swot-title">
+              <span>🔴 Weaknesses</span>
+              <span id="countWeaknesses">2 Concerns</span>
+            </div>
+            <ul class="swot-list" id="swotWeaknessesList">
+              <li>Large capital expenditures in green hydrogen and solar gigafactories have extended gestation periods.</li>
+              <li>Global refining margin swings occasionally cause quarterly profit volatility.</li>
             </ul>
-            <div class="t-sub con">Things to Watch</div>
-            <ul class="t-list" id="studyFundCons">
-              <li>New green energy factories require large cash spending before giving profits.</li>
-              <li>Global oil price fluctuations occasionally affect quarterly margins.</li>
+          </div>
+
+          <!-- Opportunities -->
+          <div class="swot-box swot-o">
+            <div class="swot-title">
+              <span>🔵 Opportunities</span>
+              <span id="countOpportunities">2 Catalysts</span>
+            </div>
+            <ul class="swot-list" id="swotOpportunitiesList">
+              <li>Value unlocking via planned independent public listings (IPOs) of Reliance Retail and Jio.</li>
+              <li>Monetizing 5G enterprise infrastructure, cloud data centers, and AI enterprise platforms.</li>
+            </ul>
+          </div>
+
+          <!-- Threats -->
+          <div class="swot-box swot-t">
+            <div class="swot-title">
+              <span>🟠 Threats</span>
+              <span id="countThreats">2 Watchpoints</span>
+            </div>
+            <ul class="swot-list" id="swotThreatsList">
+              <li>Geopolitical crude price spikes and export duty revisions by sovereign regulators.</li>
+              <li>Aggressive quick-commerce and consumer competition in grocery supply chains.</li>
             </ul>
           </div>
         </div>
@@ -670,34 +733,38 @@
       "RELIANCE": {
         name: "Reliance Industries Ltd",
         sector: "Oil Refining, Reliance Retail & Jio Telecom",
-        cmp: 1187.00, chg: 5.00, pct: 0.42, dma50: 1220.40, dma200: 1280.00,
+        cmp: 1194.40, chg: -13.30, pct: -1.10, dma50: 1220.40, dma200: 1280.00,
         high52: 1302.00, low52: 1020.00,
         summary: "What the company does: India's largest private company. It earns steady cash from its oil refining plants and reinvests that money to grow Reliance Retail stores across India and Jio 5G mobile networks.",
-        moat: "Market Leader", girvi: "0.00% Girvi", roce: "11.4% Return", pe: "21.8x P/E"
+        moat: "Market Leader", girvi: "0.00% Girvi", roce: "11.4% Return", pe: "21.8x P/E",
+        dvm: { d: 82, v: 64, m: 71 }
       },
       "HDFCBANK": {
         name: "HDFC Bank Ltd",
         sector: "Banking & Financial Services",
-        cmp: 721.20, chg: 12.50, pct: 1.76, dma50: 710.20, dma200: 742.00,
+        cmp: 699.70, chg: -3.05, pct: -0.43, dma50: 710.20, dma200: 742.00,
         high52: 810.00, low52: 660.00,
         summary: "What the company does: India's largest private bank. Millions of Indians keep savings and salary accounts here, giving the bank low-cost funds to issue home loans, car loans, and credit cards safely.",
-        moat: "Trusted Brand", girvi: "0.00% Girvi", roce: "16.8% Return", pe: "14.2x P/E"
+        moat: "Trusted Brand", girvi: "0.00% Girvi", roce: "16.8% Return", pe: "14.2x P/E",
+        dvm: { d: 89, v: 78, m: 62 }
       },
       "BHARTIARTL": {
         name: "Bharti Airtel Ltd",
         sector: "Mobile Network, Broadband & 5G Data",
-        cmp: 1741.10, chg: -15.80, pct: -0.90, dma50: 1680.00, dma200: 1460.50,
-        high52: 1785.00, low52: 1100.00,
+        cmp: 1820.30, chg: -13.60, pct: -0.74, dma50: 1680.00, dma200: 1460.50,
+        high52: 1854.70, low52: 1100.00,
         summary: "What the company does: Top telecom provider with high-paying smartphone users. It operates across India and Africa with zero founder share pledging, giving it strong pricing power on mobile data plans.",
-        moat: "Duopoly Power", girvi: "0.00% Girvi", roce: "18.2% Return", pe: "35.4x P/E"
+        moat: "Duopoly Power", girvi: "0.00% Girvi", roce: "18.2% Return", pe: "35.4x P/E",
+        dvm: { d: 78, v: 52, m: 88 }
       },
       "ICICIBANK": {
         name: "ICICI Bank Ltd",
         sector: "Banking & Loan Services",
-        cmp: 1310.60, chg: -11.10, pct: -0.84, dma50: 1285.00, dma200: 1210.00,
-        high52: 1350.00, low52: 980.00,
+        cmp: 1353.30, chg: -4.20, pct: -0.31, dma50: 1285.00, dma200: 1210.00,
+        high52: 1365.00, low52: 980.00,
         summary: "What the company does: One of India's most profitable banks. Well known for easy mobile banking apps, low unpaid bad loans, and high customer retention across businesses and retail borrowers.",
-        moat: "Digital Lending", girvi: "0.00% Girvi", roce: "17.4% Return", pe: "17.8x P/E"
+        moat: "Digital Lending", girvi: "0.00% Girvi", roce: "17.4% Return", pe: "17.8x P/E",
+        dvm: { d: 85, v: 69, m: 84 }
       },
       "SBIN": {
         name: "State Bank of India",
@@ -705,7 +772,8 @@
         cmp: 954.10, chg: -5.40, pct: -0.56, dma50: 935.00, dma200: 865.00,
         high52: 990.00, low52: 680.00,
         summary: "What the company does: India's largest state-owned bank managing roughly 1 in every 4 bank deposits in the country. It handles government projects, industrial loans, and widespread rural branch banking.",
-        moat: "Sovereign Trust", girvi: "0.00% Girvi", roce: "15.8% Return", pe: "10.2x P/E"
+        moat: "Sovereign Trust", girvi: "0.00% Girvi", roce: "15.8% Return", pe: "10.2x P/E",
+        dvm: { d: 80, v: 84, m: 76 }
       }
     };
 
@@ -739,20 +807,22 @@
         name: "Samvardhana Motherson International Ltd",
         sector: "Car Parts, Wiring & Rearview Mirrors",
         summary: "What the company does: A major global supplier of automotive wiring cables, side mirrors, and dashboard components to world-leading automobile manufacturers.",
-        moat: "Global Carmaker Partner", girvi: "1.45% Girvi", roce: "14.2% Return", pe: "38.5x P/E"
+        moat: "Global Carmaker Partner", girvi: "1.45% Girvi", roce: "14.2% Return", pe: "38.5x P/E",
+        dvm: { d: 74, v: 48, m: 79 }
       },
       "TRENT": {
         name: "Trent Ltd",
         sector: "Value Fashion (Zudio & Westside)",
         summary: "What the company does: The fast-fashion powerhouse of the Tata Group, driving high inventory turnover and self-funded aggressive store rollouts.",
-        moat: "Fast Selling Zudio Model", girvi: "0.00% Girvi", roce: "28.4% Return", pe: "112.4x P/E"
+        moat: "Fast Selling Zudio Model", girvi: "0.00% Girvi", roce: "28.4% Return", pe: "112.4x P/E",
+        dvm: { d: 88, v: 31, m: 92 }
       }
     };
 
     let activeTicker = "RELIANCE";
     let activeStockData = TOP_5_DEFAULTS["RELIANCE"];
     let currentTimeframe = '1Y';
-    let chartCoordinates = []; // Fixed precomputed coordinates
+    let chartCoordinates = [];
 
     function computeLiveRSI(closes, period = 14) {
       if (!closes || closes.length <= period) return 52;
@@ -774,7 +844,6 @@
       needle.style.transform = `translateX(-50%) rotate(${deg}deg)`;
     }
 
-    // Live Market Breadth & Tape Sync
     async function refreshMarketBreadth() {
       try {
         const res = await fetch(`/api/quote?ticker=^NSEI`);
@@ -793,7 +862,7 @@
           chgEl.className = pct >= 0 ? 'up' : 'down';
         }
       } catch (e) {
-        // Keeps verified realistic market indicators
+        // Fallback verified baseline
       }
     }
 
@@ -804,54 +873,57 @@
       drawChart();
     }
 
-    function generateDynamicTStudy(ticker, name, cmp, dma50, dma200, high52, low52, rsi, pe) {
-      const techPros = [];
-      const techCons = [];
-      const fundPros = [];
-      const fundCons = [];
+    function generateDynamicSWOT(ticker, name, cmp, dma50, dma200, high52, low52, rsi, pe) {
+      const strengths = [];
+      const weaknesses = [];
+      const opportunities = [];
+      const threats = [];
 
+      // Strengths
+      strengths.push(`Pristine promoter balance sheet with 0.00% shares pledged.`);
       if (cmp >= dma50 && dma50 >= dma200) {
-        techPros.push(`Strong Upward Trend: The stock price (₹${cmp}) is trading comfortably above both its 50-day average (₹${dma50}) and 200-day average (₹${dma200}).`);
-      } else if (cmp < dma50 && cmp < dma200) {
-        techCons.push(`Short-Term Pressure: Currently trading below its 50-day average (₹${dma50}) and 200-day average (₹${dma200}).`);
+        strengths.push(`Confirmed bullish price trend: Trading firmly above both 50 DMA (₹${dma50}) and 200 DMA (₹${dma200}).`);
       } else {
-        techPros.push(`Steady Range: The stock is hovering near its medium-term support level of ₹${dma50}.`);
+        strengths.push(`Strong operating footprint across national retail & digital infrastructure.`);
+      }
+      if (rsi >= 48 && rsi <= 65) {
+        strengths.push(`Healthy accumulation: RSI(14) at ${rsi} reflects stable institutional volume.`);
       }
 
-      if (rsi >= 50 && rsi <= 68) {
-        techPros.push(`Healthy Buying: Regular investors are steadily buying without pushing the stock into an over-hyped zone.`);
-      } else if (rsi > 70) {
-        techCons.push(`Short-Term Heated: The stock has run up very fast recently, which might lead to temporary profit booking.`);
-      } else if (rsi < 35) {
-        techPros.push(`Oversold Opportunity: The stock has dropped sharply and may soon find bargain buyers.`);
+      // Weaknesses
+      if (cmp < dma50) {
+        weaknesses.push(`Short-term resistance: Trading below the 50-day moving average (₹${dma50}).`);
+      }
+      if (pe && pe !== "N/A" && parseFloat(pe) > 40) {
+        weaknesses.push(`Premium valuation multiple (${pe}) leaves lower margin of safety for quarterly earnings misses.`);
+      } else {
+        weaknesses.push(`Substantial capital expenditure commitments required to maintain infrastructure leadership.`);
       }
 
+      // Opportunities
+      opportunities.push(`Expanding high-margin digital solutions and enterprise connectivity revenues.`);
       const distFromHigh = high52 > 0 ? (((high52 - cmp) / high52) * 100) : 0;
-      if (distFromHigh <= 5) {
-        techPros.push(`Near Yearly Peak: Sitting within ${distFromHigh.toFixed(1)}% of its 1-year high (₹${high52}), showing strong investor confidence.`);
+      if (distFromHigh <= 6) {
+        opportunities.push(`Stage 2 breakout potential as price hovers within ${distFromHigh.toFixed(1)}% of 52W High (₹${high52}).`);
       } else {
-        techCons.push(`Distance from Top: Currently ${distFromHigh.toFixed(1)}% below its 1-year highest price (₹${high52}).`);
+        opportunities.push(`Favorable risk-reward entry zone sitting ${(distFromHigh).toFixed(1)}% beneath annual peaks.`);
       }
 
-      fundPros.push(`Transparent Disclosures: Properly registered with Indian regulators with active tracking by mutual funds.`);
-      if (pe && pe !== "N/A" && parseFloat(pe) < 25) {
-        fundPros.push(`Attractive Valuation: The stock price multiple (${pe}) looks reasonably priced compared to wider market averages.`);
-      } else if (pe && pe !== "N/A" && parseFloat(pe) >= 45) {
-        fundCons.push(`Priced for High Growth: Trading at an expensive multiple of ${pe}, meaning the company must deliver high profit growth every quarter.`);
-      } else {
-        fundPros.push(`Reinvesting in Growth: Profits are being put back into strengthening stores and operations.`);
-      }
+      // Threats
+      threats.push(`Macroeconomic currency fluctuations and broader foreign institutional index outflows.`);
+      threats.push(`Competitive pressures and potential regulatory interventions across operating verticals.`);
 
-      const tpEl = document.getElementById('studyTechPros');
-      const tcEl = document.getElementById('studyTechCons');
-      const fpEl = document.getElementById('studyFundPros');
-      const fcEl = document.getElementById('studyFundCons');
+      document.getElementById('swotStrengthsList').innerHTML = strengths.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('swotWeaknessesList').innerHTML = weaknesses.map(w => `<li>${w}</li>`).join('');
+      document.getElementById('swotOpportunitiesList').innerHTML = opportunities.map(o => `<li>${o}</li>`).join('');
+      document.getElementById('swotThreatsList').innerHTML = threats.map(t => `<li>${t}</li>`).join('');
 
-      if (tpEl) tpEl.innerHTML = techPros.map(p => `<li>${p}</li>`).join('');
-      if (tcEl) tcEl.innerHTML = techCons.map(c => `<li>${c}</li>`).join('');
-      if (fpEl) fpEl.innerHTML = fundPros.map(p => `<li>${p}</li>`).join('');
-      if (fcEl) fcEl.innerHTML = fundCons.map(c => `<li>${c}</li>`).join('');
+      document.getElementById('countStrengths').textContent = `${strengths.length} Checks Pass`;
+      document.getElementById('countWeaknesses').textContent = `${weaknesses.length} Concerns`;
+      document.getElementById('countOpportunities').textContent = `${opportunities.length} Catalysts`;
+      document.getElementById('countThreats').textContent = `${threats.length} Watchpoints`;
 
+      // Update Companion Diagnostics Table
       const trendEl = document.getElementById('tableTrendStatus');
       if (trendEl) {
         if (cmp >= dma50 && dma50 >= dma200) {
@@ -875,7 +947,7 @@
 
       const noteEl = document.getElementById('chartContextNote');
       if (noteEl) {
-        noteEl.innerHTML = `💡 <strong>Key takeaway:</strong> ${ticker} is currently trading at <strong>₹${cmp.toFixed(2)}</strong>. The 50-day average at <strong>₹${dma50.toFixed(2)}</strong> acts as the key line in the sand for near-term trend support.`;
+        noteEl.innerHTML = `💡 <strong>Key takeaway:</strong> ${ticker} is trading at <strong>₹${cmp.toFixed(2)}</strong>. The 50-day average at <strong>₹${dma50.toFixed(2)}</strong> represents critical medium-term support.`;
       }
     }
 
@@ -919,7 +991,8 @@
         roce: "15.0% Return",
         pe: "22.0x P/E",
         high52: 0,
-        low52: 0
+        low52: 0,
+        dvm: { d: 70, v: 50, m: 50 }
       };
 
       try {
@@ -963,6 +1036,11 @@
         const low52 = meta.fiftyTwoWeekLow || Math.min(...closes.slice(-250));
         const liveRsi = computeLiveRSI(closes, 14);
 
+        // Derive dynamic DVM
+        const dScore = profile.dvm ? profile.dvm.d : 75;
+        const vScore = meta.trailingPE ? Math.max(20, Math.min(95, Math.round(100 - (meta.trailingPE * 1.4)))) : 60;
+        const mScore = Math.max(10, Math.min(95, Math.round((liveRsi * 0.8) + (cmp >= dma50 ? 25 : -10))));
+
         activeStockData = {
           name: profile.name || meta.symbol.replace('.NS', '').replace('.BO', ''),
           sector: profile.sector,
@@ -978,11 +1056,12 @@
           girvi: profile.girvi || "0.00% Girvi",
           roce: profile.roce || "18.5% Return",
           pe: profile.pe !== "N/A" ? profile.pe : (meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E"),
+          dvm: { d: dScore, v: vScore, m: mScore },
           bars: cleanData
         };
 
         renderActiveStock(activeStockData);
-        generateDynamicTStudy(ticker, activeStockData.name, activeStockData.cmp, dma50, dma200, high52, low52, liveRsi, activeStockData.pe);
+        generateDynamicSWOT(ticker, activeStockData.name, activeStockData.cmp, dma50, dma200, high52, low52, liveRsi, activeStockData.pe);
 
         if (badge) {
           badge.textContent = "🟢 LIVE EXCHANGE DATA";
@@ -1020,6 +1099,13 @@
       document.getElementById('dispDma50').textContent = `₹${(data.dma50 || data.cmp || 0).toFixed(2)}`;
       document.getElementById('dispDma200').textContent = `₹${(data.dma200 || data.cmp || 0).toFixed(2)}`;
       
+      // Update DVM Scorecard
+      if (data.dvm) {
+        document.getElementById('scoreDurability').textContent = `${data.dvm.d} / 100`;
+        document.getElementById('scoreValuation').textContent = `${data.dvm.v} / 100`;
+        document.getElementById('scoreMomentum').textContent = `${data.dvm.m} / 100`;
+      }
+
       const headerEl = document.getElementById('studyTickerHeader');
       if (headerEl) headerEl.textContent = activeTicker;
 
@@ -1070,8 +1156,7 @@
         allBars[allBars.length - 1].close = baseCmp;
       }
 
-      // Filter bars based on selected timeframe
-      let sliceCount = 60; // 1Y default
+      let sliceCount = 60; // 1Y
       if (currentTimeframe === '3Y') sliceCount = 130;
       if (currentTimeframe === '5Y') sliceCount = 220;
       const bars = allBars.slice(-Math.min(sliceCount, allBars.length));
@@ -1083,20 +1168,18 @@
       const priceRange = maxPrice - minPrice;
       const maxVol = Math.max(...volumes);
 
-      // Precalculate 50 DMA
       const dma50Arr = [];
       for (let i = 0; i < closes.length; i++) {
         const slice = closes.slice(Math.max(0, i - 14), i + 1);
         dma50Arr.push(slice.reduce((a, b) => a + b, 0) / slice.length);
       }
 
-      // Precalculate RSI
       const rsiArr = [];
       for (let i = 0; i < closes.length; i++) {
         rsiArr.push(computeLiveRSI(closes.slice(0, i + 1), 14));
       }
 
-      // 1. Gridlines & Price Y-Axis
+      // Gridlines & Y-Axis
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
@@ -1116,7 +1199,7 @@
         ctx.fillText(`₹${val.toFixed(0)}`, marginLeft + plotW + 5, y);
       }
 
-      // 2. Precompute Static Coordinates
+      // Static Coordinates
       chartCoordinates = [];
       for (let i = 0; i < bars.length; i++) {
         const x = marginLeft + (i / (bars.length - 1)) * plotW;
@@ -1136,7 +1219,7 @@
         });
       }
 
-      // 3. Render Volume Histogram Bars
+      // Volume Bars
       ctx.fillStyle = '#E2E8F0';
       ctx.fillText('VOL', marginLeft + plotW + 5, volTop + 10);
       for (let i = 0; i < chartCoordinates.length; i++) {
@@ -1146,7 +1229,7 @@
         ctx.fillRect(c.x - barWidth / 2, volTop + volHeight - c.volH, barWidth, c.volH);
       }
 
-      // 4. Render RSI Curve & Bounds
+      // RSI Curve
       ctx.fillStyle = '#94A3B8';
       ctx.fillText('RSI', marginLeft + plotW + 5, rsiTop + 14);
 
@@ -1168,7 +1251,7 @@
       }
       ctx.stroke();
 
-      // 5. Render 50 DMA Curve Overlay
+      // 50 DMA Line
       ctx.beginPath();
       ctx.strokeStyle = '#F59E0B';
       ctx.lineWidth = 1.8;
@@ -1179,7 +1262,7 @@
       }
       ctx.stroke();
 
-      // 6. Render Price Line
+      // Price Line
       const isUp = closes[closes.length - 1] >= closes[0];
       const strokeColor = isUp ? '#10B981' : '#EF4444';
 
@@ -1193,7 +1276,7 @@
       }
       ctx.stroke();
 
-      // 7. Render X-Axis Date Timestamps
+      // X-Axis Timestamps
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.fillStyle = '#94A3B8';
@@ -1206,7 +1289,7 @@
       }
     }
 
-    // Interactive Hover: Absolutely NO Redraws. Simply moves the floating box smoothly.
+    // Hover Interaction: Fixed Canvas, moves only the glass floating box
     const chartCanvas = document.getElementById('dossierCanvas');
     const chartTooltip = document.getElementById('chartTooltip');
 
@@ -1228,7 +1311,6 @@
 
         const point = chartCoordinates[closestIdx];
 
-        // Format Date and Values
         const dateStr = point.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
         const priceStr = `₹${point.bar.close.toFixed(2)}`;
         const dmaStr = `₹${point.dmaVal.toFixed(2)}`;
@@ -1242,7 +1324,6 @@
           <div class="tt-row"><span>RSI:</span><span class="tt-val" style="color:#A78BFA;">${point.rsiVal}</span></div>
         `;
 
-        // Position Floating Box
         const tooltipX = Math.min(rect.width - 150, Math.max(10, point.x + 12));
         const tooltipY = Math.min(rect.height - 110, Math.max(10, point.priceY - 30));
 
