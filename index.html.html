@@ -36,19 +36,20 @@
     body { background-color: var(--bg-canvas); color: var(--text-main); font-size: 13px; line-height: 1.5; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
     /* Masthead */
-    .masthead-t1 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-shrink: 0; z-index: 100; }
+    .masthead-t1 { background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-shrink: 0; position: relative; z-index: 1000; }
     .brand-group { display: flex; align-items: center; gap: 10px; }
     .brand-mark { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; color: #FFF; }
     .brand-mark span { color: var(--brand-brass); }
     .brand-tag { font-size: 11px; color: var(--text-dim); border-left: 1px solid var(--border-subtle); padding-left: 10px; }
 
-    .search-box-wrap { position: relative; flex: 1; max-width: 520px; }
+    /* Unclipped Search Box */
+    .search-box-wrap { position: relative; flex: 1; max-width: 520px; z-index: 1001; }
     .search-input-box { width: 100%; background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 12px 8px 34px; color: #FFF; font-size: 12.5px; outline: none; transition: all 0.2s; }
-    .search-input-box:focus { border-color: var(--brand-brass); }
+    .search-input-box:focus { border-color: var(--brand-brass); box-shadow: 0 0 15px rgba(234, 179, 8, 0.2); }
     .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
 
-    .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height: 340px; overflow-y: auto; display: none; z-index: 999; }
-    .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
+    .suggest-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); max-height: 340px; overflow-y: auto; display: none; z-index: 99999; }
+    .suggest-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
     .suggest-item:hover { background: var(--bg-card-hover); }
     .suggest-ticker { font-weight: 800; color: #FFF; }
     .suggest-name { font-size: 11.5px; color: var(--text-muted); margin-left: 8px; }
@@ -80,13 +81,14 @@
     .card-3d { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; margin-bottom: 12px; box-shadow: var(--shadow-3d-card); position: relative; }
     .card-title { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brand-brass); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 
-    /* Overview Grid */
+    /* Executive Overview 2-Column Split */
     .overview-hero-split { display: grid; grid-template-columns: 1fr 1.35fr; gap: 14px; margin-bottom: 12px; }
     @media (max-width: 1024px) { .overview-hero-split { grid-template-columns: 1fr; } }
 
     .overview-left-col { display: flex; flex-direction: column; gap: 10px; }
     .company-identity-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; }
     
+    /* 4 Sub-Tabs Quadrant Layout */
     .pillars-quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .pillar-card { background: linear-gradient(145deg, #32445E 0%, #25344A 100%); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px 12px; position: relative; overflow: hidden; }
     .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
@@ -104,7 +106,7 @@
     .info-popover { position: absolute; top: 26px; right: 10px; width: 200px; background: #162032; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px; font-size: 10px; color: var(--text-muted); z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
     .info-bubble:hover + .info-popover { display: block; }
 
-    /* Chart Right Column */
+    /* Chart & Horizontal Diagnostic Strip */
     .overview-right-col { display: flex; flex-direction: column; gap: 10px; }
     .chart-panel-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; }
     .time-ribbon { display: inline-flex; background: var(--bg-canvas); border-radius: 6px; padding: 2px; gap: 2px; }
@@ -119,7 +121,7 @@
     .diag-lbl { color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 9px; }
     .diag-val { color: #FFF; font-weight: 800; font-size: 11px; margin-top: 1px; }
 
-    /* Tooltip */
+    /* Floating Tooltip */
     .chart-tooltip-floating { 
       position: absolute; pointer-events: none; background: rgba(22, 32, 50, 0.95); color: #FFF; padding: 6px 10px;
       border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 24px rgba(0,0,0,0.5); backdrop-filter: blur(8px);
@@ -129,12 +131,12 @@
     .chart-tooltip-floating .tt-row { display: flex; justify-content: space-between; gap: 8px; }
     .chart-tooltip-floating .tt-val { font-weight: 800; color: #FFF; font-size: 10px; }
 
-    /* Subnav */
+    /* Subnav Pills */
     .subnav-pills { display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
     .subnav-btn { background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
     .subnav-btn.active { background: var(--brand-brass); color: #000; border-color: var(--brand-brass); }
 
-    /* Deep Scan Plain Cards */
+    /* Deep Scan Plain-English Cards */
     .deep-plain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
     @media (max-width: 900px) { .deep-plain-grid { grid-template-columns: 1fr; } }
     .plain-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px; }
@@ -171,6 +173,11 @@
       box-shadow: 2px 2px 6px rgba(0,0,0,0.35); z-index: 10;
     }
     .gauge-hub { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; background: #EAB308; border: 3px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 11; }
+    
+    .holding-tag { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+    .tag-added { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid var(--accent-emerald); }
+    .tag-hold { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+    .tag-exit { background: rgba(244, 63, 94, 0.2); color: var(--accent-rose); border: 1px solid var(--accent-rose); }
   </style>
 </head>
 <body>
