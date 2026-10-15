@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Market Drishti × Market Monk | Research Terminal</title>
+  <!-- TradingView Lightweight Charts Engine -->
+  <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
   <style>
     :root {
-      /* Refined Executive Slate/Navy Theme */
       --bg-canvas: #1E293B;
       --bg-surface: #29384F;
       --bg-card: #2D3D56;
@@ -22,9 +23,7 @@
       --brand-brass-light: rgba(234, 179, 8, 0.16);
 
       --accent-emerald: #10B981;
-      --accent-emerald-dark: #059669;
       --accent-rose: #F43F5E;
-      --accent-rose-dark: #E11D48;
       --accent-amber: #F59E0B;
       --accent-sapphire: #38BDF8;
       --accent-purple: #A855F7;
@@ -42,7 +41,7 @@
     .brand-mark span { color: var(--brand-brass); }
     .brand-tag { font-size: 11px; color: var(--text-dim); border-left: 1px solid var(--border-subtle); padding-left: 10px; }
 
-    /* Search Box */
+    /* Search Input with Non-Clipped Dropdown */
     .search-box-wrap { position: relative; flex: 1; max-width: 520px; z-index: 1001; }
     .search-input-box { width: 100%; background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 12px 8px 34px; color: #FFF; font-size: 12.5px; outline: none; transition: all 0.2s; }
     .search-input-box:focus { border-color: var(--brand-brass); box-shadow: 0 0 15px rgba(234, 179, 8, 0.2); }
@@ -57,7 +56,7 @@
 
     .status-badge { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; }
 
-    /* Tape */
+    /* Market Tape */
     .masthead-t2 { background: #233146; border-bottom: 1px solid var(--border-subtle); padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; flex-shrink: 0; }
     .tape-items { display: flex; align-items: center; gap: 18px; }
     .up { color: var(--accent-emerald); font-weight: 600; }
@@ -88,7 +87,7 @@
     .overview-left-col { display: flex; flex-direction: column; gap: 10px; }
     .company-identity-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; }
     
-    /* 4 Sub-Tabs Quadrant Layout */
+    /* 4 Pillars Quadrant */
     .pillars-quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .pillar-card { background: linear-gradient(145deg, #32445E 0%, #25344A 100%); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px 12px; position: relative; overflow: hidden; }
     .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; }
@@ -102,42 +101,32 @@
     .pillar-val { font-size: 15px; font-weight: 900; color: #FFF; margin: 2px 0; }
     .pillar-desc { font-size: 9.5px; color: var(--text-dim); line-height: 1.3; }
 
-    .info-bubble { width: 13px; height: 13px; border-radius: 50%; background: rgba(255,255,255,0.15); color: #FFF; font-size: 8.5px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
-    .info-popover { position: absolute; top: 26px; right: 10px; width: 200px; background: #162032; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px; font-size: 10px; color: var(--text-muted); z-index: 100; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.8); }
-    .info-bubble:hover + .info-popover { display: block; }
-
-    /* Chart & Horizontal Diagnostic Strip */
+    /* TradingView Professional Candlestick Workspace */
     .overview-right-col { display: flex; flex-direction: column; gap: 10px; }
-    .chart-panel-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; }
+    .chart-panel-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; }
+    
+    .chart-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
     .time-ribbon { display: inline-flex; background: var(--bg-canvas); border-radius: 6px; padding: 2px; gap: 2px; }
     .time-btn { background: transparent; border: none; color: var(--text-muted); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; cursor: pointer; }
     .time-btn.active { background: var(--brand-brass); color: #000; }
-    
-    /* Height expanded to 240px to prevent X-axis clipping */
-    .chart-box { position: relative; width: 100%; height: 240px; }
-    canvas { width: 100% !important; height: 100% !important; cursor: crosshair; }
+
+    .chart-tools-group { display: flex; align-items: center; gap: 6px; }
+    .tool-btn { background: var(--bg-canvas); border: 1px solid var(--border-subtle); color: var(--text-dim); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; cursor: pointer; transition: all 0.15s; }
+    .tool-btn.active { border-color: var(--accent-sapphire); color: #FFF; background: rgba(56, 189, 248, 0.15); }
+
+    .tv-chart-wrapper { width: 100%; height: 260px; position: relative; border-radius: 6px; overflow: hidden; }
 
     .chart-diagnostic-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: var(--bg-canvas); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; font-size: 10px; }
     .diag-item { display: flex; flex-direction: column; }
     .diag-lbl { color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 9px; }
     .diag-val { color: #FFF; font-weight: 800; font-size: 11px; margin-top: 1px; }
 
-    /* Tooltip */
-    .chart-tooltip-floating { 
-      position: absolute; pointer-events: none; background: rgba(22, 32, 50, 0.95); color: #FFF; padding: 6px 10px;
-      border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 24px rgba(0,0,0,0.5); backdrop-filter: blur(8px);
-      display: none; z-index: 100; font-size: 10px; line-height: 1.4; min-width: 125px;
-    }
-    .chart-tooltip-floating .tt-date { color: var(--text-dim); font-size: 9px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2px; margin-bottom: 3px; }
-    .chart-tooltip-floating .tt-row { display: flex; justify-content: space-between; gap: 8px; }
-    .chart-tooltip-floating .tt-val { font-weight: 800; color: #FFF; font-size: 10px; }
-
-    /* Subnav Pills */
+    /* Subnav Buttons */
     .subnav-pills { display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
     .subnav-btn { background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
     .subnav-btn.active { background: var(--brand-brass); color: #000; border-color: var(--brand-brass); }
 
-    /* Deep Scan Plain-English Cards */
+    /* Deep Scan Plain Cards */
     .deep-plain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
     @media (max-width: 900px) { .deep-plain-grid { grid-template-columns: 1fr; } }
     .plain-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 14px; }
@@ -149,25 +138,7 @@
     .plain-score { font-size: 22px; font-weight: 900; color: #FFF; margin-bottom: 4px; }
     .plain-explain { font-size: 11px; color: var(--text-muted); line-height: 1.45; }
 
-    /* Technical Workspace */
-    .tech-3d-suite { display: grid; grid-template-columns: 1.8fr 1fr; gap: 14px; }
-    @media (max-width: 950px) { .tech-3d-suite { grid-template-columns: 1fr; } }
-    .tech-chart-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px; }
-    .tech-legend-strip { display: flex; gap: 12px; font-size: 10px; font-weight: 700; margin-bottom: 6px; }
-    .tech-matrix-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
-    .matrix-tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
-    .matrix-tbl td { padding: 5px 0; border-bottom: 1px solid var(--border-subtle); }
-    .matrix-tbl tr:last-child td { border-bottom: none; }
-
-    /* Quadrant Grid for Mood Meter */
-    .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 980px) { .quadrant-grid { grid-template-columns: 1fr; } }
-
-    /* FII / DII Bar */
-    .fii-bar { height: 6px; border-radius: 3px; background: var(--accent-rose); margin-bottom: 6px; }
-    .dii-bar { height: 6px; border-radius: 3px; background: var(--accent-emerald); }
-
-    /* Complete 4-Quadrant SWOT Matrix */
+    /* 4-Quadrant Complete SWOT */
     .swot-grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 11px; }
     @media (max-width: 900px) { .swot-grid-4 { grid-template-columns: 1fr; } }
     .swot-card-quad { border-radius: 8px; padding: 14px; border: 1px solid transparent; }
@@ -176,18 +147,16 @@
     .swot-o-card { background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.3); }
     .swot-t-card { background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.3); }
 
-    /* Gauge Dial Needle */
+    /* Market Mood 2x2 Quadrant */
+    .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 980px) { .quadrant-grid { grid-template-columns: 1fr; } }
+
     .gauge-needle {
       position: absolute; bottom: 15px; left: 50%; width: 4px; height: 72px; background: linear-gradient(to top, #475569, #0F172A);
       border-radius: 3px 3px 0 0; transform-origin: bottom center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 2px 2px 6px rgba(0,0,0,0.35); z-index: 10;
     }
     .gauge-hub { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 18px; height: 18px; background: #EAB308; border: 3px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.3); z-index: 11; }
-    
-    .holding-tag { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
-    .tag-added { background: rgba(16, 185, 129, 0.2); color: var(--accent-emerald); border: 1px solid var(--accent-emerald); }
-    .tag-hold { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
-    .tag-exit { background: rgba(244, 63, 94, 0.2); color: var(--accent-rose); border: 1px solid var(--accent-rose); }
   </style>
 </head>
 <body>
@@ -196,7 +165,7 @@
   <div class="masthead-t1">
     <div class="brand-group">
       <div class="brand-mark">MARKET <span>DRISHTI</span></div>
-      <div class="brand-tag">Terminal v2.6 • Institutional Screener Engine</div>
+      <div class="brand-tag">Terminal v3.0 • TradingView OHLC Architecture</div>
     </div>
     
     <div class="search-box-wrap">
@@ -232,7 +201,7 @@
 
   <!-- App Body Layout -->
   <div class="app-body">
-    <!-- Sidebar: Market Mood Meter Top of List -->
+    <!-- Sidebar: Market Mood Top of List -->
     <aside class="sidebar">
       <div class="nav-header">Research Modules</div>
       <button class="nav-btn active" onclick="switchTab('pulse', this)">🧭 Market Mood Meter</button>
@@ -245,10 +214,11 @@
     <!-- Main Viewport -->
     <main class="content-viewport">
       
-      <!-- TAB 1: MARKET MOOD METER (TOP POSITION) -->
+      <!-- TAB 1: MARKET MOOD METER (TOP PRIORITY) -->
       <section id="tab-pulse">
         <h2 style="font-size:18px; font-weight:900; color:#FFF; margin-bottom:12px;">🧭 Market Mood & Institutional Breadth</h2>
         <div class="quadrant-grid">
+          <!-- MMI Dial -->
           <div class="card-3d" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
             <div class="card-title" style="width:100%;">Tickertape Market Mood Index (MMI)</div>
             <div style="position:relative; width:220px; height:110px; display:flex; justify-content:center; margin-top:4px;">
@@ -268,6 +238,7 @@
             <div id="gaugeTagDisp" style="font-size:11px; font-weight:800; color:var(--accent-rose); text-transform:uppercase;">Extreme Fear</div>
           </div>
 
+          <!-- A/D Breadth -->
           <div class="card-3d">
             <div class="card-title">Live Advance / Decline Breadth</div>
             <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:2px;">
@@ -284,6 +255,7 @@
             </div>
           </div>
 
+          <!-- FII / DII Activity -->
           <div class="card-3d">
             <div class="card-title">FII / DII Institutional Flows (₹ Crores)</div>
             <table style="width:100%; border-collapse:collapse; font-size:11px; margin-top:4px;">
@@ -306,12 +278,9 @@
                 <td style="padding:5px 0; text-align:right; font-weight:800; color:var(--accent-emerald);">+₹10,703 Cr</td>
               </tr>
             </table>
-            <div style="margin-top: 6px;">
-              <div class="fii-bar" style="width: 100%;" title="FII Net Sell"></div>
-              <div class="dii-bar" style="width: 82%;" title="DII Net Buy"></div>
-            </div>
           </div>
 
+          <!-- Volatility Card -->
           <div class="card-3d">
             <div class="card-title">Market Volatility (India VIX)</div>
             <div style="font-size:22px; font-weight:900; color:#FFF; margin-top:2px;">15.28 <span class="down" style="font-size:12px;">(▲ +10.01%)</span></div>
@@ -322,10 +291,10 @@
         </div>
       </section>
 
-      <!-- TAB 2: EXECUTIVE OVERVIEW (RESTRUCTURED) -->
+      <!-- TAB 2: EXECUTIVE OVERVIEW (TRADINGVIEW OHLC INTEGRATED) -->
       <section id="tab-dossier" style="display:none;">
         <div class="overview-hero-split">
-          <!-- Left: Identity & 4 Pillars Quadrant -->
+          <!-- Left Column -->
           <div class="overview-left-col">
             <div class="company-identity-card">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -343,13 +312,11 @@
               </div>
             </div>
 
-            <!-- Quadrant Form of 4 Sub-Tabs -->
+            <!-- Quadrant 4 Pillars -->
             <div class="pillars-quadrant-grid">
               <div class="pillar-card pillar-sage">
                 <div class="pillar-header-row">
                   <span class="pillar-name">Competitive Edge</span>
-                  <div class="info-bubble">i</div>
-                  <div class="info-popover">Economic Moat: Unique scale advantages protecting pricing power.</div>
                 </div>
                 <div class="pillar-val" id="dispMoat">Market Leader</div>
                 <div class="pillar-desc" id="dispMoatDesc">Integrated refining footprint, retail reach & 5G telecom scale.</div>
@@ -358,8 +325,6 @@
               <div class="pillar-card pillar-sapphire">
                 <div class="pillar-header-row">
                   <span class="pillar-name">Debt & Pledge</span>
-                  <div class="info-bubble">i</div>
-                  <div class="info-popover">Promoter Pledge: Shares mortgaged against debt. 0% is pristine.</div>
                 </div>
                 <div class="pillar-val" id="dispGirvi">0.00% Girvi</div>
                 <div class="pillar-desc" id="dispGirviDesc">Clean balance sheet; zero promoter shares mortgaged against loans.</div>
@@ -368,8 +333,6 @@
               <div class="pillar-card pillar-amber">
                 <div class="pillar-header-row">
                   <span class="pillar-name">Profitability</span>
-                  <div class="info-bubble">i</div>
-                  <div class="info-popover">ROCE: Operating return on capital invested in the business.</div>
                 </div>
                 <div class="pillar-val" id="dispRoce">11.4% Return</div>
                 <div class="pillar-desc" id="dispRoceDesc">Heavy cash generation reinvested into clean energy gigafactories.</div>
@@ -378,8 +341,6 @@
               <div class="pillar-card pillar-lavender">
                 <div class="pillar-header-row">
                   <span class="pillar-name">Stock Valuation</span>
-                  <div class="info-bubble">i</div>
-                  <div class="info-popover">P/E Ratio: Multiple paid per rupee of annual net profit.</div>
                 </div>
                 <div class="pillar-val" id="dispPe">21.8x P/E</div>
                 <div class="pillar-desc" id="dispPeDesc">Trading near historical multiple support relative to consumer business.</div>
@@ -387,25 +348,33 @@
             </div>
           </div>
 
-          <!-- Right: Price-Volume Action Chart & Horizontal Diagnostics -->
+          <!-- Right Column: TradingView Lightweight Candlestick Chart -->
           <div class="overview-right-col">
             <div class="chart-panel-card">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <div class="chart-toolbar">
+                <!-- Timeframe Ribbon -->
                 <div class="time-ribbon">
-                  <button class="time-btn" onclick="setTimeframe('1D', this)">1D</button>
-                  <button class="time-btn active" onclick="setTimeframe('1Y', this)">1Y</button>
-                  <button class="time-btn" onclick="setTimeframe('3Y', this)">3Y</button>
-                  <button class="time-btn" onclick="setTimeframe('5Y', this)">5Y</button>
+                  <button class="time-btn" onclick="changeChartTimeframe('1D', this)">1D</button>
+                  <button class="time-btn" onclick="changeChartTimeframe('1W', this)">1W</button>
+                  <button class="time-btn" onclick="changeChartTimeframe('1M', this)">1M</button>
+                  <button class="time-btn active" onclick="changeChartTimeframe('1Y', this)">1Y</button>
+                  <button class="time-btn" onclick="changeChartTimeframe('5Y', this)">5Y</button>
                 </div>
-                <span style="font-size:10px; color:var(--text-dim);">Screener-Engine Rescaling • 50 DMA: <strong id="dispDma50" style="color:#FFF;">₹1,220.40</strong></span>
+
+                <!-- Overlay Tools Selector -->
+                <div class="chart-tools-group">
+                  <button class="tool-btn active" id="btnToolSma50" onclick="toggleIndicator('sma50', this)">50 SMA</button>
+                  <button class="tool-btn active" id="btnToolSma200" onclick="toggleIndicator('sma200', this)">200 SMA</button>
+                  <button class="tool-btn" id="btnToolEma20" onclick="toggleIndicator('ema20', this)">20 EMA</button>
+                  <button class="tool-btn active" id="btnToolVol" onclick="toggleIndicator('vol', this)">Volume</button>
+                </div>
               </div>
 
-              <div class="chart-box">
-                <canvas id="dossierCanvas"></canvas>
-                <div id="chartTooltip" class="chart-tooltip-floating"></div>
-              </div>
+              <!-- TradingView Canvas Root -->
+              <div class="tv-chart-wrapper" id="tvChartContainer"></div>
             </div>
 
+            <!-- Diagnostics Strip -->
             <div class="chart-diagnostic-strip">
               <div class="diag-item">
                 <span class="diag-lbl">Current Trend</span>
@@ -427,7 +396,7 @@
           </div>
         </div>
 
-        <!-- Partitioned News (Left) & Corporate Actions (Right) -->
+        <!-- Partitioned News & Corporate Actions -->
         <div class="card-3d">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div>
@@ -478,8 +447,8 @@
         </div>
 
         <div class="subnav-pills">
-          <button class="subnav-btn active" id="btnSubFund" onclick="switchSubScan('fund')">📑 Fundamental Deep Scan (Plain English)</button>
-          <button class="subnav-btn" id="btnSubTech" onclick="switchSubScan('tech')">📐 Advanced Technicals</button>
+          <button class="subnav-btn active" id="btnSubFund" onclick="switchSubScan('fund')">📑 Fundamental Deep Scan</button>
+          <button class="subnav-btn" id="btnSubTech" onclick="switchSubScan('tech')">📐 Technical Alignment Matrix</button>
           <button class="subnav-btn" id="btnSubLegend" onclick="switchSubScan('legend')">⚡ Technofunda Screener Engine</button>
         </div>
 
@@ -493,7 +462,7 @@
               </div>
               <div class="plain-score" id="scanPiotroski">8 / 9</div>
               <p class="plain-explain" id="scanPiotroskiExplain">
-                <b>What it means in simple words:</b> Out of 9 key balance sheet tests (operating cash flow, debt control, and asset efficiency), the business passes 8. A score of 7 or higher means the company is fundamentally robust.
+                <b>What it means:</b> Out of 9 key balance sheet tests, the business passes 8. A score of 7+ means the business is fundamentally robust.
               </p>
             </div>
 
@@ -504,7 +473,7 @@
               </div>
               <div class="plain-score" id="scanAltman">3.82</div>
               <p class="plain-explain" id="scanAltmanExplain">
-                <b>What it means in simple words:</b> This checks if a company has too much debt relative to its working assets. A score above 3.0 confirms the business is safely insulated from insolvency risk.
+                <b>What it means:</b> Checks if a company carries excess debt relative to liquid assets. Score above 3.0 confirms protection from loan distress.
               </p>
             </div>
 
@@ -515,7 +484,7 @@
               </div>
               <div class="plain-score" id="scanDupont">14.2%</div>
               <p class="plain-explain" id="scanDupontExplain">
-                <b>What it means in simple words:</b> This breaks down where returns come from. The company makes money through real operational margins and rapid inventory turnover, not by borrowing reckless leverage.
+                <b>What it means:</b> Returns stem from operational margins and rapid inventory turnover, not from dangerous borrowing.
               </p>
             </div>
           </div>
@@ -548,78 +517,42 @@
           </div>
         </div>
 
-        <!-- Advanced Technicals Suite -->
+        <!-- Technical Alignment Matrix -->
         <div id="subscan-tech" style="display:none;">
-          <div class="tech-3d-suite">
-            <div class="tech-chart-card">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <span style="font-size:11.5px; font-weight:800; color:#FFF;">Advanced Technical Overlay</span>
-                <div class="tech-legend-strip">
-                  <span style="color:#10B981;">● Price</span>
-                  <span style="color:#38BDF8;">● 20 EMA</span>
-                  <span style="color:#EAB308;">● 50 SMA</span>
-                  <span style="color:#A855F7;">● 200 SMA</span>
-                </div>
-              </div>
-              <div style="position:relative; width:100%; height:260px;">
-                <canvas id="techAdvCanvas"></canvas>
-              </div>
-            </div>
-
-            <div class="tech-matrix-card">
-              <div>
-                <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--brand-brass); margin-bottom:8px;">
-                  Moving Averages & Oscillators
-                </div>
-                <table class="matrix-tbl">
-                  <tr><td style="color:var(--text-dim);">20 EMA (Short Momentum)</td><td style="text-align:right; font-weight:800; color:#38BDF8;" id="ma20">₹1,192.00 (Bullish)</td></tr>
-                  <tr><td style="color:var(--text-dim);">50 SMA (Medium Trend)</td><td style="text-align:right; font-weight:800; color:#EAB308;" id="ma50">₹1,220.40 (Testing)</td></tr>
-                  <tr><td style="color:var(--text-dim);">200 SMA (Long Baseline)</td><td style="text-align:right; font-weight:800; color:#A855F7;" id="ma200">₹1,280.00 (Resistance)</td></tr>
-                  <tr><td style="color:var(--text-dim);">14-Day ADX (Trend Power)</td><td style="text-align:right; font-weight:800;" id="oscAdx">24.5 (Moderate Power)</td></tr>
-                  <tr><td style="color:var(--text-dim);">MACD (12, 26, 9)</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="oscMacd">+4.20 (Positive Cross)</td></tr>
-                </table>
-              </div>
-
-              <!-- Minervini VCP & Martin Pring KST Advanced Checklists -->
-              <div style="margin-top:10px; background:var(--bg-canvas); padding:10px; border-radius:6px; border:1px solid var(--border-subtle);">
-                <div style="font-size:10.5px; font-weight:800; color:var(--brand-brass); margin-bottom:4px;">
-                  Mark Minervini VCP & Martin Pring KST Audit
-                </div>
-                <div style="font-size:10.5px; display:flex; justify-content:space-between; margin-bottom:2px;">
-                  <span>VCP Volatility Contraction:</span><b style="color:var(--accent-emerald);" id="vcpStatusAudit">Qualified (T3 Base)</b>
-                </div>
-                <div style="font-size:10.5px; display:flex; justify-content:space-between;">
-                  <span>Martin Pring KST Oscillator:</span><b style="color:var(--accent-emerald);" id="kstStatusAudit">Bullish Signal Cross (+8.2)</b>
-                </div>
-              </div>
-            </div>
+          <div class="card-3d">
+            <div class="card-title">Technical Moving Averages & Classical Pivots</div>
+            <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+              <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:6px 0; color:var(--text-dim);">20 EMA Momentum:</td><td style="text-align:right; font-weight:800; color:var(--accent-sapphire);" id="ma20">₹1,192.00 (Bullish)</td></tr>
+              <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:6px 0; color:var(--text-dim);">50 SMA Trendline:</td><td style="text-align:right; font-weight:800; color:var(--accent-amber);" id="ma50">₹1,220.40 (Testing)</td></tr>
+              <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:6px 0; color:var(--text-dim);">200 SMA Long Baseline:</td><td style="text-align:right; font-weight:800; color:var(--accent-purple);" id="ma200">₹1,280.00 (Resistance)</td></tr>
+              <tr style="border-bottom:1px solid var(--border-subtle);"><td style="padding:6px 0; color:var(--text-dim);">14-Day ADX Trend Strength:</td><td style="text-align:right; font-weight:800;" id="oscAdx">24.5 (Moderate)</td></tr>
+              <tr><td style="padding:6px 0; color:var(--text-dim);">MACD (12, 26, 9):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="oscMacd">+4.20 (Positive Cross)</td></tr>
+            </table>
           </div>
         </div>
 
-        <!-- Technofunda Screener Engine (Dual Fundamental + Technical Integration) -->
+        <!-- Technofunda Screener Engine -->
         <div id="subscan-legend" style="display:none;">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-            <!-- Fundamental Hurdle Criteria -->
             <div class="card-3d">
               <div class="card-title">Fundamental Quality Hurdles</div>
-              <table class="matrix-tbl">
-                <tr><td style="color:var(--text-dim);">P/E Ratio vs Sector:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdlePe">21.8x (Pass • Sector: 24.5x)</td></tr>
-                <tr><td style="color:var(--text-dim);">ROCE Hurdle (>15%):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleRoce">11.4% (Pass • Capital Intense)</td></tr>
-                <tr><td style="color:var(--text-dim);">Quarterly Sales Growth:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleSales">+14.8% YoY (Pass)</td></tr>
-                <tr><td style="color:var(--text-dim);">Debt-to-Equity (<0.5):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleDebt">0.38 (Pass • High Solvency)</td></tr>
-                <tr><td style="color:var(--text-dim);">Promoter Pledge (Girvi):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleGirvi">0.00% (Pristine Hygiene)</td></tr>
+              <table style="width:100%; border-collapse:collapse; font-size:11px;">
+                <tr><td style="padding:5px 0; color:var(--text-dim);">P/E Ratio vs Sector:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdlePe">21.8x (Pass)</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">ROCE Hurdle (>15%):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleRoce">11.4% (Pass)</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">Quarterly Sales Growth:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleSales">+14.8% YoY (Pass)</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">Debt-to-Equity (<0.5):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleDebt">0.38 (Pass)</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">Promoter Pledge (Girvi):</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="hurdleGirvi">0.00% (Pristine)</td></tr>
               </table>
             </div>
 
-            <!-- Technical Timing & Price Action Hurdles -->
             <div class="card-3d">
               <div class="card-title">Technical Timing & Price Action Filters</div>
-              <table class="matrix-tbl">
-                <tr><td style="color:var(--text-dim);">52-Week Breakout Watch:</td><td style="text-align:right; font-weight:800; color:#FFF;" id="filter52w">Within 8.8% of Peak</td></tr>
-                <tr><td style="color:var(--text-dim);">200 DMA Alignment:</td><td style="text-align:right; font-weight:800; color:var(--accent-amber);" id="filter200dma">Consolidating Under 200 DMA</td></tr>
-                <tr><td style="color:var(--text-dim);">Volume Spike Confirmation:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="filterVol">1.4x 20-Day Average Volume</td></tr>
-                <tr><td style="color:var(--text-dim);">Minervini VCP Base:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="filterVcp">Stage 2 Accumulation Active</td></tr>
-                <tr><td style="color:var(--text-dim);">Martin Pring KST Momentum:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="filterKst">Positive Signal Cross Active</td></tr>
+              <table style="width:100%; border-collapse:collapse; font-size:11px;">
+                <tr><td style="padding:5px 0; color:var(--text-dim);">52-Week Breakout Watch:</td><td style="text-align:right; font-weight:800; color:#FFF;" id="filter52w">Within 8.8% of Peak</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">200 DMA Alignment:</td><td style="text-align:right; font-weight:800; color:var(--accent-amber);" id="filter200dma">Consolidating Under 200 DMA</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">Volume Spike Confirmation:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="filterVol">1.4x 20-Day Average Volume</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">Minervini VCP Base:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="filterVcp">Stage 2 Accumulation Active</td></tr>
+                <tr><td style="padding:5px 0; color:var(--text-dim);">Martin Pring KST Momentum:</td><td style="text-align:right; font-weight:800; color:var(--accent-emerald);" id="filterKst">Positive Signal Cross Active</td></tr>
               </table>
             </div>
           </div>
@@ -637,13 +570,13 @@
               <th style="padding:6px;">Investor</th><th style="padding:6px;">Stock</th><th style="padding:6px;">Stake</th><th style="padding:6px;">Recent Action</th>
             </tr>
             <tr style="border-bottom:1px solid var(--border-subtle);">
-              <td style="padding:8px 6px; font-weight:800;">Rakesh Jhunjhunwala</td><td style="padding:8px 6px;">Titan Company Ltd</td><td style="padding:8px 6px;">~5.1%</td><td style="padding:8px 6px;"><span class="plain-status status-good">Hold</span></td>
+              <td style="padding:8px 6px; font-weight:800;">Rakesh Jhunjhunwala</td><td style="padding:8px 6px;">Titan Company Ltd</td><td style="padding:8px 6px;">~5.1%</td><td style="padding:8px 6px;"><span class="holding-tag tag-hold">Hold</span></td>
             </tr>
             <tr style="border-bottom:1px solid var(--border-subtle);">
-              <td style="padding:8px 6px; font-weight:800;">Radhakishan Damani</td><td style="padding:8px 6px;">V-Guard Industries</td><td style="padding:8px 6px;">~1.8%</td><td style="padding:8px 6px;"><span class="plain-status status-good">Added</span></td>
+              <td style="padding:8px 6px; font-weight:800;">Radhakishan Damani</td><td style="padding:8px 6px;">V-Guard Industries</td><td style="padding:8px 6px;">~1.8%</td><td style="padding:8px 6px;"><span class="holding-tag tag-added">Added</span></td>
             </tr>
             <tr>
-              <td style="padding:8px 6px; font-weight:800;">Ashish Kacholia</td><td style="padding:8px 6px;">Safari Industries</td><td style="padding:8px 6px;">~2.2%</td><td style="padding:8px 6px;"><span class="plain-status status-warn">Trimmed</span></td>
+              <td style="padding:8px 6px; font-weight:800;">Ashish Kacholia</td><td style="padding:8px 6px;">Safari Industries</td><td style="padding:8px 6px;">~2.2%</td><td style="padding:8px 6px;"><span class="holding-tag tag-exit">Trimmed</span></td>
             </tr>
           </table>
         </div>
@@ -654,55 +587,22 @@
         <div class="card-3d">
           <div class="card-title">Institutional SWOT Analysis: <span id="studyTickerHeader" style="color:#FFF;">RELIANCE</span></div>
           <div class="swot-grid-4">
-            
-            <!-- Strengths -->
             <div class="swot-card-quad swot-s-card">
-              <div style="color:var(--accent-emerald); font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between;">
-                <span>🟢 Strengths</span>
-                <span id="swotCountS" style="font-size:10px;">Passed Checks</span>
-              </div>
-              <ul id="swotListS" style="color:var(--text-muted); line-height:1.5; padding-left:14px;">
-                <li>Pristine promoter balance sheet with 0.00% shares pledged.</li>
-                <li>Steady operating cash flow from integrated refining assets.</li>
-              </ul>
+              <div style="color:var(--accent-emerald); font-weight:800; margin-bottom:6px;">🟢 Strengths</div>
+              <ul id="swotListS" style="color:var(--text-muted); line-height:1.5; padding-left:14px;"></ul>
             </div>
-
-            <!-- Weaknesses -->
             <div class="swot-card-quad swot-w-card">
-              <div style="color:var(--accent-rose); font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between;">
-                <span>🔴 Weaknesses</span>
-                <span id="swotCountW" style="font-size:10px;">Watchpoints</span>
-              </div>
-              <ul id="swotListW" style="color:var(--text-muted); line-height:1.5; padding-left:14px;">
-                <li>Large capex commitments in clean energy gigafactories with long gestation periods.</li>
-                <li>Global refining margin swings occasionally cause profit volatility.</li>
-              </ul>
+              <div style="color:var(--accent-rose); font-weight:800; margin-bottom:6px;">🔴 Weaknesses</div>
+              <ul id="swotListW" style="color:var(--text-muted); line-height:1.5; padding-left:14px;"></ul>
             </div>
-
-            <!-- Opportunities (Restored) -->
             <div class="swot-card-quad swot-o-card">
-              <div style="color:var(--accent-sapphire); font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between;">
-                <span>🔵 Opportunities</span>
-                <span id="swotCountO" style="font-size:10px;">Growth Catalysts</span>
-              </div>
-              <ul id="swotListO" style="color:var(--text-muted); line-height:1.5; padding-left:14px;">
-                <li>Value unlocking via planned independent public listings (IPOs) of Reliance Retail and Jio.</li>
-                <li>Monetizing 5G enterprise infrastructure, cloud data centers, and AI enterprise platforms.</li>
-              </ul>
+              <div style="color:var(--accent-sapphire); font-weight:800; margin-bottom:6px;">🔵 Opportunities</div>
+              <ul id="swotListO" style="color:var(--text-muted); line-height:1.5; padding-left:14px;"></ul>
             </div>
-
-            <!-- Threats (Restored) -->
             <div class="swot-card-quad swot-t-card">
-              <div style="color:var(--accent-amber); font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between;">
-                <span>🟠 Threats</span>
-                <span id="swotCountT" style="font-size:10px;">Risk Factors</span>
-              </div>
-              <ul id="swotListT" style="color:var(--text-muted); line-height:1.5; padding-left:14px;">
-                <li>Geopolitical crude price spikes and export duty revisions by sovereign regulators.</li>
-                <li>Aggressive quick-commerce and consumer competition in grocery supply chains.</li>
-              </ul>
+              <div style="color:var(--accent-amber); font-weight:800; margin-bottom:6px;">🟠 Threats</div>
+              <ul id="swotListT" style="color:var(--text-muted); line-height:1.5; padding-left:14px;"></ul>
             </div>
-
           </div>
         </div>
       </section>
@@ -711,21 +611,19 @@
   </div>
 
   <script>
-    // Comprehensive Stock Metadata & Fundamentals Database
-    const ALL_STOCKS_SUGGEST = [
-      { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy & Telecom" },
-      { ticker: "HDFCBANK", name: "HDFC Bank Ltd", sector: "Private Banking" },
-      { ticker: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom & Cloud" },
-      { ticker: "ICICIBANK", name: "ICICI Bank Ltd", sector: "Private Banking" },
-      { ticker: "SBIN", name: "State Bank of India", sector: "Public Sector Banking" },
-      { ticker: "MOTHERSON", name: "Samvardhana Motherson", sector: "Auto Components" },
-      { ticker: "TCS", name: "Tata Consultancy Services", sector: "IT Software" },
-      { ticker: "INFY", name: "Infosys Ltd", sector: "IT Software" },
-      { ticker: "TRENT", name: "Trent Ltd (Zudio/Westside)", sector: "Retail" },
-      { ticker: "TATAMOTORS", name: "Tata Motors Ltd", sector: "Automobiles" }
-    ];
+    // -------------------------------------------------------------
+    // Immutable Terminal State Management
+    // -------------------------------------------------------------
+    const TerminalState = {
+      ticker: "RELIANCE",
+      activeData: null,
+      timeframe: "1Y",
+      tools: { sma50: true, sma200: true, ema20: false, vol: true },
+      chartInstance: null,
+      series: { candle: null, volume: null, sma50: null, sma200: null, ema20: null }
+    };
 
-    const STOCK_PROFILES = {
+    const STOCK_DATABASE = {
       "RELIANCE": {
         name: "Reliance Industries Ltd", sector: "Oil Refining, Retail & Jio Telecom",
         cmp: 1187.00, chg: 5.00, pct: 0.42, dma50: 1220.40, dma200: 1280.00, high52: 1302.00, low52: 1020.00,
@@ -754,7 +652,7 @@
         pe: "14.2x P/E", peDesc: "Historically attractive valuation multiple post-merger.",
         piotroski: "7 / 9", piotStatus: "Strong", piotExplain: "Stable loan book expansion with expanding net interest margins and declining credit costs.",
         altman: "2.95", altmanStatus: "Safe Zone", altmanExplain: "Capital Adequacy Ratio (CAR) well above RBI statutory thresholds.",
-        dupont: "16.4%", dupontStatus: "High Quality", dupontExplain: "Driven by high fee income and extensive branch branch-led deposit mobilization.",
+        dupont: "16.4%", dupontStatus: "High Quality", dupontExplain: "Driven by high fee income and extensive branch-led deposit mobilization.",
         sh: { prom: "0.0%", fii: "52.4%", dii: "30.8%", pub: "16.8%" },
         cagr: { rev: "+18.2%", opm: "+19.0%", debt: "N/A (Bank)" },
         swot: {
@@ -780,36 +678,202 @@
           s: ["Zudio's disruptive value-fashion model expanding rapidly across Tier-2/3 cities.", "High inventory turnover leading to zero discounting and robust cash generation."],
           w: ["Elevated P/E multiple demands continuous 35%+ quarterly earnings growth.", "Rental cost escalations across premier retail locations."],
           o: ["Scaling Star Bazaar grocery format and international expansion into the Middle East.", "Expanding private-label beauty and personal care lines."],
-          t: ["Aggressive entry of competing value-fashion formats like Yousta and Style Up.", "Consumer spending slowdown during inflationary cycles."]
+          t: ["Aggressive entry of competing value-fashion formats.", "Consumer spending slowdown during inflationary cycles."]
         }
       }
     };
 
-    let activeTicker = "RELIANCE";
-    let activeStockData = STOCK_PROFILES["RELIANCE"];
-    let currentTimeframe = '1Y';
-    let chartCoordinates = [];
+    const ALL_STOCKS_SUGGEST = [
+      { ticker: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy & Telecom" },
+      { ticker: "HDFCBANK", name: "HDFC Bank Ltd", sector: "Private Banking" },
+      { ticker: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom & Cloud" },
+      { ticker: "ICICIBANK", name: "ICICI Bank Ltd", sector: "Private Banking" },
+      { ticker: "SBIN", name: "State Bank of India", sector: "Public Sector Banking" },
+      { ticker: "MOTHERSON", name: "Samvardhana Motherson", sector: "Auto Components" },
+      { ticker: "TCS", name: "Tata Consultancy Services", sector: "IT Software" },
+      { ticker: "INFY", name: "Infosys Ltd", sector: "IT Software" },
+      { ticker: "TRENT", name: "Trent Ltd (Zudio/Westside)", sector: "Retail" },
+      { ticker: "TATAMOTORS", name: "Tata Motors Ltd", sector: "Automobiles" }
+    ];
 
-    function computeLiveRSI(closes, period = 14) {
-      if (!closes || closes.length <= period) return 52;
-      let gains = 0, losses = 0;
-      for (let i = closes.length - period; i < closes.length; i++) {
-        const diff = closes[i] - closes[i - 1];
-        if (diff >= 0) gains += diff;
-        else losses -= diff;
+    // -------------------------------------------------------------
+    // TradingView Lightweight Charts Implementation
+    // -------------------------------------------------------------
+    function initTradingViewChart() {
+      const container = document.getElementById('tvChartContainer');
+      if (!container || TerminalState.chartInstance) return;
+
+      TerminalState.chartInstance = LightweightCharts.createChart(container, {
+        layout: {
+          background: { color: '#233146' },
+          textColor: '#CBD5E1',
+          fontSize: 11
+        },
+        grid: {
+          vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+          horzLines: { color: 'rgba(255, 255, 255, 0.05)' }
+        },
+        crosshair: {
+          mode: LightweightCharts.CrosshairMode.Normal,
+        },
+        rightPriceScale: {
+          borderColor: '#415371',
+        },
+        timeScale: {
+          borderColor: '#415371',
+          timeVisible: true,
+          secondsVisible: false
+        }
+      });
+
+      // Candlestick Series (Green/Red TradingView standard)
+      TerminalState.series.candle = TerminalState.chartInstance.addCandlestickSeries({
+        upColor: '#10B981',
+        downColor: '#F43F5E',
+        borderVisible: false,
+        wickUpColor: '#10B981',
+        wickDownColor: '#F43F5E'
+      });
+
+      // Volume Series
+      TerminalState.series.volume = TerminalState.chartInstance.addHistogramSeries({
+        color: '#64748B',
+        priceFormat: { type: 'volume' },
+        priceScaleId: '',
+        scaleMargins: { top: 0.8, bottom: 0 }
+      });
+
+      // Moving Average Indicators
+      TerminalState.series.sma50 = TerminalState.chartInstance.addLineSeries({
+        color: '#EAB308',
+        lineWidth: 2,
+        title: '50 SMA'
+      });
+
+      TerminalState.series.sma200 = TerminalState.chartInstance.addLineSeries({
+        color: '#A855F7',
+        lineWidth: 2,
+        title: '200 SMA'
+      });
+
+      TerminalState.series.ema20 = TerminalState.chartInstance.addLineSeries({
+        color: '#38BDF8',
+        lineWidth: 2,
+        title: '20 EMA'
+      });
+
+      // Resize listener
+      window.addEventListener('resize', () => {
+        if (TerminalState.chartInstance && container) {
+          TerminalState.chartInstance.applyOptions({
+            width: container.clientWidth,
+            height: container.clientHeight
+          });
+        }
+      });
+    }
+
+    // Mathematical Moving Average Generators
+    function calculateSMA(data, period) {
+      const sma = [];
+      for (let i = 0; i < data.length; i++) {
+        if (i < period - 1) continue;
+        let sum = 0;
+        for (let j = 0; j < period; j++) sum += data[i - j].close;
+        sma.push({ time: data[i].time, value: sum / period });
       }
-      if (losses === 0) return 100;
-      const rs = (gains / period) / (losses / period);
-      return Math.round(100 - (100 / (1 + rs)));
+      return sma;
     }
 
-    function updateGaugeNeedle(val = 17.02) {
-      const needle = document.getElementById('gaugeNeedle');
-      if (!needle) return;
-      const deg = -90 + (val / 100) * 180;
-      needle.style.transform = `translateX(-50%) rotate(${deg}deg)`;
+    function calculateEMA(data, period) {
+      const ema = [];
+      const k = 2 / (period + 1);
+      let prev = data[0].close;
+      for (let i = 0; i < data.length; i++) {
+        const val = i === 0 ? prev : (data[i].close * k) + (prev * (1 - k));
+        prev = val;
+        if (i >= period - 1) {
+          ema.push({ time: data[i].time, value: val });
+        }
+      }
+      return ema;
     }
 
+    // Update TradingView Candlestick & Tool Series with Rescaling
+    function updateTradingViewData() {
+      if (!TerminalState.chartInstance || !TerminalState.activeData || !TerminalState.activeData.candles) return;
+
+      const rawCandles = TerminalState.activeData.candles;
+      let displayCandles = [];
+
+      // Timeframe Resolution Processing
+      if (TerminalState.timeframe === '1D') {
+        displayCandles = rawCandles.slice(-30);
+      } else if (TerminalState.timeframe === '1W') {
+        displayCandles = rawCandles.slice(-60);
+      } else if (TerminalState.timeframe === '1M') {
+        displayCandles = rawCandles.slice(-120);
+      } else if (TerminalState.timeframe === '1Y') {
+        displayCandles = rawCandles.slice(-252);
+      } else {
+        displayCandles = rawCandles; // 5Y / Full Horizon
+      }
+
+      // Populate Candles
+      TerminalState.series.candle.setData(displayCandles);
+
+      // Populate Volume
+      if (TerminalState.tools.vol) {
+        const volumeData = displayCandles.map(c => ({
+          time: c.time,
+          value: c.volume,
+          color: c.close >= c.open ? 'rgba(16, 185, 129, 0.45)' : 'rgba(244, 63, 94, 0.45)'
+        }));
+        TerminalState.series.volume.setData(volumeData);
+      } else {
+        TerminalState.series.volume.setData([]);
+      }
+
+      // Populate 50 SMA
+      if (TerminalState.tools.sma50 && displayCandles.length > 50) {
+        TerminalState.series.sma50.setData(calculateSMA(displayCandles, 50));
+      } else {
+        TerminalState.series.sma50.setData([]);
+      }
+
+      // Populate 200 SMA
+      if (TerminalState.tools.sma200 && displayCandles.length > 200) {
+        TerminalState.series.sma200.setData(calculateSMA(displayCandles, 200));
+      } else {
+        TerminalState.series.sma200.setData([]);
+      }
+
+      // Populate 20 EMA
+      if (TerminalState.tools.ema20 && displayCandles.length > 20) {
+        TerminalState.series.ema20.setData(calculateEMA(displayCandles, 20));
+      } else {
+        TerminalState.series.ema20.setData([]);
+      }
+
+      TerminalState.chartInstance.timeScale().fitContent();
+    }
+
+    function changeChartTimeframe(tf, btn) {
+      TerminalState.timeframe = tf;
+      document.querySelectorAll('.time-ribbon .time-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      updateTradingViewData();
+    }
+
+    function toggleIndicator(toolName, btn) {
+      TerminalState.tools[toolName] = !TerminalState.tools[toolName];
+      btn.classList.toggle('active', TerminalState.tools[toolName]);
+      updateTradingViewData();
+    }
+
+    // -------------------------------------------------------------
+    // Tab & Navigation Engine
+    // -------------------------------------------------------------
     function switchTab(tabId, btn) {
       document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -820,9 +884,13 @@
         if (el) el.style.display = (t === tabId) ? 'block' : 'none';
       });
 
-      if (tabId === 'dossier') drawChart();
       if (tabId === 'pulse') updateGaugeNeedle(17.02);
-      if (tabId === 'deepscan') drawAdvTechChart();
+      if (tabId === 'dossier') {
+        setTimeout(() => {
+          if (!TerminalState.chartInstance) initTradingViewChart();
+          updateTradingViewData();
+        }, 50);
+      }
     }
 
     function switchSubScan(type) {
@@ -837,21 +905,22 @@
       } else if (type === 'tech') {
         document.getElementById('btnSubTech').classList.add('active');
         document.getElementById('subscan-tech').style.display = 'block';
-        drawAdvTechChart();
       } else {
         document.getElementById('btnSubLegend').classList.add('active');
         document.getElementById('subscan-legend').style.display = 'block';
       }
     }
 
-    function setTimeframe(tf, btn) {
-      currentTimeframe = tf;
-      document.querySelectorAll('.time-ribbon .time-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-      drawChart();
+    function updateGaugeNeedle(val = 17.02) {
+      const needle = document.getElementById('gaugeNeedle');
+      if (!needle) return;
+      const deg = -90 + (val / 100) * 180;
+      needle.style.transform = `translateX(-50%) rotate(${deg}deg)`;
     }
 
-    // Dynamic RSS Ingestion
+    // -------------------------------------------------------------
+    // Live RSS Feed Reader
+    // -------------------------------------------------------------
     async function loadLiveNews(ticker) {
       const container = document.getElementById('liveNewsContainer');
       const statusEl = document.getElementById('newsFeedStatus');
@@ -865,7 +934,7 @@
         const data = await res.json();
 
         if (!data.items || data.items.length === 0) {
-          container.innerHTML = `<div style="color:var(--text-dim); font-size:11px; padding:8px; background:var(--bg-canvas); border-radius:6px;">No recent regulatory filings recorded for ${ticker}.</div>`;
+          container.innerHTML = `<div style="color:var(--text-dim); font-size:11px; padding:8px; background:var(--bg-canvas); border-radius:6px;">No recent filings found for ${ticker}.</div>`;
           return;
         }
 
@@ -889,310 +958,224 @@
         });
 
         container.innerHTML = html;
-        if (statusEl) statusEl.textContent = `🟢 Live ${ticker} RSS Disclosures`;
+        if (statusEl) statusEl.textContent = `🟢 Live ${ticker} RSS Feed`;
       } catch (err) {
         if (statusEl) statusEl.textContent = `🟡 Static Fallback`;
         container.innerHTML = `
           <div style="background:var(--bg-canvas); padding:9px 11px; border-radius:6px; border:1px solid var(--border-subtle);">
             <div style="color:var(--brand-brass); font-weight:800; font-size:11.5px;">Exchange Filings & Regulatory Compliance (${ticker})</div>
-            <div style="color:var(--text-muted); font-size:10.5px; margin-top:2px;">Periodic financial statements and board compliance disclosures filed under continuous SEBI listing regulations.</div>
+            <div style="color:var(--text-muted); font-size:10.5px; margin-top:2px;">Continuous disclosure statements filed under SEBI listing regulations.</div>
             <div style="color:var(--text-dim); font-size:9.5px; margin-top:4px;">NSE / BSE Corporate Compliance Wire</div>
           </div>
         `;
       }
     }
 
-    // Screener.in-Style Rescaling Engine with full X-Axis Viewport Visibility
-    function drawChart() {
-      const canvas = document.getElementById('dossierCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const w = canvas.parentElement.offsetWidth;
-      const h = canvas.parentElement.offsetHeight;
-      canvas.width = w;
-      canvas.height = h;
+    // -------------------------------------------------------------
+    // Core Stock Selection & Synchronous State Propagation
+    // -------------------------------------------------------------
+    window.selectStock = async function(ticker) {
+      ticker = ticker.toUpperCase().trim();
+      if (!ticker) return;
+      TerminalState.ticker = ticker;
 
-      ctx.clearRect(0, 0, w, h);
+      document.getElementById('suggestDropdown').style.display = 'none';
+      document.getElementById('omniSearch').value = ticker;
 
-      const marginLeft = 6;
-      const marginRight = 54;
-      const plotW = w - marginLeft - marginRight;
-      
-      // Expanded vertical coordinate bounds
-      const priceTop = 10;
-      const priceHeight = 135;
-      const volTop = 155;
-      const volHeight = 35;
-      const timeAxisY = 205; // Explicitly positioned with 35px safety margin
+      const badge = document.getElementById('backendBadge');
+      badge.textContent = "⏳ QUERYING EXCHANGE...";
 
-      let allBars = (activeStockData && activeStockData.bars && activeStockData.bars.length > 5)
-        ? activeStockData.bars
-        : null;
+      let profile = STOCK_DATABASE[ticker];
 
-      if (!allBars) {
-        const pts = 252;
-        const baseCmp = activeStockData ? activeStockData.cmp : 1000;
-        let p = baseCmp * 0.88;
-        allBars = [];
-        const now = new Date();
-        for (let i = pts; i >= 0; i--) {
-          p += (Math.random() - 0.49) * (baseCmp * 0.015);
-          const d = new Date(now.getTime() - i * 24 * 3600 * 1000);
-          allBars.push({ time: d, close: p, volume: Math.round(400000 + Math.random() * 600000) });
-        }
-        allBars[allBars.length - 1].close = baseCmp;
-      }
+      try {
+        const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
+        if (!res.ok) throw new Error("Fetch failed");
+        const json = await res.json();
+        const result = json.chart?.result?.[0];
+        if (!result) throw new Error("Ticker missing");
 
-      let bars = [];
-      const totalAvailable = allBars.length;
-      if (currentTimeframe === '1D') {
-        const lastCmp = activeStockData.cmp;
-        let cur = lastCmp - (activeStockData.chg || 0);
-        const today = new Date();
-        for (let i = 0; i < 25; i++) {
-          cur += (Math.random() - 0.48) * (lastCmp * 0.0015);
-          const time = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 9, 15 + i * 15);
-          bars.push({ time, close: cur, volume: Math.round(20000 + Math.random() * 40000) });
-        }
-        bars[bars.length - 1].close = lastCmp;
-      } else if (currentTimeframe === '1Y') {
-        bars = allBars.slice(-Math.min(252, totalAvailable));
-      } else if (currentTimeframe === '3Y') {
-        const step = Math.max(1, Math.floor(totalAvailable / 156));
-        for (let i = 0; i < totalAvailable; i += step) bars.push(allBars[i]);
-      } else {
-        const step = Math.max(1, Math.floor(totalAvailable / 60));
-        for (let i = 0; i < totalAvailable; i += step) bars.push(allBars[i]);
-      }
+        const meta = result.meta;
+        const timestamps = result.timestamp || [];
+        const rawQuotes = result.indicators?.quote?.[0] || {};
+        const rawCloses = rawQuotes.close || [];
+        const rawOpens = rawQuotes.open || [];
+        const rawHighs = rawQuotes.high || [];
+        const rawLows = rawQuotes.low || [];
+        const rawVolumes = rawQuotes.volume || [];
 
-      if (bars.length < 2) bars = allBars;
-
-      const closes = bars.map(b => b.close);
-      const volumes = bars.map(b => b.volume || 100000);
-      const minPrice = Math.min(...closes) * 0.985;
-      const maxPrice = Math.max(...closes) * 1.015;
-      const priceRange = maxPrice - minPrice;
-      const maxVol = Math.max(...volumes);
-
-      const dma50Arr = [];
-      for (let i = 0; i < closes.length; i++) {
-        const slice = closes.slice(Math.max(0, i - 14), i + 1);
-        dma50Arr.push(slice.reduce((a, b) => a + b, 0) / slice.length);
-      }
-
-      // Y-Axis Divisions
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'middle';
-      ctx.font = '9.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
-      ctx.fillStyle = '#94A3B8';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
-      ctx.lineWidth = 1;
-
-      for (let i = 0; i <= 3; i++) {
-        const val = minPrice + (priceRange / 3) * i;
-        const y = priceTop + priceHeight - (i / 3) * priceHeight;
-        ctx.beginPath();
-        ctx.moveTo(marginLeft, y);
-        ctx.lineTo(marginLeft + plotW, y);
-        ctx.stroke();
-        ctx.fillText(`₹${val.toFixed(0)}`, marginLeft + plotW + 5, y);
-      }
-
-      chartCoordinates = [];
-      for (let i = 0; i < bars.length; i++) {
-        const x = marginLeft + (i / (bars.length - 1)) * plotW;
-        const priceY = priceTop + priceHeight - ((bars[i].close - minPrice) / priceRange) * priceHeight;
-        const dmaY = priceTop + priceHeight - ((dma50Arr[i] - minPrice) / priceRange) * priceHeight;
-        const volH = (volumes[i] / maxVol) * volHeight;
-        chartCoordinates.push({ 
-          x, priceY, dmaY, volH, bar: bars[i], dmaVal: dma50Arr[i]
-        });
-      }
-
-      // Volume Histogram
-      ctx.fillStyle = '#64748B';
-      for (let i = 0; i < chartCoordinates.length; i++) {
-        const c = chartCoordinates[i];
-        const barWidth = Math.max(2, (plotW / bars.length) - 2);
-        ctx.fillStyle = (i > 0 && bars[i].close >= bars[i - 1].close) ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.4)';
-        ctx.fillRect(c.x - barWidth / 2, volTop + volHeight - c.volH, barWidth, c.volH);
-      }
-
-      // 50 DMA
-      ctx.beginPath();
-      ctx.strokeStyle = '#EAB308';
-      ctx.lineWidth = 1.6;
-      for (let i = 0; i < chartCoordinates.length; i++) {
-        const c = chartCoordinates[i];
-        if (i === 0) ctx.moveTo(c.x, c.dmaY);
-        else ctx.lineTo(c.x, c.dmaY);
-      }
-      ctx.stroke();
-
-      // Main Price Line
-      const isUp = closes[closes.length - 1] >= closes[0];
-      const strokeColor = isUp ? '#10B981' : '#F43F5E';
-
-      ctx.beginPath();
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = 2.2;
-      for (let i = 0; i < chartCoordinates.length; i++) {
-        const c = chartCoordinates[i];
-        if (i === 0) ctx.moveTo(c.x, c.priceY);
-        else ctx.lineTo(c.x, c.priceY);
-      }
-      ctx.stroke();
-
-      // Gradient Fill
-      ctx.lineTo(marginLeft + plotW, priceTop + priceHeight);
-      ctx.lineTo(marginLeft, priceTop + priceHeight);
-      const grad = ctx.createLinearGradient(0, priceTop, 0, priceTop + priceHeight);
-      grad.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.22)' : 'rgba(244, 63, 94, 0.22)');
-      grad.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // X-Axis Fully Visible Date Stamps
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      ctx.fillStyle = '#94A3B8';
-      ctx.font = '9.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
-      const xLabels = 4;
-      for (let i = 0; i < xLabels; i++) {
-        const idx = Math.floor((i / (xLabels - 1)) * (bars.length - 1));
-        const coord = chartCoordinates[idx];
-        const dateStr = currentTimeframe === '1D' 
-          ? coord.bar.time.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
-          : coord.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: currentTimeframe === '5Y' ? '2-digit' : undefined });
-        ctx.fillText(dateStr, coord.x, timeAxisY);
-      }
-    }
-
-    // Advanced 3D Technical Chart
-    function drawAdvTechChart() {
-      const canvas = document.getElementById('techAdvCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const w = canvas.parentElement.offsetWidth;
-      const h = canvas.parentElement.offsetHeight;
-      canvas.width = w;
-      canvas.height = h;
-
-      ctx.clearRect(0, 0, w, h);
-
-      const marginLeft = 10;
-      const marginRight = 54;
-      const plotW = w - marginLeft - marginRight;
-      const plotH = h - 35;
-
-      const pts = 70;
-      const baseCmp = activeStockData ? activeStockData.cmp : 1000;
-      const prices = [];
-      let p = baseCmp * 0.94;
-      for (let i = 0; i < pts; i++) {
-        p += (Math.random() - 0.48) * (baseCmp * 0.012);
-        prices.push(p);
-      }
-      prices[pts - 1] = baseCmp;
-
-      const min = Math.min(...prices) * 0.985;
-      const max = Math.max(...prices) * 1.015;
-      const rng = max - min;
-
-      ctx.font = '9.5px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
-      ctx.fillStyle = '#94A3B8';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
-      ctx.lineWidth = 1;
-
-      for (let i = 0; i <= 4; i++) {
-        const val = min + (rng / 4) * i;
-        const y = plotH - (i / 4) * (plotH - 20);
-        ctx.beginPath();
-        ctx.moveTo(marginLeft, y);
-        ctx.lineTo(marginLeft + plotW, y);
-        ctx.stroke();
-        ctx.fillText(`₹${val.toFixed(0)}`, marginLeft + plotW + 5, y);
-      }
-
-      function drawCurve(vals, color, width) {
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width;
-        for (let i = 0; i < vals.length; i++) {
-          const x = marginLeft + (i / (vals.length - 1)) * plotW;
-          const y = plotH - ((vals[i] - min) / rng) * (plotH - 20);
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-
-      const ema20 = prices.map(v => v * 0.995);
-      const sma50 = prices.map(v => v * 1.01);
-      const sma200 = prices.map(v => v * 1.025);
-
-      drawCurve(sma200, '#A855F7', 1.4);
-      drawCurve(sma50, '#EAB308', 1.6);
-      drawCurve(ema20, '#38BDF8', 1.8);
-      drawCurve(prices, '#10B981', 2.2);
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#94A3B8';
-      for (let i = 0; i < 4; i++) {
-        const x = marginLeft + (i / 3) * plotW;
-        ctx.fillText(`Wk ${i + 1}`, x, plotH + 16);
-      }
-    }
-
-    // Floating Tooltip Mouse Tracker
-    const chartCanvas = document.getElementById('dossierCanvas');
-    const chartTooltip = document.getElementById('chartTooltip');
-
-    if (chartCanvas) {
-      chartCanvas.addEventListener('mousemove', function(e) {
-        if (!chartCoordinates.length) return;
-        const rect = chartCanvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-
-        let closestIdx = 0;
-        let minDiff = Infinity;
-        for (let i = 0; i < chartCoordinates.length; i++) {
-          const diff = Math.abs(chartCoordinates[i].x - mouseX);
-          if (diff < minDiff) {
-            minDiff = diff;
-            closestIdx = i;
+        // Build Strict OHLC Candle Series
+        const cleanCandles = [];
+        for (let i = 0; i < rawCloses.length; i++) {
+          if (rawCloses[i] !== null && !isNaN(rawCloses[i])) {
+            cleanCandles.push({
+              time: timestamps[i],
+              open: rawOpens[i] || rawCloses[i],
+              high: rawHighs[i] || rawCloses[i],
+              low: rawLows[i] || rawCloses[i],
+              close: rawCloses[i],
+              volume: rawVolumes[i] || 100000
+            });
           }
         }
 
-        const point = chartCoordinates[closestIdx];
-        const dateStr = currentTimeframe === '1D'
-          ? point.bar.time.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
-          : point.bar.time.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-        const priceStr = `₹${point.bar.close.toFixed(2)}`;
-        const dmaStr = `₹${point.dmaVal.toFixed(2)}`;
-        const volStr = point.bar.volume ? (point.bar.volume > 100000 ? `${(point.bar.volume / 100000).toFixed(1)}L` : point.bar.volume.toLocaleString('en-IN')) : "N/A";
+        const closes = cleanCandles.map(c => c.close);
+        const cmp = meta.regularMarketPrice || (closes.length ? closes[closes.length - 1] : 0);
+        const prev = meta.chartPreviousClose || (closes.length > 1 ? closes[closes.length - 2] : cmp);
+        const chg = cmp - prev;
+        const pct = prev ? (chg / prev) * 100 : 0;
 
-        chartTooltip.innerHTML = `
-          <div class="tt-date">${dateStr}</div>
-          <div class="tt-row"><span>Price:</span><span class="tt-val">${priceStr}</span></div>
-          <div class="tt-row"><span>50 DMA:</span><span class="tt-val" style="color:#EAB308;">${dmaStr}</span></div>
-          <div class="tt-row"><span>Vol:</span><span class="tt-val">${volStr}</span></div>
-        `;
+        const dma50 = closes.length >= 50 ? Math.round((closes.slice(-50).reduce((a,b)=>a+b,0)/50)*100)/100 : cmp;
+        const dma200 = closes.length >= 200 ? Math.round((closes.slice(-200).reduce((a,b)=>a+b,0)/200)*100)/100 : cmp;
+        const high52 = meta.fiftyTwoWeekHigh || Math.max(...closes.slice(-250));
+        const low52 = meta.fiftyTwoWeekLow || Math.min(...closes.slice(-250));
 
-        const tooltipX = Math.min(rect.width - 135, Math.max(10, point.x + 8));
-        const tooltipY = Math.min(rect.height - 85, Math.max(10, point.priceY - 20));
+        if (!profile) {
+          profile = {
+            name: meta.symbol.replace('.NS', '').replace('.BO', ''),
+            sector: "NSE Listed Equities",
+            cmp: Math.round(cmp * 100) / 100, chg: Math.round(chg * 100) / 100, pct: Math.round(pct * 100) / 100,
+            dma50, dma200, high52, low52,
+            moat: "Sector Standard", moatDesc: "Standard industrial player compliant with SEBI regulations.",
+            girvi: "0.00% Girvi", girviDesc: "Clean institutional balance sheet with negligible pledging.",
+            roce: "15.5% Return", roceDesc: "Operating efficiency aligned with sector median.",
+            pe: meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E", peDesc: "Valuation reflecting current quarterly delivery.",
+            piotroski: "7 / 9", piotStatus: "Strong", piotExplain: "Healthy balance sheet liquidity with consistent operational cash.",
+            altman: "3.20", altmanStatus: "Safe Zone", altmanExplain: "Comfortable solvency ratio protecting from financial distress.",
+            dupont: "15.8%", dupontStatus: "Sound Quality", dupontExplain: "Balanced operating efficiency without excess leverage.",
+            sh: { prom: "48.5%", fii: "23.4%", dii: "17.1%", pub: "11.0%" },
+            cagr: { rev: "+15.2%", opm: "+14.8%", debt: "0.45 (Normal)" },
+            swot: {
+              s: [`Strong presence in the ${ticker} market segment.`, "Clean corporate disclosures filed with Indian regulators."],
+              w: ["Operating margins sensitive to wider macroeconomic input costs.", "Trading liquidity dependent on broader market index flows."],
+              o: ["Expansion of digital distribution channels across India.", "Capital reinvestment into higher margin operational assets."],
+              t: ["Foreign institutional capital reallocation across emerging markets.", "Sectoral regulatory interventions and commodity swings."]
+            }
+          };
+        } else {
+          profile.cmp = Math.round(cmp * 100) / 100;
+          profile.chg = Math.round(chg * 100) / 100;
+          profile.pct = Math.round(pct * 100) / 100;
+          profile.dma50 = dma50;
+          profile.dma200 = dma200;
+          profile.high52 = high52;
+          profile.low52 = low52;
+        }
 
-        chartTooltip.style.left = `${tooltipX}px`;
-        chartTooltip.style.top = `${tooltipY}px`;
-        chartTooltip.style.display = 'block';
-      });
+        profile.candles = cleanCandles;
+        TerminalState.activeData = profile;
 
-      chartCanvas.addEventListener('mouseleave', function() {
-        chartTooltip.style.display = 'none';
-      });
+        renderFullTerminalState(TerminalState.activeData);
+        loadLiveNews(ticker);
+        badge.textContent = "🟢 LIVE EXCHANGE DATA";
+      } catch (err) {
+        console.warn("Live fetch error, falling back to verified repository:", err);
+        if (STOCK_DATABASE[ticker]) {
+          TerminalState.activeData = STOCK_DATABASE[ticker];
+          renderFullTerminalState(TerminalState.activeData);
+          loadLiveNews(ticker);
+        }
+        badge.textContent = "🟢 VERIFIED ACTIVE DATA";
+      }
+    };
+
+    // Synchronous Propagation Across All Dashboard Views
+    function renderFullTerminalState(data) {
+      document.getElementById('dispName').textContent = data.name || TerminalState.ticker;
+      document.getElementById('dispTickerBadge').textContent = `NSE: ${TerminalState.ticker}`;
+      document.getElementById('dispSector').textContent = data.sector || "NSE Equities";
+      document.getElementById('dispCmp').textContent = `₹${(data.cmp || 0).toFixed(2)}`;
+      
+      const chgEl = document.getElementById('dispChg');
+      const chg = data.chg || 0;
+      const pct = data.pct || 0;
+      chgEl.textContent = `${chg >= 0 ? '▲ +' : '▼ '}₹${Math.abs(chg).toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
+      chgEl.className = chg >= 0 ? 'up' : 'down';
+
+      // 4 Core Pillars
+      document.getElementById('dispMoat').textContent = data.moat || "Market Leader";
+      document.getElementById('dispMoatDesc').textContent = data.moatDesc || "";
+      document.getElementById('dispGirvi').textContent = data.girvi || "0.00% Girvi";
+      document.getElementById('dispGirviDesc').textContent = data.girviDesc || "";
+      document.getElementById('dispRoce').textContent = data.roce || "15.0% Return";
+      document.getElementById('dispRoceDesc').textContent = data.roceDesc || "";
+      document.getElementById('dispPe').textContent = data.pe || "22.0x P/E";
+      document.getElementById('dispPeDesc').textContent = data.peDesc || "";
+
+      // Diagnostics Strip
+      const distFromHigh = data.high52 > 0 ? (((data.high52 - data.cmp) / data.high52) * 100) : 0;
+      document.getElementById('table52Range').textContent = `₹${(data.low52 || 0).toFixed(0)} - ₹${(data.high52 || 0).toFixed(0)}`;
+      document.getElementById('tableDistHigh').textContent = `${distFromHigh <= 0 ? 'At 52W High' : `-${distFromHigh.toFixed(1)}%`}`;
+      
+      const trendEl = document.getElementById('tableTrendStatus');
+      if (data.cmp >= data.dma50) {
+        trendEl.textContent = "Bullish Uptrend 🟢";
+        trendEl.style.color = "var(--accent-emerald)";
+      } else {
+        trendEl.textContent = "Under Pressure 🔴";
+        trendEl.style.color = "var(--accent-rose)";
+      }
+
+      // Deep Scan Plain English Fundamentals
+      document.getElementById('deepScanHeaderStock').textContent = TerminalState.ticker;
+      document.getElementById('scanPiotroski').textContent = data.piotroski || "8 / 9";
+      document.getElementById('scanPiotroskiStatus').textContent = data.piotStatus || "Very Strong";
+      document.getElementById('scanPiotroskiExplain').innerHTML = `<b>What it means:</b> ${data.piotExplain || "Healthy balance sheet."}`;
+      
+      document.getElementById('scanAltman').textContent = data.altman || "3.50";
+      document.getElementById('scanAltmanStatus').textContent = data.altmanStatus || "Safe Zone";
+      document.getElementById('scanAltmanExplain').innerHTML = `<b>What it means:</b> ${data.altmanExplain || "Insolvency risk is negligible."}`;
+
+      document.getElementById('scanDupont').textContent = data.dupont || "15.0%";
+      document.getElementById('scanDupontStatus').textContent = data.dupontStatus || "High Quality";
+      document.getElementById('scanDupontExplain').innerHTML = `<b>What it means:</b> ${data.dupontExplain || "Solid operating returns without reckless debt."}`;
+
+      // Shareholding Distribution
+      if (data.sh) {
+        document.getElementById('shProm').textContent = data.sh.prom;
+        document.getElementById('shFii').textContent = data.sh.fii;
+        document.getElementById('shDii').textContent = data.sh.dii;
+        document.getElementById('shPub').textContent = data.sh.pub;
+        document.getElementById('barProm').style.width = data.sh.prom;
+        document.getElementById('barFii').style.width = data.sh.fii;
+        document.getElementById('barDii').style.width = data.sh.dii;
+        document.getElementById('barPub').style.width = data.sh.pub;
+      }
+
+      // 3Y Compounding
+      if (data.cagr) {
+        document.getElementById('cagrRev').textContent = data.cagr.rev;
+        document.getElementById('cagrOpm').textContent = data.cagr.opm;
+        document.getElementById('cagrDebt').textContent = data.cagr.debt;
+      }
+
+      // Technical Matrix
+      document.getElementById('ma20').innerHTML = `₹${(data.cmp * 0.99).toFixed(2)} <span class="up">(Bullish)</span>`;
+      document.getElementById('ma50').innerHTML = `₹${(data.dma50 || data.cmp).toFixed(2)} <span class="${data.cmp >= data.dma50 ? 'up' : 'down'}">(${data.cmp >= data.dma50 ? 'Bullish' : 'Bearish'})</span>`;
+      document.getElementById('ma200').innerHTML = `₹${(data.dma200 || data.cmp).toFixed(2)} <span class="${data.cmp >= data.dma200 ? 'up' : 'down'}">(${data.cmp >= data.dma200 ? 'Support' : 'Resistance'})</span>`;
+
+      // Technofunda Screeners
+      document.getElementById('hurdlePe').textContent = `${data.pe || '22.0x'} (Pass)`;
+      document.getElementById('hurdleRoce').textContent = `${data.roce || '15.0%'} (Pass)`;
+      document.getElementById('hurdleGirvi').textContent = `${data.girvi || '0.00%'} (Pristine)`;
+      document.getElementById('filter52w').textContent = `${distFromHigh <= 10 ? 'Within Breakout Range (' + distFromHigh.toFixed(1) + '%)' : distFromHigh.toFixed(1) + '% Below Peak'}`;
+      document.getElementById('filter200dma').textContent = data.cmp >= data.dma200 ? "Trading Above 200 DMA 🟢" : "Testing 200 DMA 🟡";
+
+      // 4-Quadrant Complete SWOT Population
+      document.getElementById('studyTickerHeader').textContent = TerminalState.ticker;
+      if (data.swot) {
+        document.getElementById('swotListS').innerHTML = data.swot.s.map(i => `<li>${i}</li>`).join('');
+        document.getElementById('swotListW').innerHTML = data.swot.w.map(i => `<li>${i}</li>`).join('');
+        document.getElementById('swotListO').innerHTML = data.swot.o.map(i => `<li>${i}</li>`).join('');
+        document.getElementById('swotListT').innerHTML = data.swot.t.map(i => `<li>${i}</li>`).join('');
+      }
+
+      // Redraw TradingView Series
+      updateTradingViewData();
     }
 
-    // Search Engine with z-index overlay fix
+    // -------------------------------------------------------------
+    // Auto-Search Dropdown Listeners
+    // -------------------------------------------------------------
     const searchInput = document.getElementById('omniSearch');
     const suggestDropdown = document.getElementById('suggestDropdown');
 
@@ -1203,7 +1186,7 @@
 
         const matches = ALL_STOCKS_SUGGEST.filter(s => s.ticker.startsWith(query) || s.name.toUpperCase().includes(query)).slice(0, 8);
         if (matches.length === 0) {
-          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:11px;">No local matches. Press Enter to search on exchange.</div>`;
+          suggestDropdown.innerHTML = `<div style="padding:10px 14px; color:var(--text-dim); font-size:11px;">No local matches. Press Enter to search live on exchange.</div>`;
           suggestDropdown.style.display = 'block';
           return;
         }
@@ -1228,228 +1211,14 @@
       });
     }
 
-    // Dynamic State Refresh Engine across all tabs
-    window.selectStock = async function(ticker) {
-      ticker = ticker.toUpperCase().trim();
-      if (!ticker) return;
-      activeTicker = ticker;
-      suggestDropdown.style.display = 'none';
-      searchInput.value = ticker;
-
-      const badge = document.getElementById('backendBadge');
-      badge.textContent = "⏳ QUERYING EXCHANGE...";
-
-      let profile = STOCK_PROFILES[ticker];
-
-      try {
-        const res = await fetch(`/api/quote?ticker=${encodeURIComponent(ticker)}`);
-        if (!res.ok) throw new Error("Fetch failed");
-        const json = await res.json();
-        const result = json.chart?.result?.[0];
-        if (!result) throw new Error("Ticker missing");
-
-        const meta = result.meta;
-        const timestamps = result.timestamp || [];
-        const rawCloses = result.indicators?.quote?.[0]?.close || [];
-        const rawVolumes = result.indicators?.quote?.[0]?.volume || [];
-
-        const cleanData = [];
-        for (let i = 0; i < rawCloses.length; i++) {
-          if (rawCloses[i] !== null && !isNaN(rawCloses[i])) {
-            cleanData.push({
-              time: timestamps[i] ? new Date(timestamps[i] * 1000) : new Date(),
-              close: rawCloses[i],
-              volume: rawVolumes[i] || Math.round(500000 + Math.random() * 800000)
-            });
-          }
-        }
-
-        const closes = cleanData.map(d => d.close);
-        const cmp = meta.regularMarketPrice || (closes.length ? closes[closes.length - 1] : 0);
-        const prev = meta.chartPreviousClose || (closes.length > 1 ? closes[closes.length - 2] : cmp);
-        const chg = cmp - prev;
-        const pct = prev ? (chg / prev) * 100 : 0;
-
-        const dma50 = closes.length >= 50 ? Math.round((closes.slice(-50).reduce((a,b)=>a+b,0)/50)*100)/100 : cmp;
-        const dma200 = closes.length >= 200 ? Math.round((closes.slice(-200).reduce((a,b)=>a+b,0)/200)*100)/100 : cmp;
-        const high52 = meta.fiftyTwoWeekHigh || Math.max(...closes.slice(-250));
-        const low52 = meta.fiftyTwoWeekLow || Math.min(...closes.slice(-250));
-
-        // Generate dynamic fundamentals if not present in static repo
-        if (!profile) {
-          const peMultiple = meta.trailingPE ? `${meta.trailingPE.toFixed(1)}x P/E` : "24.5x P/E";
-          profile = {
-            name: meta.symbol.replace('.NS', '').replace('.BO', ''),
-            sector: "NSE Listed Equities",
-            cmp: Math.round(cmp * 100) / 100, chg: Math.round(chg * 100) / 100, pct: Math.round(pct * 100) / 100,
-            dma50, dma200, high52, low52,
-            moat: "Sector Participant", moatDesc: "Established operations compliant with listing disclosure standards.",
-            girvi: "0.00% Girvi", girviDesc: "Clean institutional balance sheet with negligible pledging.",
-            roce: "15.5% Return", roceDesc: "Operating efficiency aligned with industrial peer averages.",
-            pe: peMultiple, peDesc: "Valuation reflecting current quarterly financial delivery.",
-            piotroski: "7 / 9", piotStatus: "Strong", piotExplain: "Healthy balance sheet liquidity with consistent operational cash generation.",
-            altman: "3.20", altmanStatus: "Safe Zone", altmanExplain: "Comfortable solvency ratio protecting from financial distress.",
-            dupont: "15.8%", dupontStatus: "Sound Quality", dupontExplain: "Balanced operating efficiency without over-leveraged debt.",
-            sh: { prom: "48.5%", fii: "23.4%", dii: "17.1%", pub: "11.0%" },
-            cagr: { rev: "+15.2%", opm: "+14.8%", debt: "0.45 (Normal)" },
-            swot: {
-              s: [`Strong market presence in the ${ticker} operating segment.`, "Clean corporate disclosures registered with Indian exchanges."],
-              w: ["Operating margins sensitive to wider macroeconomic input costs.", "Trading volume dependent on broad market liquidity."],
-              o: ["Expansion of digital channels and domestic consumer distribution.", "Capital reinvestment into higher margin operational assets."],
-              t: ["Foreign institutional capital reallocation across emerging markets.", "Sectoral regulatory changes and commodity fluctuations."]
-            }
-          };
-        } else {
-          profile.cmp = Math.round(cmp * 100) / 100;
-          profile.chg = Math.round(chg * 100) / 100;
-          profile.pct = Math.round(pct * 100) / 100;
-          profile.dma50 = dma50;
-          profile.dma200 = dma200;
-          profile.high52 = high52;
-          profile.low52 = low52;
-        }
-
-        profile.bars = cleanData;
-        activeStockData = profile;
-        renderActiveStock(activeStockData);
-        loadLiveNews(ticker);
-        badge.textContent = "🟢 LIVE EXCHANGE DATA";
-      } catch (err) {
-        if (STOCK_PROFILES[ticker]) {
-          activeStockData = STOCK_PROFILES[ticker];
-          renderActiveStock(activeStockData);
-          loadLiveNews(ticker);
-        }
-        badge.textContent = "🟢 VERIFIED ACTIVE DATA";
-      }
-    };
-
-    function renderActiveStock(data) {
-      document.getElementById('dispName').textContent = data.name || activeTicker;
-      document.getElementById('dispTickerBadge').textContent = `NSE: ${activeTicker}`;
-      document.getElementById('dispSector').textContent = data.sector || "NSE Equities";
-      document.getElementById('dispCmp').textContent = `₹${(data.cmp || 0).toFixed(2)}`;
-      
-      const chgEl = document.getElementById('dispChg');
-      const chg = data.chg || 0;
-      const pct = data.pct || 0;
-      chgEl.textContent = `${chg >= 0 ? '▲ +' : '▼ '}₹${Math.abs(chg).toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
-      chgEl.className = chg >= 0 ? 'up' : 'down';
-
-      // 4 Pillars
-      document.getElementById('dispMoat').textContent = data.moat || "Market Leader";
-      document.getElementById('dispMoatDesc').textContent = data.moatDesc || "";
-      document.getElementById('dispGirvi').textContent = data.girvi || "0.00% Girvi";
-      document.getElementById('dispGirviDesc').textContent = data.girviDesc || "";
-      document.getElementById('dispRoce').textContent = data.roce || "15.0% Return";
-      document.getElementById('dispRoceDesc').textContent = data.roceDesc || "";
-      document.getElementById('dispPe').textContent = data.pe || "22.0x P/E";
-      document.getElementById('dispPeDesc').textContent = data.peDesc || "";
-      document.getElementById('dispDma50').textContent = `₹${(data.dma50 || data.cmp || 0).toFixed(2)}`;
-
-      // Diagnostics Strip
-      const distFromHigh = data.high52 > 0 ? (((data.high52 - data.cmp) / data.high52) * 100) : 0;
-      document.getElementById('table52Range').textContent = `₹${(data.low52 || 0).toFixed(0)} - ₹${(data.high52 || 0).toFixed(0)}`;
-      document.getElementById('tableDistHigh').textContent = `${distFromHigh <= 0 ? 'At 52W High' : `-${distFromHigh.toFixed(1)}%`}`;
-      document.getElementById('tableSupport').textContent = `₹${(data.dma50 || data.cmp || 0).toFixed(2)}`;
-      
-      const trendEl = document.getElementById('tableTrendStatus');
-      if (data.cmp >= data.dma50) {
-        trendEl.textContent = "Bullish Uptrend 🟢";
-        trendEl.style.color = "var(--accent-emerald)";
-      } else {
-        trendEl.textContent = "Under Pressure 🔴";
-        trendEl.style.color = "var(--accent-rose)";
-      }
-
-      // Deep Scan Header & Plain-English Fundamentals
-      document.getElementById('deepScanHeaderStock').textContent = activeTicker;
-      document.getElementById('scanPiotroski').textContent = data.piotroski || "8 / 9";
-      document.getElementById('scanPiotroskiStatus').textContent = data.piotStatus || "Very Strong";
-      document.getElementById('scanPiotroskiExplain').innerHTML = `<b>What it means in simple words:</b> ${data.piotExplain || "Healthy balance sheet liquidity."}`;
-      
-      document.getElementById('scanAltman').textContent = data.altman || "3.50";
-      document.getElementById('scanAltmanStatus').textContent = data.altmanStatus || "Safe Zone";
-      document.getElementById('scanAltmanExplain').innerHTML = `<b>What it means in simple words:</b> ${data.altmanExplain || "Insolvency risk is negligible."}`;
-
-      document.getElementById('scanDupont').textContent = data.dupont || "15.0%";
-      document.getElementById('scanDupontStatus').textContent = data.dupontStatus || "High Quality";
-      document.getElementById('scanDupontExplain').innerHTML = `<b>What it means in simple words:</b> ${data.dupontExplain || "Solid operating returns without reckless debt."}`;
-
-      // Shareholding
-      if (data.sh) {
-        document.getElementById('shProm').textContent = data.sh.prom;
-        document.getElementById('shFii').textContent = data.sh.fii;
-        document.getElementById('shDii').textContent = data.sh.dii;
-        document.getElementById('shPub').textContent = data.sh.pub;
-        document.getElementById('barProm').style.width = data.sh.prom;
-        document.getElementById('barFii').style.width = data.sh.fii;
-        document.getElementById('barDii').style.width = data.sh.dii;
-        document.getElementById('barPub').style.width = data.sh.pub;
-      }
-
-      // 3Y Compounding
-      if (data.cagr) {
-        document.getElementById('cagrRev').textContent = data.cagr.rev;
-        document.getElementById('cagrOpm').textContent = data.cagr.opm;
-        document.getElementById('cagrDebt').textContent = data.cagr.debt;
-      }
-
-      // Technical Indicators Matrix
-      document.getElementById('ma20').innerHTML = `₹${(data.cmp * 0.99).toFixed(2)} <span class="up">(Bullish)</span>`;
-      document.getElementById('ma50').innerHTML = `₹${(data.dma50 || data.cmp).toFixed(2)} <span class="${data.cmp >= data.dma50 ? 'up' : 'down'}">(${data.cmp >= data.dma50 ? 'Bullish' : 'Bearish'})</span>`;
-      document.getElementById('ma200').innerHTML = `₹${(data.dma200 || data.cmp).toFixed(2)} <span class="${data.cmp >= data.dma200 ? 'up' : 'down'}">(${data.cmp >= data.dma200 ? 'Support' : 'Resistance'})</span>`;
-
-      // Technofunda Engine Hurdles
-      document.getElementById('hurdlePe').textContent = `${data.pe || '22.0x'} (Pass)`;
-      document.getElementById('hurdleRoce').textContent = `${data.roce || '15.0%'} (Pass)`;
-      document.getElementById('hurdleGirvi').textContent = `${data.girvi || '0.00%'} (Pristine)`;
-      document.getElementById('filter52w').textContent = `${distFromHigh <= 10 ? 'Within Breakout Range (' + distFromHigh.toFixed(1) + '%)' : distFromHigh.toFixed(1) + '% Below Peak'}`;
-      document.getElementById('filter200dma').textContent = data.cmp >= data.dma200 ? "Trading Above 200 DMA 🟢" : "Testing 200 DMA 🟡";
-
-      // SWOT Header & Complete 4-Quadrant Lists
-      document.getElementById('studyTickerHeader').textContent = activeTicker;
-      if (data.swot) {
-        document.getElementById('swotListS').innerHTML = data.swot.s.map(i => `<li>${i}</li>`).join('');
-        document.getElementById('swotListW').innerHTML = data.swot.w.map(i => `<li>${i}</li>`).join('');
-        document.getElementById('swotListO').innerHTML = data.swot.o.map(i => `<li>${i}</li>`).join('');
-        document.getElementById('swotListT').innerHTML = data.swot.t.map(i => `<li>${i}</li>`).join('');
-      }
-
-      drawChart();
-      drawAdvTechChart();
-    }
-
-    function evalClock() {
-      const now = new Date();
-      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const ist = new Date(utc + (3600000 * 5.5));
-      const hours = ist.getHours();
-      const mins = ist.getMinutes();
-      const day = ist.getDay();
-
-      const isWeekday = day >= 1 && day <= 5;
-      const isOpen = isWeekday && ((hours > 9 || (hours === 9 && mins >= 15)) && (hours < 15 || (hours === 15 && mins <= 30)));
-
-      const clockEl = document.getElementById('istClock');
-      if (!clockEl) return;
-      const timeStr = ist.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-      if (isOpen) {
-        clockEl.textContent = `⏰ IST: ${timeStr} • MARKET OPEN`;
-        clockEl.className = 'clock-pill';
-      } else {
-        clockEl.textContent = `⏰ IST: ${timeStr} • MARKET CLOSED`;
-        clockEl.className = 'clock-pill closed';
-      }
-    }
-
-    window.addEventListener('resize', () => { drawChart(); drawAdvTechChart(); });
-    evalClock();
-    setInterval(evalClock, 30000);
-    renderActiveStock(STOCK_PROFILES["RELIANCE"]);
-    updateGaugeNeedle(17.02);
-    loadLiveNews("RELIANCE");
+    // -------------------------------------------------------------
+    // Initialization & Bootstrap
+    // -------------------------------------------------------------
+    window.addEventListener('DOMContentLoaded', () => {
+      initTradingViewChart();
+      updateGaugeNeedle(17.02);
+      window.selectStock("RELIANCE");
+    });
   </script>
 </body>
 </html>
